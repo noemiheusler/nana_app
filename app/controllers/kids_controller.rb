@@ -1,4 +1,6 @@
 class KidsController < ApplicationController
+    authorize @kid
+
   def new
   end
 
