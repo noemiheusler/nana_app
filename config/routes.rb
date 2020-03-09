@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
+
   devise_for :users
-  root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'pages#discover'
+
+  resources :kids, except: [:index, :show]
+
+  resources :events do
+    resources :participations, only: [:create]
+  end
+  resources :participations, only: [:destroy]
+
+  resources :answers, only: [:create]
+
+  get "profile", to: "pages#profile", as: :profile
+  get "mynanas", to: "pages#mynanas", as: :mynanas
+  get "intro", to: "pages#intro", as: :intro
+  get "onboarding", to: "pages#onboarding", as: :onboarding
+  # sascha muss adden messages
 end
