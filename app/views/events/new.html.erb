@@ -7,6 +7,6 @@
   <%= f.input :max_participants%>
   <%= f.input :start_date%>
   <%= f.input :end_date%>
-  <%= f.input :category%>
-  <%= f.button :submit %>
+  <%= f.select :category, options_for_select(%w[Private Public])%>
+  <%= f.button :submit%>
 <% end %>

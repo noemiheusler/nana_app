@@ -25,7 +25,7 @@ Event.create!(
     max_participants: 5,
     start_date: (Date.today + 1),
     end_date: (Date.today + 2),
-    category: "public",
+    category: "Public",
     user_id: User.all.sample.id
   )
 }
