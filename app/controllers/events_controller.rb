@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :edit, :update, :new, :show, :creat, :destroy]
 
   def index
     @events = Event.all
+    @events = policy_scope(Event).order(created_at: :desc)
   end
 
   def new
