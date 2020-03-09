@@ -1,2 +1,44 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<div>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="myevents-tab" data-toggle="tab" href="#myevents" role="tab" aria-controls="myevents" aria-selected="true">My Events</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="publicevents-tab" data-toggle="tab" href="#publicevents" role="tab" aria-controls="publicevents" aria-selected="false">Public Events</a>
+    </li>
+  </ul>
+</div>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="myevents" role="tabpanel" aria-labelledby="myevents-tab">
+
+    <ul class="list-group">
+    <% @events.each do |event| %>
+      <% if event.category == "private" %>
+
+        <%# if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
+          <li class="list-group-item"><%= event.title %></li>
+        <% #end %>
+
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+
+  <div class="tab-pane fade" id="publicevents" role="tabpanel" aria-labelledby="publicevents-tab">
+
+    <ul class="list-group">
+    <% @events.each do |event| %>
+      <% if event.category == "public" %>
+
+        <%# if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
+          <li class="list-group-item"><%= event.title %><%= event.start_date %><%= event.description[0..25]%></li>
+        <% #end %>
+
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<%= link_to "+", new_event_path, class: "btn btn-plus btn-primary" %>
