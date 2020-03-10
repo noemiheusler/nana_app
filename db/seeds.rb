@@ -14,7 +14,6 @@ Participation.destroy_all
 Question.destroy_all
 User.destroy_all
 
-
 user_1 = User.create!(email: "anna.hill@gmail.com", password: "password", firstname: "Anna", lastname: "Hill", address: "Heinrichstrasse 269 8005 Zürich", motto: "Work hard, play hard!", description: "I love my kids, going for a walk and playing with my dog Sammy.")
 user_2 = User.create!(email: "t.gardner@gmail.com", password: "password", firstname: "Tomas", lastname: "Gardner", address: "Kronenstrasse 42 8006 Zürich", motto: "Carpe diem <3", description: "I am a single dad and looking for other parents to support each other.")
 user_3 = User.create!(email: "jules_travels@gmail.com", password: "password", firstname: "Julia", lastname: "Förster", address: "Badenerstrasse 500 8048 Zürich", motto: "You cannot buy happiness, but flights!", description: "I travel the world with my familiy.")

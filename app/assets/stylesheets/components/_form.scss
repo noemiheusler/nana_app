@@ -1,0 +1,66 @@
+.form-control {
+  height: 60px;
+  padding: 20px;
+  border: 2px solid #DFDFDF;
+  border-radius: 25px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+}
+.header {
+  margin-bottom: 35px;
+}
+
+.form-control:focus {
+  color: #353535;
+  background-color: #fff;
+  border-color: rgba(98, 41, 206, 0.25);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(98, 41, 206, 0.25);
+}
+
+
+.form-actions {
+  border-radius: 25px;
+  border: 2px solid #6229CE;
+  text-align: center;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+  margin-top: 67px;
+}
+
+.form-actions:active a {
+  margin-top: 2px;
+}
+
+.form-actions:active {
+  bottom: 41px;
+}
+
+.form-control.is-valid {
+  border-color: #03BCE1;
+}
+
+.valid-feedback {
+  color: #03BCE1;
+}
+
+.form-control.is-valid:focus {
+  border-color: #03BCE1;
+  box-shadow: 0 0 0 0.2rem rgba(3, 188, 225, 0.25)
+}
+
+.form-control.is-invalid:focus {
+  border-color: #ff7a46;
+  box-shadow: 0 0 0 0.2rem rgba(255, 89, 70, 0.25)
+}
+
+.form-control.is-invalid {
+  border-color: #ff7a46;
+}
+
+.invalid-feedback {
+  color: #ff7a46;
+}
+
+.form-control::-webkit-input-placeholder {
+  opacity: 0.3;
+  color: $grey-dark;
+}

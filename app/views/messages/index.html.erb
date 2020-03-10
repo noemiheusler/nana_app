@@ -1,30 +1,54 @@
 <% if @over_ten %>
- <%= link_to ‘Show Previous’, ‘?m=all’ %>
+  <%= link_to 'Show Previous', '?m=all' %>
 <% end %>
-<div class=”ui segment”>
- <% @messages.each do |message| %>
-  <% if message.body %>
-   <% user = User.find(message.user_id) %>
-   <div class=”item”>
-    <div class=”content”>
-     <div class=”header”><strong><%= user.first_name %></strong>     <%= message.message_time %></div>
-      <div class=”list”>
-       <div class=”item”>
-        <i class=”right triangle icon”></i>
-         <%= message.body %>
+<div class="ui segment">
+<% @messages.each do |message| %>
+    <% if message.body %>
+      <% user = User.find(message.user_id) %>
+      <div class="item">
+        <div class="content">
+          <div class="header"><strong><%= user.firstname %></strong>
+            <%= message.message_time %>
+          </div>
+          <div class="list">
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <%= message.body %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-   </div>
- </div>
- <% end %>
-<% end %>
+    <% end %>
+  <% end %>
 </div>
-<%= form_for [@conversation, @message], html: {class: “ui reply form”} do |f| %>
- <div class=”field”>
-   <%= f.text_area :body, class: “form-control” %>
- </div>
- <%= f.text_field :user_id, value: current_user.id, type: “hidden” %>
- <div>
-   <%= f.submit “Add Reply”, class: “ui blue labeled submit icon button” %>
- </div>
+
+<%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+  <div class="field">
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+  <div>
+    <%= f.submit "Add Reply", class: "ui blue labeled submit icon button", id: "hide-send" %>
+  </div>
 <% end %>
+<style>
+ #hide-send {
+    display:  none;
+  }
+</style>
+<script type="text/javascript">
+  // Get the input field
+  const input = document.getElementById("new_message");
+
+  // Execute a function when the user releases a key on the keyboard
+  input.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("hide-send").click();
+    }
+  })
+</script>
+<%= render 'shared/navigation' %>
