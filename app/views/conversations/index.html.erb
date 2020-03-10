@@ -22,7 +22,7 @@
     <% @users.each do |user| %>
       <% if user.id != current_user.id %>
       <div class="item">
-        <%= user.firstname %> <%= link_to 'Contact', conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post'%>
+        <%= user.firstname %> <%= link_to conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post' do %><i class="far fa-comments"></i><% end %>
       </div>
       <% end %>
     <% end %>
