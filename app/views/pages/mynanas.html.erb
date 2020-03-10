@@ -20,7 +20,37 @@
   <h2>My friends</h2>
   <% @friends.each do |friend|%>
     <%= friend.firstname %>
+
+      <% if current_user.favorites.blank? %>
+        <%=link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+        <i class="fas fa-heart" id="heart" style="color:yellow;"></i>
+        <% end %>
+      <% elsif current_user.favorites.count == 1 %>
+        <% favorite = current_user.favorites.first %>
+          <% if favorite.nana_id == friend.id %>
+            <%=link_to nana_unfriend_path(friend.id), method: :delete, remote: true do %>
+              <i class="fas fa-heart" id="heart" style="color:red;"></i>
+            <% end %>
+          <% else %>
+            <%=link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+            <i class="fas fa-heart" id="heart"></i>
+            <% end %>
+          <% end %>
+      <% else %>
+        <% current_user.favorites each do |favorite| %>
+
+          <% if favorite.nana_id == friend.id %>
+            <%=link_to nana_unfriend_path(friend.id), method: :delete, remote: true do %>
+              <i class="fas fa-heart" id="heart" style="color:red;"></i>
+            <% end %>
+          <% else %>
+            <%=link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+            <i class="fas fa-heart" id="heart"></i>
+            <% end %>
+          <% end %>
+
+      <% end %>
+
+    <% end %>
   <% end %>
 </div>
-
-

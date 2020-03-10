@@ -25,6 +25,18 @@ user_8 = User.create!(email: "steffi_loves_cake@gmail.com", password: "password"
 user_9 = User.create!(email: "caro.maier@gmail.com", password: "password", firstname: "Caroline", lastname: "Maier", address: "Falkenstrasse 1 8008 Zürich, Schweiz", motto: "<3 Chappucchino <3", description: "Having a cappucchino and relaxing while reading a book is my perfect day.")
 user_10 = User.create!(email: "jessy.manner@gmail.com", password: "password", firstname: "Jessica", lastname: "Manner", address: "Mainaustrasse 23 8008 Zürich", motto: "In love with life", description: "Positive thinker with a lot of energy :)")
 
+user_2.friend_request(user_1)
+user_3.friend_request(user_1)
+user_4.friend_request(user_1)
+user_5.friend_request(user_1)
+user_6.friend_request(user_1)
+user_7.friend_request(user_1)
+user_1.friend_request(user_8)
+user_1.friend_request(user_9)
+user_1.friend_request(user_10)
+user_1.accept_request(user_2)
+user_1.accept_request(user_3)
+user_1.accept_request(user_4)
 
 kid_1 = Kid.create!(birthday: "10.03.2017" , user_id: 1)
 kid_2 = Kid.create!(birthday: "29.05.2010" , user_id: 2)
