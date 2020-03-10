@@ -14,12 +14,20 @@
 
     <ul class="list-group">
     <% @events.each do |event| %>
-      <% if event.category == "private" %>
+      <% if event.category == "Private" %>
 
-        <%# if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
-          <li class="list-group-item"><%= event.title %></li>
-        <% #end %>
-
+        <% if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
+          <li class="list-group-item"><%= event.title %>
+          <% if event.user_id = current_user %>
+            <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+            <i class="fas fa-trash-alt"></i>
+            <% end %>
+            <%=link_to edit_event_path(event.id) do %>
+            <i class="fas fa-pen"></i>
+            <% end %>
+          </li>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
     </ul>
@@ -29,11 +37,11 @@
 
     <ul class="list-group">
     <% @events.each do |event| %>
-      <% if event.category == "public" %>
+      <% if event.category == "Public" %>
 
-        <%# if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
+        <% if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
           <li class="list-group-item"><%= event.title %><%= event.start_date %><%= event.description[0..25]%></li>
-        <% #end %>
+        <% end %>
 
       <% end %>
     <% end %>

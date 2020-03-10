@@ -7,19 +7,16 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "Seed started"
 
-
-
-
-  User.create!(
-      firstname: "Sascha",
-      lastname: "Gysel",
-      email: "sascha@gysel.biz",
-      password: "123456",
-      address: "Gehrenholz 1a, 8055, Zürich, Schweiz",
-      motto: "Motto Bla",
-      description: "Description Bla"
-    )
-
-
+5.times {
+Event.create!(
+    title: "Event Title",
+    description: "Event description",
+    max_participants: 5,
+    start_date: (Date.today + 1),
+    end_date: (Date.today + 2),
+    category: "Public",
+    user_id: User.all.sample.id
+  )
+}
 
 puts  "Seed ended"
