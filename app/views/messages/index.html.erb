@@ -28,6 +28,27 @@
   </div>
   <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
   <div>
-    <%= f.submit "Add Reply", class: "ui blue labeled submit icon button" %>
+    <%= f.submit "Add Reply", class: "ui blue labeled submit icon button", id: "hide-send" %>
   </div>
 <% end %>
+<style>
+ #hide-send {
+    display:  none;
+  }
+</style>
+<script type="text/javascript">
+  // Get the input field
+  const input = document.getElementById("new_message");
+
+  // Execute a function when the user releases a key on the keyboard
+  input.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("hide-send").click();
+    }
+  })
+</script>
+<%= render 'shared/navigation' %>
