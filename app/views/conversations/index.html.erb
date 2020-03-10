@@ -17,12 +17,12 @@
 </div>
 
 <div class="ui segment">
-  <h3>All Users</h3>
+  <h3>Your Nanas</h3>
   <div class="ui list">
     <% @users.each do |user| %>
       <% if user.id != current_user.id %>
       <div class="item">
-        <%= user.firstname %> <%= link_to 'Message me!', conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post'%>
+        <%= user.firstname %> <%= link_to 'Contact', conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post'%>
       </div>
       <% end %>
     <% end %>
