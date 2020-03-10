@@ -16,6 +16,18 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user = current_user
+
+    #@params[:event][:participations]
+
+
+    #@participations = @event.participations.each
+    #raise
+
+    #do |participation|
+        # participation = Participation.new
+    #  participation.event_id = @event.id
+    #end
+
     authorize @event
     if @event.save
       redirect_to events_path, notice: 'Event was successfully created.'
