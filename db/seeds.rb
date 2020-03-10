@@ -11,9 +11,30 @@ puts "Seed started"
   User.create!(
       firstname: "Noemi",
       lastname: "Heusler",
-      email: "blub@gmail.com",
+      email: "blubblub@gmail.com",
       password: "123456",
       address: "Gehrenholz 1a, 8055, Zürich, Schweiz",
+      motto: "Motto Bla",
+      description: "Description Bla"
+    )
+
+  User.create!(
+      firstname: "Anna",
+      lastname: "Trippel",
+      email: "annat@gmail.com",
+      password: "123456",
+      address: "Gehrenholz 2a, 8055, Zürich, Schweiz",
+      motto: "Motto Bla",
+      description: "Description Bla"
+    )
+
+
+  User.create!(
+      firstname: "Carla",
+      lastname: "Theler",
+      email: "carla@gmail.com",
+      password: "123456",
+      address: "Gehrenholz 3a, 8055, Zürich, Schweiz",
       motto: "Motto Bla",
       description: "Description Bla"
     )
@@ -29,6 +50,5 @@ Event.create!(
     user_id: User.all.sample.id
   )
 }
-
 
 puts  "Seed ended"

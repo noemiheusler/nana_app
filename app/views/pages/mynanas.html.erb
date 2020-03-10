@@ -1,0 +1,26 @@
+<h1>My Nanas</h1>
+
+<div>
+  <h2>Friend requests</h2>
+  <% @friends_requested.each do |friend_requested| %>
+    <%= friend_requested.firstname  %>
+
+      <%=link_to accept_friend_path(friend_requested.id), method: :patch do %>
+        <i class="fas fa-check-circle"></i>
+      <% end %>
+
+      <%=link_to reject_friend_path(friend_requested.id), method: :patch do %>
+        <i class="fas fa-times-circle"></i>
+      <% end %>
+
+  <% end %>
+</div>
+
+<div>
+  <h2>My friends</h2>
+  <% @friends.each do |friend|%>
+    <%= friend.firstname %>
+  <% end %>
+</div>
+
+
