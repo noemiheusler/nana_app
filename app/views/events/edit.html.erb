@@ -1,12 +1,4 @@
 <h1>Events#edit</h1>
 <p>Find me in app/views/events/edit.html.erb</p>
 
-<%= simple_form_for @event do |f| %>
-  <%= f.input :title%>
-  <%= f.input :description%>
-  <%= f.input :max_participants%>
-  <%= f.input :start_date%>
-  <%= f.input :end_date%>
-  <%= f.select :category, options_for_select(%w[Private Public])%>
-  <%= f.button :submit%>
-<% end %>
+<%= render 'events/form', event: @event%>

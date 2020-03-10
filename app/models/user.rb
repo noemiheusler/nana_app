@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :participations
   has_many :answers
-  # has_many_attached :photos
+  has_one_attached :photo
 
   validates  :firstname, presence: true, length: { maximum: 25 }
   validates  :lastname, presence: true, length: { maximum: 25 }
