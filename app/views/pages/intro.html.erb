@@ -1,2 +1,88 @@
- <%= render 'shared/navbar' %>
-<%= render 'shared/navigation' %>
+<div class="onboarding-container">
+  <div class="panel">
+    <div class="panel-1">
+      <%= image_tag "panel1.png"%>
+     <h3 class="panel-text">Find like-minded parents
+in close proximity</h3>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-2">
+      <%= image_tag "panel2.png"%>
+      <h3 class="panel-text">Get support from nanas or become a nana</h3>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-3">
+      <%= image_tag "panel3.png"%>
+      <h3 class="panel-text-3">Build your own support system</h3>
+    </div>
+  </div>
+</div>
+
+<span id="sign-up-link" class="btn-sign-up" hidden>
+  <%= link_to "sign up", new_user_registration_path %>
+</span>
+<div class="swipe-dots">
+  <i id='dot-1' class='fas fa-circle'></i>
+  <i id='dot-1' class='far fa-circle'></i>
+  <i id='dot-1' class='far fa-circle'></i>
+</div>
+
+
+<script>
+  const dots = document.querySelector(".swipe-dots");
+  const signUpLink = document.querySelector('#sign-up-link');
+
+  const _C = document.querySelector('.onboarding-container'),
+      N = _C.children.length;
+    _C.style.setProperty('--n', N)
+
+  function unify(e) { return e.changedTouches ? e.changedTouches[0] : e };
+  let x0 = null;
+
+  function lock(e) { x0 = unify(e).clientX };
+
+  let i = 0;
+
+  function move(e) {
+    if (x0 || x0 === 0) {
+      let dx = unify(e).clientX - x0, s = Math.sign(dx);
+
+      if ((i > 0 || s < 0) && (i < N - 1 || s > 0))
+        _C.style.setProperty('--i', i -= s)
+
+
+      x0 = null
+    }
+
+    const fullDot = "<i id='dot-1' class='fas fa-circle'></i>"
+    const emptyDot = "<i id='dot-2' class='far fa-circle'></i>"
+
+      if (i == 0 || i == null) {
+        console.log("hi")
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+        signUpLink.setAttribute("hidden", "")
+      }
+      if (i == 1) {
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        signUpLink.setAttribute("hidden", "")
+      }
+      if (i == 2) {
+        dots.innerHTML = ""
+        signUpLink.removeAttribute("hidden", "")
+      }
+  };
+
+  _C.addEventListener('mousedown', lock, false);
+  _C.addEventListener('touchstart', lock, false);
+  _C.addEventListener('mouseup', move, false);
+  _C.addEventListener('touchend', move, false);
+  _C.addEventListener('touchmove', e => {e.preventDefault()}, false)
+</script>
