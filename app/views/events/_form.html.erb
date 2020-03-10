@@ -1,0 +1,14 @@
+<%= simple_form_for event do |f| %>
+  <%= f.input :title%>
+  <%= f.input :description%>
+  <%= f.input :max_participants%>
+  <%= f.input :start_date%>
+  <%= f.input :end_date%>
+  <%= f.select :category, options_for_select(%w[Private Public])%>
+  <% user_collection = [] %>
+  <% User.all.each do |user| %>
+    <% user_collection.push(user.firstname) %>
+  <% end %>
+  <%= f.input :participations, collection: user_collection, input_html: { multiple: true }, as: :check_boxes%>
+  <%= f.button :submit%>
+<% end %>
