@@ -1,10 +1,10 @@
 class Conversation < ActiveRecord::Base
-    belongs_to :sender, :foreign_key => :user1_id, class_name: ‘User’
-    belongs_to :recipient, :foreign_key => :user2_id, class_name: ‘User’
+    belongs_to :user1, :foreign_key => :user1_id, class_name: 'User'
+    belongs_to :user2, :foreign_key => :user2_id, class_name: 'User'
     has_many :messages, dependent: :destroy
-    validates_uniqueness_of :sender_id, :scope => :recipient_id
+    validates_uniqueness_of :user1_id, :scope => :user2_id
     
-    scope :between, -> (sender_id,recipient_id) do
-    where(“(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?)”, sender_id,recipient_id, recipient_id, sender_id)
+    scope :between, -> (user1_id,user2_id) do
+        where("(conversations.user1_id = ? AND conversations.user2_id =?) OR (conversations.user1_id = ? AND conversations.user2_id =?)", user1_id,user2_id, user2_id, user1_id)
     end
 end
