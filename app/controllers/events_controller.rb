@@ -17,23 +17,21 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user = current_user
 
-    #@params[:event][:participations]
-
-
-    #@participations = @event.participations.each
-    #raise
-
-    #do |participation|
-        # participation = Participation.new
-    #  participation.event_id = @event.id
-    #end
-
     authorize @event
+
     if @event.save
+      user_ids = params[:event][:participations]
+      user_ids.each do |id|
+        @participation = Participation.new
+        @participation.user_id = id
+        @participation.event_id = @event.id
+        @participation.save
+      end
       redirect_to events_path, notice: 'Event was successfully created.'
     else
       render :new
     end
+
   end
 
   def destroy
