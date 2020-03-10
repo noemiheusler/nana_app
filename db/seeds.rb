@@ -7,11 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "Seed started"
 
-
   User.create!(
       firstname: "Noemi",
       lastname: "Heusler",
-      email: "blubblub@gmail.com",
+      email: "noemi@gmail.com",
       password: "123456",
       address: "Gehrenholz 1a, 8055, Zürich, Schweiz",
       motto: "Motto Bla",
@@ -20,18 +19,17 @@ puts "Seed started"
 
   User.create!(
       firstname: "Anna",
-      lastname: "Trippel",
-      email: "annat@gmail.com",
+      lastname: "Trappel",
+      email: "anna@gmail.com",
       password: "123456",
       address: "Gehrenholz 2a, 8055, Zürich, Schweiz",
       motto: "Motto Bla",
       description: "Description Bla"
     )
 
-
   User.create!(
       firstname: "Carla",
-      lastname: "Theler",
+      lastname: "Theiler",
       email: "carla@gmail.com",
       password: "123456",
       address: "Gehrenholz 3a, 8055, Zürich, Schweiz",
