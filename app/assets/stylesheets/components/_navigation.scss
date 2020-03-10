@@ -19,18 +19,6 @@
   height: 100%;
   justify-content: space-around;
 }
-
-.nav-button:hover i {
-  color: #934DE6 !important;
-}
-
-.nav-button:hover span {
-  color: #934DE6 !important;
-}
-.nav-button:hover a {
-  text-decoration: none !important;
-}
-
 .discover-button {
   display: flex;
   align-items: center;
@@ -44,6 +32,26 @@
   left: calc(50% - 30px);
   border: 5px solid white;
 }
+
+.discover-button:active a {
+  margin-top: 2px;
+}
+
+.discover-button:active {
+  bottom: 41px;
+}
+
+.nav-button:hover i {
+  color: #934DE6 !important;
+}
+
+.nav-button:hover span {
+  color: #934DE6 !important;
+}
+.nav-button:hover a {
+  text-decoration: none !important;
+}
+
 
 .icon-box{
   display: flex;
