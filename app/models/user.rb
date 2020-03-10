@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 # include PgSearch::Model
-#  geocoded_by :location
-#  after_validation :geocode, if: :will_save_change_to_location?
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   has_friendship
 
