@@ -11,14 +11,13 @@
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="myevents" role="tabpanel" aria-labelledby="myevents-tab">
-
     <ul class="list-group">
     <% @events.each do |event| %>
+
       <% if event.category == "Private" %>
 
-        <% if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
+        <% if (event.user_id == current_user.id) %>
           <li class="list-group-item"><%= event.title %>
-          <% if event.user_id = current_user %>
             <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
             <i class="fas fa-trash-alt"></i>
             <% end %>
@@ -26,8 +25,25 @@
             <i class="fas fa-pen"></i>
             <% end %>
           </li>
-          <% end %>
         <% end %>
+
+        <% if event.participations.present? %>
+
+          <% event.participations.each do |participation| %>
+            <% if participation.user_id == current_user.id %>
+              <li class="list-group-item"><%= event.title %>
+                <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+                <i class="fas fa-trash-alt"></i>
+                <% end %>
+                <%=link_to edit_event_path(event.id) do %>
+                <i class="fas fa-pen"></i>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+
+        <% end %>
+
       <% end %>
     <% end %>
     </ul>

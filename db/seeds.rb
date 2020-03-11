@@ -55,10 +55,10 @@ kid_14 = Kid.create!(birthday: "22.04.2014" , user_id: 9)
 kid_15 = Kid.create!(birthday: "27.12.2013" , user_id: 10)
 kid_16 = Kid.create!(birthday: "19.03.2012" , user_id: 10)
 
-event_1 = Event.create!(title: "Cappuchino Meet-up", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "10.02.2020 15:00", end_date: "10.02.2020 18:00", category: "Partens stuff", user_id: 1)
-event_2 = Event.create!(title: "Playground Meet-up", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "15.05.2020 14:00", end_date: "15.05.2020 17:00", category: "Kids stuff", user_id: 3)
-event_3 = Event.create!(title: "Water park tomorrow", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "03.01.2020 10:00", end_date: "03.01.2020 12:00", category: "Kids stuff", user_id: 7)
-event_4 = Event.create!(title: "Diaper workshop", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "14.04.2020 17:00", end_date: "14.04.2020 20:00", category: "Kids stuff", user_id: 2)
-event_5 = Event.create!(title: "Cappuchino Meet-up #2", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Partens stuff", user_id: 8)
+event_1 = Event.create!(title: "Cappuchino Meet-up", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "10.02.2020 15:00", end_date: "10.02.2020 18:00", category: "Private", user_id: 1)
+event_2 = Event.create!(title: "Playground Meet-up", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "15.05.2020 14:00", end_date: "15.05.2020 17:00", category: "Public", user_id: 1)
+event_3 = Event.create!(title: "Water park tomorrow", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "03.01.2020 10:00", end_date: "03.01.2020 12:00", category: "Public", user_id: 1)
+event_4 = Event.create!(title: "Diaper workshop", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "14.04.2020 17:00", end_date: "14.04.2020 20:00", category: "Private", user_id: 2)
+event_5 = Event.create!(title: "Cappuchino Meet-up #2", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Public", user_id: 2)
 
 puts "End of seed!"
