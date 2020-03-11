@@ -1,4 +1,3 @@
-require 'faker'
 require 'date'
 require "open-uri"
 
@@ -49,4 +48,9 @@ event_3 = Event.create!(title: "Water park tomorrow", description: "Have a chat 
 event_4 = Event.create!(title: "Diaper workshop", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "14.04.2020 17:00", end_date: "14.04.2020 20:00", category: "Kids stuff", user_id: 2)
 event_5 = Event.create!(title: "Cappuchino Meet-up #2", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Partens stuff", user_id: 8)
 
-puts "End of seed!"
+Question.create(question: "what do you like more?", option_a: "SECOND HAND", option_b: "NEW")
+Question.create(question: "what do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
+Question.create(question: "what do you like more?", option_a: "WOODEN TOYS", option_b: "PLASTIC TOYS")
+
+# puts "End of seed!"
+
