@@ -1,66 +1,58 @@
-<div class="container">
-  <div class="chat-box row" id="chat-box">
-    <%# if @over_ten %>
-      <%#= link_to 'Show Previous', '?m=all' %>
-    <%# end %>
-    <% @messages.each do |message| %>
-      <div class="col-md-12 chat-item">
-        <% if message.body %>
-          <% user = User.find(message.user_id) %>
-          <%= message.message_time %> <%= user.firstname %> <%= message.body %>
-        <% end %>
+  <div>
+    <div class="chat">
+      <div class="contact bar">
+        <div class="pic otheruser"></div>
+        <div class="name">
+          <%= @conversation.user2.firstname %>
+        </div>
+        <div class="seen">
+          01.01.2020
+          <%#= @conversation.messages.last.created_at.strftime("%B %Y")%>
+        </div>
       </div>
-    <% end %>
-    <div id="endofchat"></div>
-    <!--div class="col-md-12">
-    </div-->
-  </div>
-</div>
+      <div class="messages" id="chat-box">
+        <%# if @over_ten %>
+          <%#= link_to 'Show Previous', '?m=all' %>
+        <%# end %>
+        <% @messages.each do |message| %>
+          <% user = User.find(message.user_id) %>
+          <% if user.id == current_user.id %>
+          <div class="message my">
+            <% if message.body %>
+              <%= message.body %>
+            <% end %>
+          </div>
+          <% end %>
+        <% end %>
+        <span id="endofchat"></span>
+      </div>
 
-<div class="chat-footer">
-  <div class="container">
+
+    <div class="input">
+      <i class="far fa-laugh-beam"></i>
     <%= form_for [@conversation, @message], html: {class: "ui reply form"}, remote: true do |f| %>
-      <%= f.text_area :body, class: "form-control", autofocus: true %>
+      <%= f.text_field :body, class: "form-control", autofocus: true %>
       <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-      <%= f.submit "Add Reply", id: "hide-send" %>
+      <%= f.submit :submit, id: "send" %><!--i class="fas fa-paper-plane"></i-->
     <% end %>
+    </div>
   </div>
 </div>
-
 
 <%= render 'shared/navigation' %>
 
+<% if  @conversation.user2.photo.attached? %>
+  <% path = cl_image_path @conversation.user2.photo.key %>
+<% else %>
+  <% path = 'https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png' %>
+<% end %>  
+
 <style>
-#hide-send {
-  display:  none;
+  .pic.otheruser {
+  background-image: url("<%= path %>");
 }
-body *, * {
-  box-sizing: border-box !important;
-}
-.chat-item {
-  background-color: #ffe1e1;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 30px;
-  padding: 50px;
-  width: 100%;
-  overflow: hidden
-}
-
-.chat-footer{
-  padding: 10px;
-  position: fixed;
-  bottom: 105px;
-  width: 100%;
-}
-
-.chat-box {
-  height: 100%;
-  overflow: auto;
-  overflow-x: hidden;
-  padding-bottom: 210px;
-}    
 </style>
+
 <script type="text/javascript">
 // Get the input field
 const chatBox = document.getElementById("chat-box");
@@ -72,7 +64,7 @@ input.addEventListener("keyup", function(event) {
     // Cancel the default action, if needed
     //event.preventDefault();
     // Trigger the button element with a click
-    document.getElementById("hide-send").click();
+    document.getElementById("send").click();
   }
 });
 
