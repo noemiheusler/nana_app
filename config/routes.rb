@@ -13,9 +13,12 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :participations, only: [:create]
+    resources :invitations, only: [:create]
   end
 
   resources :participations, only: [:destroy]
+
+  resources :invitations, only: [:destroy]
 
   resources :answers, only: [:create]
 

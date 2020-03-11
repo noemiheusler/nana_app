@@ -1,0 +1,4 @@
+console.log("Hello Nana Unfriend")
+
+var box = document.getElementById("<%= @favorite.nana.id%>-box")
+box.innerHTML = "<%= j render 'add_favorite_link', friend: @favorite.nana %>"

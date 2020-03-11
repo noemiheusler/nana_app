@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :user
-  has_many :participations
+  has_many :participations, dependent: :destroy
+  has_many :invitations, dependent: :destroy
 
   validates :start_date, presence: true
   validates :end_date, presence: true

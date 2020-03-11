@@ -14,37 +14,56 @@
     <ul class="list-group">
     <% @events.each do |event| %>
 
-      <% if event.category == "Private" %>
-
         <% if (event.user_id == current_user.id) %>
-          <li class="list-group-item"><%= event.title %>
+          <li class="list-group-item">I am organizer of <%= event.title %>
             <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-            <i class="fas fa-trash-alt"></i>
+              <i class="fas fa-trash-alt"></i>
             <% end %>
             <%=link_to edit_event_path(event.id) do %>
-            <i class="fas fa-pen"></i>
+              <i class="fas fa-pen"></i>
             <% end %>
           </li>
+        <% end %>
+
+        <% if event.invitations.present?%>
+
+          <% event.invitations.each do |invitation| %>
+            <% if (invitation.user_id == current_user.id) && (event.user_id != current_user.id) %>
+              <li class="list-group-item">I am Invited to <%= event.title %>
+
+                <%=link_to invitation_path(invitation.id), method: :delete do %>
+
+                  <p>Reject Invitation</p>
+
+                <% end %>
+                <%=link_to event_participations_path(event.id), method: :post do %>
+
+                  <p>Accept Invitation</p>
+
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
         <% end %>
 
         <% if event.participations.present? %>
 
           <% event.participations.each do |participation| %>
-            <% if participation.user_id == current_user.id %>
-              <li class="list-group-item"><%= event.title %>
-                <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-                <i class="fas fa-trash-alt"></i>
+            <% if participation.user_id == current_user.id && event.user_id != current_user.id %>
+              <li class="list-group-item">I participate in <%= event.title %>
+
+                <%=link_to participation_path(participation.id), method: :delete do %>
+
+                  <p>Cancel Participation</p>
+
                 <% end %>
-                <%=link_to edit_event_path(event.id) do %>
-                <i class="fas fa-pen"></i>
-                <% end %>
+
               </li>
             <% end %>
           <% end %>
 
         <% end %>
 
-      <% end %>
     <% end %>
     </ul>
   </div>
@@ -53,12 +72,23 @@
 
     <ul class="list-group">
     <% @events.each do |event| %>
-      <% if event.category == "Public" %>
+      <% if event.category == "Public" && event.user_id != current_user.id %>
+          <% event.participations.each do |participation| %>
 
-        <% if (event.user_id = current_user) || (event.participations.user_id = current_user) %>
-          <li class="list-group-item"><%= event.title %><%= event.start_date %><%= event.description[0..25]%></li>
+          <li class="list-group-item"><%= event.title %><%= event.start_date %><%= event.description[0..25]%>
+          <% if participation.user_id != current_user.id %>
+              <%=link_to event_participations_path(event.id), method: :post do %>
+                <p>Participate</p>
+              <% end %>
+          <% end %>
+          <% if participation.user_id == current_user.id %>
+                <%=link_to participation_path(participation.id), method: :delete do %>
+                  <p>Cancel Participation</p>
+                <% end %>
+          <% end %>
+          </li>
+
         <% end %>
-
       <% end %>
     <% end %>
     </ul>

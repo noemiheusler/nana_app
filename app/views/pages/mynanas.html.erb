@@ -20,17 +20,24 @@
   <h2>My friends</h2>
 
   <% @friends.each do |friend|%>
+
     <%= friend.firstname %>
     <% if friend.is_favorited?(current_user) %>
-            <%= link_to nana_unfriend_path(friend.id), method: :delete do %>
-              <i class="fas fa-heart" id="heart" style="color:red;"></i>
+    <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
+            <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
+              <i class="fas fa-heart blue-heart"></i>
             <% end %>
+    </div>
     <% else  %>
-            <%= link_to nana_friend_path(friend.id), method: :post do %>
-            <i class="fas fa-heart" id="heart"></i>
+    <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
+            <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+            <i class="fas fa-heart"></i>
             <% end %>
+    </div>
+
     <% end %>
 
   <% end %>
 </div>
+
 

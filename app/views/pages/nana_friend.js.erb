@@ -1,5 +1,4 @@
-document.getElementById('heart').onclick = function() {
-  this.classList.toggle('blue-heart');
-};
-// Select element auf das ich clicke
-// dann inner HTML dieses Elements auswechseln
+console.log("Hello Nana Friend")
+
+var box = document.getElementById("<%= @favorite.nana.id%>-box")
+box.innerHTML = "<%= j render 'remove_favorite_link', friend: @favorite.nana %>"
