@@ -20,12 +20,12 @@ class EventsController < ApplicationController
     authorize @event
 
     if @event.save
-      user_ids = params[:event][:participations]
+      user_ids = params[:event][:invitations]
       user_ids.each do |id|
-        @participation = Participation.new
-        @participation.user_id = id
-        @participation.event_id = @event.id
-        @participation.save
+        @invitation = Invitation.new
+        @invitation.user_id = id
+        @invitation.event_id = @event.id
+        @invitation.save
       end
       redirect_to events_path, notice: 'Event was successfully created.'
     else

@@ -9,7 +9,7 @@
   <%  User.all.each do |user| %>
     <%  user_collection.push([user.firstname, user.id]) %>
   <% end %>
-  <%= f.input :participations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second %>
+  <%= f.input :invitations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second %>
   <%= f.button :submit%>
 <% end %>
 
