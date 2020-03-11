@@ -1,0 +1,173 @@
+<div class="onboarding-container">
+
+  <div class="panel">
+    <div class="panel-start">
+     <h3 class="panel-start-text">You are almost there...</h3>
+      <div class="mt-5">
+        <%= image_tag "onboarding-start.png"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-0">
+      <form>
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Profile picture input</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="MOTTO" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="DESCRIPTION" rows="3"></textarea>
+        </div>
+          <select class="form-control" id="exampleFormControlSelect1" placeholder="NUMBER OF KIDS">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+        </select>
+         <div class="form-group">
+          <input type="text" class="form-control" id="inputAddress" placeholder="ADDRESS">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-1">
+     <h3 class="panel-text">What do you like more?</h3>
+     <div class="btn-quiz">
+       SECOND HAND
+     </div>
+     <div class="btn-quiz">
+       NEW
+     </div>
+     <div class="mt-5">
+      <%= image_tag "onboarding.png"%>
+     </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-2">
+      <h3 class="panel-text">What do you like more?</h3>
+      <div class="btn-quiz">
+        RELAXING
+     </div>
+     <div class="btn-quiz">
+       BEING ACTIVE
+     </div>
+      <div class="mt-5">
+        <%= image_tag "onboarding.png"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-3">
+      <h3 class="panel-text">What do you like more?</h3>
+      <div class="btn-quiz">
+        WOODEN TOYS
+      </div>
+      <div class="btn-quiz">
+        PLASTIC TOYS
+      </div>
+        <div class="mt-5">
+          <%= image_tag "onboarding.png"%>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="swipe-dots">
+  <i id='dot-1' class='fas fa-circle'></i>
+  <i id='dot-1' class='far fa-circle'></i>
+  <i id='dot-1' class='far fa-circle'></i>
+  <i id='dot-1' class='far fa-circle'></i>
+  <i id='dot-1' class='far fa-circle'></i>
+</div>
+
+
+<script>
+  const dots = document.querySelector(".swipe-dots");
+
+  const _C = document.querySelector('.onboarding-container'),
+      N = _C.children.length;
+    _C.style.setProperty('--n', N)
+
+  function unify(e) { return e.changedTouches ? e.changedTouches[0] : e };
+  let x0 = null;
+
+  function lock(e) { x0 = unify(e).clientX };
+
+  let i = 0;
+
+  function move(e) {
+    if (x0 || x0 === 0) {
+      let dx = unify(e).clientX - x0, s = Math.sign(dx);
+
+      if ((i > 0 || s < 0) && (i < N - 1 || s > 0))
+        _C.style.setProperty('--i', i -= s)
+
+
+      x0 = null
+    }
+
+    const fullDot = "<i id='dot-1' class='fas fa-circle'></i>"
+    const emptyDot = "<i id='dot-2' class='far fa-circle'></i>"
+
+      if (i == 0 || i == null) {
+        console.log("hi")
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+      }
+      if (i == 1) {
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+      }
+      if (i == 2) {
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+      }
+       if (i == 3) {
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+      } if (i == 4) {
+        dots.innerHTML = ""
+        dots.insertAdjacentHTML("afterbegin", fullDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+        dots.insertAdjacentHTML("afterbegin", emptyDot)
+      }
+  };
+
+  _C.addEventListener('mousedown', lock, false);
+  _C.addEventListener('touchstart', lock, false);
+  _C.addEventListener('mouseup', move, false);
+  _C.addEventListener('touchend', move, false);
+  _C.addEventListener('touchmove', e => {e.preventDefault()}, false)
+</script>

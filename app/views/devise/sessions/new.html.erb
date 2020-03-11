@@ -24,6 +24,10 @@
     </div>
   <% end %>
   <div class="btn-sm-bottom">
-    <%= render "devise/shared/links" %>
+    <%= link_to "Sign up", intro_path %>
   </div>
+  <div class="btn-sm-bottom">
+    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  </div>
+
 </div>

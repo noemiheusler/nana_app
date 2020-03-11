@@ -1,4 +1,3 @@
-require 'faker'
 require 'date'
 require "open-uri"
 
@@ -74,4 +73,11 @@ participation_2 = Participation.create!(user_id: (User.all.last.id - 9) , event_
 participation_4 = Participation.create!(user_id: (User.all.last.id - 8) , event_id: (Event.all.last.id - 3))
 participation_5 = Participation.create!(user_id: (User.all.last.id - 7) , event_id: (Event.all.last.id - 4))
 
+
+Question.create(question: "what do you like more?", option_a: "SECOND HAND", option_b: "NEW")
+Question.create(question: "what do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
+Question.create(question: "what do you like more?", option_a: "WOODEN TOYS", option_b: "PLASTIC TOYS")
+
+# puts "End of seed!"
 puts "End of seed!"
+
