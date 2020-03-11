@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  get 'users/update'
+  devise_for :users, :controllers => {:registrations => "registrations"}
+
   root to: 'pages#discover'
 
   resources :conversations do
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   resources :participations, only: [:destroy]
 
   resources :answers, only: [:create]
+
+  resources :users, only: [:update]
 
   get "profile", to: "pages#profile", as: :profile
   get "mynanas", to: "pages#mynanas", as: :mynanas
