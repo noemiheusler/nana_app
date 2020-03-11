@@ -32,11 +32,21 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(message_params)
-    # @message = policy_scope(Message)
     authorize @message
+
     if @message.save
-      redirect_to conversation_messages_path(@conversation)
+      respond_to do |format|
+        format.html { redirect_to conversation_messages_path(@conversation) }
+        format.js  # <-- will render `app/views/messages/create.js.erb`
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to conversation_messages_path(@conversation) }
+        #format.html { render 'conversation/index' }
+        format.js  # <-- idem
+      end
     end
+
   end
 
   private
