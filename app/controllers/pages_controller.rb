@@ -22,9 +22,9 @@ class PagesController < ApplicationController
 
   def nana_friend
     @favorite = Favorite.new
-    @favorite.user_id = current_user.id
-    @favorite.nana_id = User.find(params[:id])
-    @favorite.save
+    @favorite.user = current_user
+    @favorite.nana = User.find(params[:id].to_i)
+    @favorite.save!
 
      respond_to do |format|
         format.html { redirect_to mynanas_path }

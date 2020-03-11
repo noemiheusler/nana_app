@@ -29,4 +29,12 @@ class User < ApplicationRecord
 #      tsearch: { prefix: true }
 #    }
 # end
+
+  def is_favorited?(current_user)
+     if Favorite.where(user: current_user, nana: self).first
+      true
+    else
+      false
+    end
+  end
 end
