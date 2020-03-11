@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :participations
   has_many :answers
+  has_many :favorites
   has_one_attached :photo
 
   validates  :firstname, presence: true, length: { maximum: 25 }
@@ -28,4 +29,12 @@ class User < ApplicationRecord
 #      tsearch: { prefix: true }
 #    }
 # end
+
+  def is_favorited?(current_user)
+     if Favorite.where(user: current_user, nana: self).first
+      true
+    else
+      false
+    end
+  end
 end

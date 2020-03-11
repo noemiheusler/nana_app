@@ -1,3 +1,17 @@
- <%= render 'shared/navbar' %>
-<h1>Discover Page</h1>
+<%= render 'shared/navbar' %>
+<div class="results-list"></div>
+<%= render 'radar' %>
 <%= render 'shared/navigation' %>
+
+
+<div id="discover-link-box">
+<%= link_to "", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby"  %>
+
+<script>
+  setTimeout(()=>{
+    const btn = document.querySelector("#show_nanas_nearby")
+    Rails.fire(btn, "click")
+  }, 1500)
+</script>
+</div>
+

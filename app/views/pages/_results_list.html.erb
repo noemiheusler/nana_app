@@ -1,0 +1,30 @@
+<% if users.empty? %>
+  <h1>Sorry no user found</h1>
+<% else %>
+  <% users.each do |user| %>
+<div class="d-flex justify-content-between align-items-center mx-2">
+  <div class="card-product">
+    <%= image_tag "image.png" %> <!-- Here we need to enter the profile imgae once it is available -->
+    <div class="card-product-infos">
+      <h2><%= user.firstname %> <%= user.lastname %></h2>
+      <p><%= user.motto %></p>
+      <p>Matching score: XX%</p> <!-- When we have the matching score it should be displayed here -->
+    </div>
+  </div>
+  <div>
+    <i class="fas fa-chevron-right"></i> <!-- Once the view for basic profile exists we have to link it here -->
+  </div>
+
+</div>
+  <hr class="m-0">
+  <% end %>
+<% end %>
+
+  <div class="btn-sm-bottom"> <!-- Change to other button when available -->
+    <%= link_to show_nanas_nearby_path do%><i class='fas fa-sync'></i><% end %>
+    <%= link_to "Refresh search", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby" %>
+  </div>
+</div>
+
+
+

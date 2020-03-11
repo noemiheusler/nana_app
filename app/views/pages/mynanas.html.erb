@@ -18,9 +18,19 @@
 
 <div>
   <h2>My friends</h2>
+
   <% @friends.each do |friend|%>
     <%= friend.firstname %>
+    <% if friend.is_favorited?(current_user) %>
+            <%= link_to nana_unfriend_path(friend.id), method: :delete do %>
+              <i class="fas fa-heart" id="heart" style="color:red;"></i>
+            <% end %>
+    <% else  %>
+            <%= link_to nana_friend_path(friend.id), method: :post do %>
+            <i class="fas fa-heart" id="heart"></i>
+            <% end %>
+    <% end %>
+
   <% end %>
 </div>
-
 

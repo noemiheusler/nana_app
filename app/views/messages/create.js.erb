@@ -1,0 +1,16 @@
+updateHTML();
+
+function updateHTML() {
+    const chatInputField = document.getElementById('message_body');
+    const chatsLoc = document.getElementById('chat-box');
+    let message = chatInputField.value;
+
+    messageHTML = `<div class="message my">${message}</div>`;
+
+    chatsLoc.insertAdjacentHTML('beforeend', messageHTML);
+
+    chatInputField.value = "";
+
+    var endofchat = document.getElementById("endofchat");
+    endofchat.scrollIntoView();
+}

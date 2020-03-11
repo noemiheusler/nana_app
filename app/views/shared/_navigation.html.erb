@@ -1,18 +1,18 @@
 <nav class="bottom-navbar-container">
   <div class="discover-button">
-    <%= link_to "#" do %>
+    <%= link_to root_path do %>
       <div>
        <i class="fas fa-search"></i>
      </div>
    <% end %>
  </div>
   <div class="icon-box">
-      <%#= link_to , pages_mynanas_path do %>
-        <div class="nav-button">
-          <i class="fas fa-users"></i>
-          <span>Nanas</span>
-        </div>
-      <%# end %>
+    <%= link_to mynanas_path do %>
+      <div class="nav-button">
+        <i class="fas fa-users"></i>
+        <span>Nanas</span>
+      </div>
+    <% end %>
 
     <%= link_to events_path do %>
       <div class="nav-button">

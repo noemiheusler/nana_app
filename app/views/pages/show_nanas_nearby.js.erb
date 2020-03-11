@@ -1,0 +1,19 @@
+var radarContainer = document.querySelector(".radar-container")
+var resultsList = document.querySelector(".results-list")
+var linkBox = document.querySelector("#discover-link-box")
+
+if (linkBox) linkBox.remove()
+
+
+if (radarContainer) {
+  radarContainer.remove();
+  resultsList.innerHTML = '<%= j render "results_list", users: @users_nearby %>'
+} else {
+  resultsList.innerHTML = ""
+  resultsList.insertAdjacentHTML("afterend",'<%= j render "radar" %>' )
+  setTimeout(()=>{
+    document.querySelector(".radar-container").remove()
+    resultsList.innerHTML = '<%= j render "results_list", users: @users_nearby %>'
+
+  }, 2000)
+}
