@@ -20,6 +20,23 @@ class PagesController < ApplicationController
     redirect_to mynanas_path
   end
 
+  def nana_friend
+    @favorite = Favorite.new
+    @favorite.user_id = current_user.id
+    @favorite.nana_id = User.find(params[:id])
+    @favorite.save
+
+     respond_to do |format|
+        format.html { redirect_to mynanas_path }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
+  end
+
+  def nana_unfriend
+    @favorite = Favorite.find_by(nana_id: params[:id])
+    @favorite.destroy
+  end
+
   def intro
   end
 

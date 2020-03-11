@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_024047) do
+ActiveRecord::Schema.define(version: 2020_03_10_083909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2020_03_10_024047) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "nana_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendships", id: :serial, force: :cascade do |t|
@@ -107,9 +114,9 @@ ActiveRecord::Schema.define(version: 2020_03_10_024047) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "firstname"
-    t.text "lastname"
-    t.text "address"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "address"
     t.integer "longitude"
     t.integer "latitude"
     t.text "motto"

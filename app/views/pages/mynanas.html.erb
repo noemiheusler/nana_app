@@ -18,9 +18,13 @@
 
 <div>
   <h2>My friends</h2>
+
   <% @friends.each do |friend|%>
     <%= friend.firstname %>
+
+    <% current_user.favorites.each do |favorite| %>
+      <% if favorite[:nana_id] == friend.id %>
+        <i class="fas fa-heart" id="heart" style="color:red;"></i>
+      <% end %>
+    <% end %>
   <% end %>
-</div>
-
-

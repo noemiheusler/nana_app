@@ -18,6 +18,7 @@ gem 'webpacker'
 gem 'pundit'
 gem 'has_friendship'
 gem 'cloudinary', '~> 1.12.0'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
 gem 'geocoder'
 
 group :development do
