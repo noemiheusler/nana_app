@@ -1,41 +1,37 @@
-  <div>
-    <div class="chat">
-      <div class="contact bar">
-        <div class="pic otheruser"></div>
-        <div class="name">
-          <%= @conversation.user2.firstname %>
-        </div>
-        <div class="seen">
-          01.01.2020
-          <%#= @conversation.messages.last.created_at.strftime("%B %Y")%>
-        </div>
-      </div>
-      <div class="messages" id="chat-box">
-        <%# if @over_ten %>
-          <%#= link_to 'Show Previous', '?m=all' %>
-        <%# end %>
-        <% @messages.each do |message| %>
-          <% user = User.find(message.user_id) %>
-          <% if user.id == current_user.id %>
-          <div class="message my">
-            <% if message.body %>
-              <%= message.body %>
-            <% end %>
-          </div>
-          <% end %>
+<div class="chat">
+  <div class="contact bar">
+    <div class="pic otheruser"></div>
+    <div class="name">
+      <%= @conversation.user2.firstname %>
+    </div>
+    <div class="seen">
+      01.01.2020
+      <%#= @conversation.messages.last.created_at.strftime("%B %Y")%>
+    </div>
+  </div>
+  <div class="messages" id="chat-box">
+    <%# if @over_ten %>
+      <%#= link_to 'Show Previous', '?m=all' %>
+    <%# end %>
+    <% @messages.each do |message| %>
+      <% user = User.find(message.user_id) %>
+      <% if user.id == current_user.id %>
+      <div class="message my">
+        <% if message.body %>
+          <%= message.body %>
         <% end %>
-        <span id="endofchat"></span>
       </div>
-
-
-    <div class="input">
-      <i class="far fa-laugh-beam"></i>
+      <% end %>
+    <% end %>
+    <span id="endofchat"></span>
+  </div>
+  <div class="input">
+    <i class="far fa-laugh-beam"></i>
     <%= form_for [@conversation, @message], html: {class: "ui reply form"}, remote: true do |f| %>
       <%= f.text_field :body, class: "form-control", autofocus: true %>
       <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
       <%= f.submit :submit, id: "send" %><!--i class="fas fa-paper-plane"></i-->
     <% end %>
-    </div>
   </div>
 </div>
 
@@ -61,15 +57,10 @@ var input = document.getElementById("message_body");
 input.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
-    // Cancel the default action, if needed
-    //event.preventDefault();
-    // Trigger the button element with a click
     document.getElementById("send").click();
   }
 });
 
 var endofchat = document.getElementById("endofchat");
 endofchat.scrollIntoView();
-// Scroll to bottom
-//chatBox.scrollTop = chatBox.scrollHeight;
 </script>
