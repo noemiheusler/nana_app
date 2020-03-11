@@ -20,17 +20,36 @@
   <h2>My friends</h2>
 
   <% @friends.each do |friend|%>
+
     <%= friend.firstname %>
     <% if friend.is_favorited?(current_user) %>
-            <%= link_to nana_unfriend_path(friend.id), method: :delete do %>
-              <i class="fas fa-heart" id="heart" style="color:red;"></i>
+            <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
+              <i class="fas fa-heart blue-heart" id=<%= friend.id%> onClick="reply_click(this.id)"></i>
             <% end %>
     <% else  %>
-            <%= link_to nana_friend_path(friend.id), method: :post do %>
-            <i class="fas fa-heart" id="heart"></i>
+            <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+            <i class="fas fa-heart" id=<%= friend.id%> onClick="reply_click(this.id)"></i>
             <% end %>
     <% end %>
 
   <% end %>
 </div>
 
+<script type="text/javascript">
+  function reply_click(clicked_id) {
+  const element = document.getElementById(clicked_id)
+  const hrefString = element.parentElement.getAttribute('href');
+
+    if (hrefString == `/nana_friend/${clicked_id}`) {
+      const hrefStringNew = `/nana_unfriend/${clicked_id}`;
+      element.parentElement.setAttribute('href', hrefStringNew);
+      element.parentElement.setAttribute('data-method', 'delete');
+      element.classList.remove("blue-heart");
+    } else {
+      const hrefStringNew = `/nana_friend/${clicked_id}`;
+      element.parentElement.setAttribute('href', hrefStringNew);
+      element.parentElement.setAttribute('data-method', 'post');
+      element.classList.add("blue-heart");
+    }
+  };
+</script>
