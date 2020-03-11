@@ -5,7 +5,7 @@ function updateHTML() {
     const chatsLoc = document.getElementById('chat-box');
     let message = chatInputField.value;
 
-    messageHTML = `<div class="col-md-12 chat-item">${message}</div>`;
+    messageHTML = `<div class="message my">${message}</div>`;
 
     chatsLoc.insertAdjacentHTML('beforeend', messageHTML);
 
