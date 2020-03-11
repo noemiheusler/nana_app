@@ -8,9 +8,8 @@ function updateHTML() {
     messageHTML = `<div class="message my">${message}</div>`;
 
     chatsLoc.insertAdjacentHTML('beforeend', messageHTML);
-
     chatInputField.value = "";
 
-    var endofchat = document.getElementById("endofchat");
+    let endofchat = document.getElementById("endofchat");
     endofchat.scrollIntoView();
 }
