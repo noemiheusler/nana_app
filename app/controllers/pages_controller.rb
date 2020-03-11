@@ -46,4 +46,12 @@ class PagesController < ApplicationController
   def discover
   end
 
+  def show_nanas_nearby
+    @users_nearby = User.near(current_user.address, 10).sample(5)
+    respond_to do |format|
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+    end
+  end
+
+
 end

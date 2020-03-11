@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   post "nana_unfriend/:id/", to: "pages#nana_unfriend", as: :nana_unfriend
   get "intro", to: "pages#intro", as: :intro
   get "onboarding", to: "pages#onboarding", as: :onboarding
+  get "show_nanas_nearby", to: "pages#show_nanas_nearby", as: :show_nanas_nearby
 end
