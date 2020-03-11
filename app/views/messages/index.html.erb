@@ -11,14 +11,15 @@
         <% end %>
       </div>
     <% end %>
-    <div class="col-md-12">
-    </div>
+    <div id="endofchat"></div>
+    <!--div class="col-md-12">
+    </div-->
   </div>
 </div>
 
 <div class="chat-footer">
   <div class="container">
-    <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+    <%= form_for [@conversation, @message], html: {class: "ui reply form"}, remote: true do |f| %>
       <%= f.text_area :body, class: "form-control", autofocus: true %>
       <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
       <%= f.submit "Add Reply", id: "hide-send" %>
@@ -62,24 +63,21 @@ body *, * {
 </style>
 <script type="text/javascript">
 // Get the input field
-let input = document.getElementById("new_message");
+const chatBox = document.getElementById("chat-box");
+var input = document.getElementById("message_body");
 
-// Execute a function when the user releases a key on the keyboard
 input.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
     // Cancel the default action, if needed
-    event.preventDefault();
+    //event.preventDefault();
     // Trigger the button element with a click
     document.getElementById("hide-send").click();
   }
 });
+
+var endofchat = document.getElementById("endofchat");
+endofchat.scrollIntoView();
 // Scroll to bottom
-
-updateScroll();
-
-function updateScroll(){
-var objDiv = document.getElementById("chat-box");
-objDiv.scrollTop = objDiv.scrollHeight;
-}
+//chatBox.scrollTop = chatBox.scrollHeight;
 </script>
