@@ -23,33 +23,21 @@
 
     <%= friend.firstname %>
     <% if friend.is_favorited?(current_user) %>
+    <div id="<%= friend.id%>-box">
             <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
-              <i class="fas fa-heart blue-heart" id=<%= friend.id%> onClick="reply_click(this.id)"></i>
+              <i class="fas fa-heart blue-heart"></i>
             <% end %>
+    </div>
     <% else  %>
+    <div id="<%= friend.id%>-box">
             <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
-            <i class="fas fa-heart" id=<%= friend.id%> onClick="reply_click(this.id)"></i>
+            <i class="fas fa-heart"></i>
             <% end %>
+    </div>
+
     <% end %>
 
   <% end %>
 </div>
 
-<script type="text/javascript">
-  function reply_click(clicked_id) {
-  const element = document.getElementById(clicked_id)
-  const hrefString = element.parentElement.getAttribute('href');
 
-    if (hrefString == `/nana_friend/${clicked_id}`) {
-      const hrefStringNew = `/nana_unfriend/${clicked_id}`;
-      element.parentElement.setAttribute('href', hrefStringNew);
-      element.parentElement.setAttribute('data-method', 'delete');
-      element.classList.remove("blue-heart");
-    } else {
-      const hrefStringNew = `/nana_friend/${clicked_id}`;
-      element.parentElement.setAttribute('href', hrefStringNew);
-      element.parentElement.setAttribute('data-method', 'post');
-      element.classList.add("blue-heart");
-    }
-  };
-</script>

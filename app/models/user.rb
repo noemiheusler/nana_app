@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :kids
   has_many :events
   has_many :participations
+  has_many :invitations
   has_many :answers
   has_many :favorites
   has_one_attached :photo

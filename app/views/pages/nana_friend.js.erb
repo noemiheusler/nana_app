@@ -1,16 +1,4 @@
+console.log("Hello Nana Friend")
 
-//.onclick = function() {
-  //console.log("Blu")
-
-//  this.classList.toggle('blue-heart');
-//};
-// Select element auf das ich clicke
-// dann inner HTML dieses Elements auswechseln
-
-
-
-  //function reply_click(clicked_id)
-  //{
-  //  console.log("clicked_id");
-  //  document.getElementById(clicked_id).classList.toggle('blue-heart');
-  //};
+var box = document.getElementById("<%= @favorite.nana.id%>-box")
+box.innerHTML = "<%= j render 'remove_favorite_link', friend: @favorite.nana %>"
