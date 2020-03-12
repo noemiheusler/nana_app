@@ -1,4 +1,4 @@
-<div class="contact"><h2>Messages</h2></div>
+<div class="contact"><h2>Conversations</h2></div>
 <% @conversations.each do |conversation| %>
   <% if conversation.user1_id == current_user.id || conversation.user2_id == current_user.id %>
     <% if conversation.user1_id == current_user.id %>
@@ -8,14 +8,19 @@
     <% end %>
     <%= link_to conversation_messages_path(conversation) do %>
     <div class="notification">
-      <% if  user_other.photo.attached? %>
+      <% if user_other.photo.attached? %>
         <%= cl_image_tag user_other.photo.key class:"avatar-large" %>
       <% else %>
         <%= image_tag "default-avatar.png", class:"avatar-large" %>
       <% end %>
       <div class="notification-content">
-        <p><small><%= conversation.messages.last.created_at.strftime("%A, %d %b %Y %H:%M") %></small></p>
-        <p><%= conversation.messages.last.user.firstname %>: <%= conversation.messages.last.body %></p>
+        <% if conversation.messages.last.present? %>
+          <p><small><%= conversation.messages.last.created_at.strftime("%A, %d %b %Y %H:%M") %> with <%= user_other.firstname %></small></p>
+          <p><%= conversation.messages.last.user.firstname %>: <%= conversation.messages.last.body %></p>
+        <% else %>
+          <p><small>No messages yet with <%= user_other.firstname %></small></p>
+          <p><%= user_other.firstname %></p>
+        <% end %>
       </div>
     </div>
     <% end %>
@@ -37,9 +42,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <% current_user.friends do |friend| %>
-          <%= link_to conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post' do %>
-            <% if friend.id != current_user.id %> 
+        <% current_user.friends.each do |friend| %>
+          <%= link_to conversations_path(user1_id: current_user.id, user2_id: friend.id), method: 'post' do %>
+            <% if friend.id != current_user.id %>
               <div class="notification">
                 <% if  friend.photo.attached? %>
                   <%= cl_image_tag friend.photo.key class:"avatar-large" %>
