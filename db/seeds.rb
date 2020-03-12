@@ -13,6 +13,10 @@ Participation.destroy_all
 Question.destroy_all
 User.destroy_all
 
+Question.create(question: "what do you like more?", option_a: "SECOND HAND", option_b: "NEW")
+Question.create(question: "what do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
+Question.create(question: "what do you like more?", option_a: "WOODEN TOYS", option_b: "PLASTIC TOYS")
+
 user_1 = User.create!(email: "anna.hill@gmail.com", password: "password", firstname: "Anna", lastname: "Hill", address: "Heinrichstrasse 269 8005 Zürich", motto: "Work hard, play hard!", description: "I love my kids, going for a walk and playing with my dog Sammy.")
 user_2 = User.create!(email: "t.gardner@gmail.com", password: "password", firstname: "Tomas", lastname: "Gardner", address: "Kronenstrasse 42 8006 Zürich", motto: "Carpe diem <3", description: "I am a single dad and looking for other parents to support each other.")
 user_3 = User.create!(email: "jules_travels@gmail.com", password: "password", firstname: "Julia", lastname: "Förster", address: "Badenerstrasse 500 8048 Zürich", motto: "You cannot buy happiness, but flights!", description: "I travel the world with my familiy.")
@@ -23,6 +27,12 @@ user_7 = User.create!(email: "jan1982@gmail.com", password: "password", firstnam
 user_8 = User.create!(email: "steffi_loves_cake@gmail.com", password: "password", firstname: "Stefanie", lastname: "Becker", address: "Studackerstrasse 1 8038 Zürich", motto: "Cake rulezzz!", description: "Love baking almost as much as my family.")
 user_9 = User.create!(email: "caro.maier@gmail.com", password: "password", firstname: "Caroline", lastname: "Maier", address: "Falkenstrasse 1 8008 Zürich, Schweiz", motto: "<3 Chappucchino <3", description: "Having a cappucchino and relaxing while reading a book is my perfect day.")
 user_10 = User.create!(email: "jessy.manner@gmail.com", password: "password", firstname: "Jessica", lastname: "Manner", address: "Mainaustrasse 23 8008 Zürich", motto: "In love with life", description: "Positive thinker with a lot of energy :)")
+
+User.all.each do |user|
+  Question.all.each do |question|
+    Answer.create(user:user, question:question, answer:[true, false].sample)
+  end
+end
 
 user_2.friend_request(user_1)
 user_3.friend_request(user_1)
@@ -73,9 +83,6 @@ participation_2 = Participation.create!(user_id: (User.all.last.id - 9) , event_
 participation_4 = Participation.create!(user_id: (User.all.last.id - 8) , event_id: (Event.all.last.id - 3))
 participation_5 = Participation.create!(user_id: (User.all.last.id - 7) , event_id: (Event.all.last.id - 4))
 
-Question.create(question: "what do you like more?", option_a: "SECOND HAND", option_b: "NEW")
-Question.create(question: "what do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
-Question.create(question: "what do you like more?", option_a: "WOODEN TOYS", option_b: "PLASTIC TOYS")
 
 # puts "End of seed!"
 puts "End of seed!"
