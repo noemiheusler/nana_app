@@ -1,16 +1,39 @@
+<%# set photo key of other user %>
+<% if @conversation.user2.id == current_user.id %>
+  <% if  @conversation.user1.photo.attached? %>
+    <% otheruser_cl_photo_key = conversation.user1.photo.key %>
+  <% else %>
+    <% otheruser_cl_photo_key = "default-pic"%>
+  <% end %>
+<% else %>
+  <% if  @conversation.user2.photo.attached? %>
+    <% otheruser_cl_photo_key = conversation.user2.photo.key %>
+  <% else %>
+    <% otheruser_cl_photo_key = "default-pic"%>
+  <% end %>
+<% end %>
+
+<%# chat-area start %>
+
 <div class="chat">
-  <div class="contact bar">
-    <%= link_to conversations_path do %><div class="back-arrow"><i class="fas fa-arrow-left"></i></div><% end %>
-    <div class="pic otheruser"></div>
-    <div class="name">
-      <% if @conversation.user2.id == current_user.id %>
-        <%= @conversation.user1.firstname %>
-      <% else %>
-        <%= @conversation.user2.firstname %>
-      <% end %>
-    </div>
-    <div class="seen">
-      <%= @messages.last.created_at.strftime("%A, %d %b %Y %H:%M")%>
+  <div class="contact">
+    <div><%= link_to conversations_path do %><i class="fas fa-arrow-left back-arrow"></i><% end %></div>
+    <% if otheruser_cl_photo_key == "default-pic" %>
+      <%= image_tag "default-avatar.png", class:"pic otheruser" %>
+    <% else %>
+      <%= cl_image_tag otheruser_cl_photo_key class:"pic otheruser" %>
+    <% end %>
+    <div class="name-seen">
+      <div class="name">
+        <% if @conversation.user2.id == current_user.id %>
+          <%= @conversation.user1.firstname %>
+        <% else %>
+          <%= @conversation.user2.firstname %>
+        <% end %>
+      </div>
+      <div class="seen">
+        <%= @messages.last.created_at.strftime("%A, %d %b %Y %H:%M")%>
+      </div>
     </div>
   </div>
   <div class="messages" id="chat-box">
@@ -63,12 +86,6 @@
   <% path = 'https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png' %>
 <% end %>  
 
-<style>
-  .pic.otheruser {
-  background-image: url("<%= path %>");
-}
-</style>
-
 <script type="text/javascript">
 // move to end of chat on page load
 
@@ -77,13 +94,17 @@ endofchat.scrollIntoView();
 
 const input = document.getElementById('message_body');
 
+<% if false %>
 // add event listener for enter button
-input.addEventListener("keyup", function(event) {
+document.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
+  console.log(event)
   if (event.keyCode === 13) {
+    input.preventDefault();
     document.getElementById("send").click();
   }
 });
+<% end %>
 
 // emoji picker, see https://github.com/joeattardi/emoji-button?ref=mdbootstrap.com
 
@@ -92,6 +113,7 @@ const picker = new EmojiButton();
 
 picker.on('emoji', emoji => {
   input.value += emoji;
+  input.focus();
 });
 
 button.addEventListener('click', () => {
