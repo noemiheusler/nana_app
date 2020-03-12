@@ -8,6 +8,7 @@ class Event < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 200 }
   validates :max_participants, presence: true, numericality: { only_integer: true }
+  validates :location, presence: true, length: { maximum: 200 }
   # accept nested attributes
   validate :date_validation
 

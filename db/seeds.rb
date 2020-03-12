@@ -54,12 +54,12 @@ kid_14 = Kid.create!(birthday: "22.04.2014" , user_id: (User.all.last.id - 4))
 kid_15 = Kid.create!(birthday: "27.12.2013" , user_id: (User.all.last.id - 3))
 kid_16 = Kid.create!(birthday: "19.03.2012" , user_id: (User.all.last.id - 1))
 
-event_1 = Event.create!(title: "Cappuchino Meet-up", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "10.02.2020 15:00", end_date: "10.02.2020 18:00", category: "Private", user_id: (User.all.last.id - 9))
-event_2 = Event.create!(title: "Playground Meet-up", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "15.05.2020 14:00", end_date: "15.05.2020 17:00", category: "Public", user_id: (User.all.last.id - 9))
-event_3 = Event.create!(title: "Water park tomorrow", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "03.01.2020 10:00", end_date: "03.01.2020 12:00", category: "Public", user_id: (User.all.last.id - 9))
-event_4 = Event.create!(title: "Diaper workshop", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "14.04.2020 17:00", end_date: "14.04.2020 20:00", category: "Private", user_id: (User.all.last.id - 8))
-event_5 = Event.create!(title: "Cappuchino Meet-up #2", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Public", user_id: (User.all.last.id - 8))
-event_6 = Event.create!(title: "Cappuchino Meet-up #2", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Private", user_id: (User.all.last.id - 4))
+event_1 = Event.create!(title: "Cappuchino Meet-up", location: "Kronenstrasse 42 8006 Zürich", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "10.02.2020 15:00", end_date: "10.02.2020 18:00", category: "Private", user_id: (User.all.last.id - 9))
+event_2 = Event.create!(title: "Playground Meet-up", location: "Kronenstrasse 42 8006 Zürich", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "15.05.2020 14:00", end_date: "15.05.2020 17:00", category: "Public", user_id: (User.all.last.id - 9))
+event_3 = Event.create!(title: "Water park tomorrow", location: "Kronenstrasse 42 8006 Zürich", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "03.01.2020 10:00", end_date: "03.01.2020 12:00", category: "Public", user_id: (User.all.last.id - 9))
+event_4 = Event.create!(title: "Diaper workshop", location: "Kronenstrasse 42 8006 Zürich", description: "Have a chat and some cappucchinos in this new Café", max_participants: "5", start_date: "14.04.2020 17:00", end_date: "14.04.2020 20:00", category: "Private", user_id: (User.all.last.id - 8))
+event_5 = Event.create!(title: "Cappuchino Meet-up #2", location: "Kronenstrasse 42 8006 Zürich", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Public", user_id: (User.all.last.id - 8))
+event_6 = Event.create!(title: "Cappuchino Meet-up #2", location: "Kronenstrasse 42 8006 Zürich", description: "Have a chat and some cappucchinos in this new Café", max_participants: "1", start_date: "10.03.2020 15:00", end_date: "10.03.2020 17:00", category: "Private", user_id: (User.all.last.id - 4))
 
 invitation_1 = Invitation.create!(user_id: (User.all.last.id - 9) , event_id: (Event.all.last.id - 4))
 invitation_2 = Invitation.create!(user_id: (User.all.last.id - 9) , event_id: (Event.all.last.id - 3))
@@ -72,7 +72,6 @@ participation_1 = Participation.create!(user_id: (User.all.last.id - 9) , event_
 participation_2 = Participation.create!(user_id: (User.all.last.id - 9) , event_id: (Event.all.last.id))
 participation_4 = Participation.create!(user_id: (User.all.last.id - 8) , event_id: (Event.all.last.id - 3))
 participation_5 = Participation.create!(user_id: (User.all.last.id - 7) , event_id: (Event.all.last.id - 4))
-
 
 Question.create(question: "what do you like more?", option_a: "SECOND HAND", option_b: "NEW")
 Question.create(question: "what do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
