@@ -1,31 +1,62 @@
-<div class="ui segment">
- <h3>Mailbox</h3>
-  <div class="ui list">
-    <div class="item">
-      <% @conversations.each do |conversation| %>
-        <% if conversation.user1_id == current_user.id || conversation.user2_id == current_user.id %>
-          <% if conversation.user1_id == current_user.id %>
-            <% user2 = User.find(conversation.user2_id) %>
-          <% else %>
-            <% user2 = User.find(conversation.user1_id) %>
-          <% end %>
-        <%= link_to user2.firstname, conversation_messages_path(conversation)%>
-        <% end %>
+<div class="contact"><h2>Messages</h2></div>
+<% @conversations.each do |conversation| %>
+  <% if conversation.user1_id == current_user.id || conversation.user2_id == current_user.id %>
+    <% if conversation.user1_id == current_user.id %>
+      <% user_other = User.find(conversation.user2_id) %>
+    <% else %>
+      <% user_other = User.find(conversation.user1_id) %>
+    <% end %>
+    <%= link_to conversation_messages_path(conversation) do %>
+    <div class="notification">
+      <% if  user_other.photo.attached? %>
+        <%= cl_image_tag user_other.photo.key class:"avatar-large" %>
+      <% else %>
+        <%= image_tag "default-avatar.png", class:"avatar-large" %>
       <% end %>
+      <div class="notification-content">
+        <p><small><%= conversation.messages.last.created_at.strftime("%A, %d %b %Y %H:%M") %></small></p>
+        <p><%= conversation.messages.last.user.firstname %>: <%= conversation.messages.last.body %></p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<div class="new-chat" data-toggle="modal" data-target="#friendsModal">
+  <i class="far fa-comments new-message-button"></i>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="friendsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">New Chat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% current_user.friends do |friend| %>
+          <%= link_to conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post' do %>
+            <% if friend.id != current_user.id %> 
+              <div class="notification">
+                <% if  friend.photo.attached? %>
+                  <%= cl_image_tag friend.photo.key class:"avatar-large" %>
+                <% else %>
+                  <%= image_tag "default-avatar.png", class:"avatar-large" %>
+                <% end %>
+                <div class="notification-content">
+                  <p><small>Member since <%= friend.created_at.strftime("%A, %d %b %Y %H:%M") %></small></p>
+                  <p><strong><%= friend.firstname %></strong></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="ui segment">
-  <h3>Your Nanas</h3>
-  <div class="ui list">
-    <% @users.each do |user| %>
-      <% if user.id != current_user.id %>
-      <div class="item">
-        <%= user.firstname %> <%= link_to conversations_path(user1_id: current_user.id, user2_id: user.id), method: 'post' do %><i class="far fa-comments"></i><% end %>
-      </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
 <%= render 'shared/navigation' %>
