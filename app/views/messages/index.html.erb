@@ -1,16 +1,41 @@
+<%# set photo key of other user %>
+<% if @conversation.user2.id == current_user.id %>
+  <% if  @conversation.user1.photo.attached? %>
+    <% otheruser_cl_photo_key = conversation.user1.photo.key %>
+  <% else %>
+    <% otheruser_cl_photo_key = "default-pic"%>
+  <% end %>
+<% else %>
+  <% if  @conversation.user2.photo.attached? %>
+    <% otheruser_cl_photo_key = conversation.user2.photo.key %>
+  <% else %>
+    <% otheruser_cl_photo_key = "default-pic"%>
+  <% end %>
+<% end %>
+
+<%# chat-area start %>
+
 <div class="chat">
-  <div class="contact bar">
-    <%= link_to conversations_path do %><div class="back-arrow"><i class="fas fa-arrow-left"></i></div><% end %>
-    <div class="pic otheruser"></div>
-    <div class="name">
-      <% if @conversation.user2.id == current_user.id %>
-        <%= @conversation.user1.firstname %>
-      <% else %>
-        <%= @conversation.user2.firstname %>
+  <div class="contact">
+    <div><%= link_to conversations_path do %><i class="fas fa-arrow-left back-arrow"></i><% end %></div>
+    <% if otheruser_cl_photo_key == "default-pic" %>
+      <%= image_tag "default-avatar.png", class:"pic otheruser" %>
+    <% else %>
+      <%= cl_image_tag otheruser_cl_photo_key class:"pic otheruser" %>
+    <% end %>
+    <div class="name-seen">
+      <div class="name">
+        <% if @conversation.user2.id == current_user.id %>
+          <%= @conversation.user1.firstname %>
+        <% else %>
+          <%= @conversation.user2.firstname %>
+        <% end %>
+      </div>
+      <div class="seen">
+      <% if @messages.last.created_at != nil %>
+        <%= @messages.last.created_at.strftime("%A, %d %b %Y %H:%M")%>
       <% end %>
-    </div>
-    <div class="seen">
-      <%= @messages.last.created_at.strftime("%A, %d %b %Y %H:%M")%>
+      </div>
     </div>
   </div>
   <div class="messages" id="chat-box">
@@ -18,29 +43,33 @@
       <%#= link_to 'Show Previous', '?m=all' %>
     <%# end %>
     <% dates = [] %>
-    <% @messages.each do |message| %>
-      <% date_string = message.created_at.strftime("%d.%m.%Y").to_s %>
-      <% if not dates.include? date_string %>
-        <% dates.push(message.created_at.strftime("%d.%m.%Y")) %>
-        <div class="chat-day"><%= message.created_at.strftime("%A, %d %b %Y") %></div>
-      <% end %>
-      <% user = User.find(message.user_id) %>
-      <% if user.id == current_user.id %>
-      <div class="message my">
-        <% if message.body %>
-          <%= message.body %>
-          <div class="message-time-other"><%= message.created_at.strftime("%H.%M") %></div>
+    <% if @messages.last.present? %>
+      <% @messages.each do |message| %>
+        <% if message.id != nil %>
+        <% date_string = message.created_at.strftime("%d.%m.%Y").to_s %>
+        <% if not dates.include? date_string %>
+          <% dates.push(message.created_at.strftime("%d.%m.%Y")) %>
+          <div class="chat-day"><%= message.created_at.strftime("%A, %d %b %Y") %></div>
         <% end %>
-      </div>
-      
-      <% else %>
-      <div class="message">
-        <% if message.body %>
-          <%= message.body %>
-          <div class="message-time-my"><%= message.created_at.strftime("%H.%M") %></div>
+        <% user = User.find(message.user_id) %>
+        <% if user.id == current_user.id %>
+        <div class="message my">
+          <% if message.body %>
+            <%= message.body %>
+            <div class="message-time-other"><%= message.created_at.strftime("%H.%M") %></div>
+          <% end %>
+        </div> 
+        <% else %>
+        <div class="message">
+          <% if message.body %>
+            <%= message.body %>
+            <div class="message-time-my"><%= message.created_at.strftime("%H.%M") %></div>
+          <% end %>
+          <% message.read = true %>
+          <% message.save %>
+        </div>     
         <% end %>
-      </div>
-      
+        <% end %>
       <% end %>
     <% end %>
     <span id="endofchat"></span>
@@ -63,12 +92,6 @@
   <% path = 'https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png' %>
 <% end %>  
 
-<style>
-  .pic.otheruser {
-  background-image: url("<%= path %>");
-}
-</style>
-
 <script type="text/javascript">
 // move to end of chat on page load
 
@@ -77,13 +100,17 @@ endofchat.scrollIntoView();
 
 const input = document.getElementById('message_body');
 
+<% if false %>
 // add event listener for enter button
-input.addEventListener("keyup", function(event) {
+document.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
+  console.log(event)
   if (event.keyCode === 13) {
+    input.preventDefault();
     document.getElementById("send").click();
   }
 });
+<% end %>
 
 // emoji picker, see https://github.com/joeattardi/emoji-button?ref=mdbootstrap.com
 
@@ -92,6 +119,7 @@ const picker = new EmojiButton();
 
 picker.on('emoji', emoji => {
   input.value += emoji;
+  input.focus();
 });
 
 button.addEventListener('click', () => {

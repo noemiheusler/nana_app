@@ -4,25 +4,16 @@ class MessagesController < ApplicationController
   end
 
   def index
+    @conversation = policy_scope(Conversation).find(params[:conversation_id])
     @messages = @conversation.messages
 
-    @messages = policy_scope(Message)
+    # @messages = policy_scope(Message) # Message.all
     
     if @messages.length > 50
       @over_ten = true
       @messages = @messages[-50..-1]
     end
     
-    if params[:m]
-      @over_ten = false
-      @messages = @conversation.messages
-    end
-    
-    if @messages.last
-      if @messages.last.user_id != current_user.id
-        @messages.last.read = true;
-      end
-    end
     @message = @conversation.messages.new
   end
   
@@ -33,7 +24,6 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.new(message_params)
     authorize @message
-
     if @message.save
       respond_to do |format|
         format.html { redirect_to conversation_messages_path(@conversation) }
