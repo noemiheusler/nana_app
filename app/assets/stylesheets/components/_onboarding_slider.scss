@@ -82,16 +82,12 @@ body { overflow-x: hidden}
   left: 50%;
 }
 
-.fas {
+ .fa-circle {
   color: #6229CE;
   opacity: 0.7;
   padding: 3px;
   font-size: 15px;
 }
 
-.far {
-  color: #6229CE;
-  opacity: 0.7;
-  padding: 3px;
-  font-size: 15px;
-}
+.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+    color: #03BCE1; }
