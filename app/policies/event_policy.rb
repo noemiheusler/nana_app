@@ -6,6 +6,10 @@ class EventPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    user
+  end
+
   def new?
     user
   end

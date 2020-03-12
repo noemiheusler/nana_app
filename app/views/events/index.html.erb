@@ -15,7 +15,11 @@
     <% @events.each do |event| %>
 
         <% if (event.user_id == current_user.id) %>
+
           <li class="list-group-item">I am organizer of <%= event.title %>
+            <%=link_to event_path(event.id) do %>
+              <p>Show Event</p>
+            <% end %>
             <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
               <i class="fas fa-trash-alt"></i>
             <% end %>
@@ -23,12 +27,18 @@
               <i class="fas fa-pen"></i>
             <% end %>
           </li>
+
         <% end %>
+
 
         <% if event.invitations.present?%>
 
+
           <% event.invitations.each do |invitation| %>
             <% if (invitation.user_id == current_user.id) && (event.user_id != current_user.id) %>
+
+              <%=link_to event_path(event.id) do %>
+
               <li class="list-group-item">I am Invited to <%= event.title %>
 
                 <%=link_to invitation_path(invitation.id), method: :delete do %>
@@ -42,6 +52,9 @@
 
                 <% end %>
               </li>
+
+              <% end %>
+
             <% end %>
           <% end %>
         <% end %>
@@ -50,15 +63,21 @@
 
           <% event.participations.each do |participation| %>
             <% if participation.user_id == current_user.id && event.user_id != current_user.id %>
-              <li class="list-group-item">I participate in <%= event.title %>
 
-                <%=link_to participation_path(participation.id), method: :delete do %>
+              <%=link_to event_path(event.id) do %>
 
-                  <p>Cancel Participation</p>
+                <li class="list-group-item">I participate in <%= event.title %>
 
-                <% end %>
+                  <%=link_to participation_path(participation.id), method: :delete do %>
 
-              </li>
+                    <p>Cancel Participation</p>
+
+                  <% end %>
+
+                </li>
+
+              <% end %>
+
             <% end %>
           <% end %>
 
@@ -75,6 +94,8 @@
       <% if event.category == "Public" && event.user_id != current_user.id %>
           <% event.participations.each do |participation| %>
 
+          <%=link_to event_path(event.id) do %>
+
           <li class="list-group-item"><%= event.title %><%= event.start_date %><%= event.description[0..25]%>
           <% if participation.user_id != current_user.id %>
               <%=link_to event_participations_path(event.id), method: :post do %>
@@ -88,6 +109,8 @@
           <% end %>
           </li>
 
+          <% end %>
+
         <% end %>
       <% end %>
     <% end %>
@@ -96,3 +119,5 @@
 </div>
 
 <%= link_to "+", new_event_path, class: "btn btn-plus btn-primary" %>
+
+<%= render 'shared/navigation' %>

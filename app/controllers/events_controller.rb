@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    authorize @event
   end
 
   def create
@@ -57,7 +58,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :max_participants, :start_date, :end_date, :category)
+    params.require(:event).permit(:title, :description, :max_participants, :start_date, :end_date, :category, :location)
   end
 
   def set_event

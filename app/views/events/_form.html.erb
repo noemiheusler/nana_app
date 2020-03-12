@@ -4,12 +4,18 @@
   <%= f.input :max_participants%>
   <%= f.input :start_date%>
   <%= f.input :end_date%>
-  <%= f.select :category, options_for_select(%w[Private Public])%>
-  <% user_collection = [] %>
-  <%  User.all.each do |user| %>
-    <%  user_collection.push([user.firstname, user.id]) %>
-  <% end %>
-  <%= f.input :invitations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second %>
+  <%= f.input :location%>
+  <%= f.select :category, options_for_select(%w[Public Private]), remote: true %>
+<div id=form-js-input>
+</div>
   <%= f.button :submit%>
 <% end %>
 
+<script>
+  console.log("Hello Form JS")
+
+  if (document.getElementById("event_category").value == 'Private') {
+    var invtation = document.getElementById("form-js-input")
+    invitation.innerHTML = "<%= j render 'form_private'%>"
+  };
+</script>

@@ -55,12 +55,13 @@ ActiveRecord::Schema.define(version: 2020_03_11_063525) do
     t.string "title"
     t.string "description"
     t.integer "max_participants"
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string "category"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "location"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
