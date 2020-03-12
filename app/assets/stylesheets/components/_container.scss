@@ -8,6 +8,8 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .profile-info {
@@ -33,7 +35,7 @@
     align-items: center;
     margin-bottom: 20px;
     height: 58px;
-    width: 280px;
+    width: 100%;
     position: relative;
     background: white;
     border: 1px solid;
@@ -49,7 +51,8 @@
     width: 60px;
     background-color: white;
     text-align: center;
-    font-size: 8px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .profile-info-item {
