@@ -25,9 +25,14 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
 
   get "profile", to: "pages#profile", as: :profile
+  get "your_profile/:id", to: "pages#your_profile", as: :your_profile
   get "mynanas", to: "pages#mynanas", as: :mynanas
+  patch "accept_friend_profile/:id/", to: "pages#accept_friend_profile", as: :accept_friend_profile
   patch "accept_friend/:id/", to: "pages#accept_friend", as: :accept_friend
+  patch "reject_friend_profile/:id/", to: "pages#reject_friend_profile", as: :reject_friend_profile
   patch "reject_friend/:id/", to: "pages#reject_friend", as: :reject_friend
+  patch "unfriend_friend/:id/", to: "pages#unfriend", as: :unfriend
+  patch "request_friend/:id/", to: "pages#request_friend", as: :request_friend
   post "nana_friend/:id/", to: "pages#nana_friend", as: :nana_friend
   delete "nana_unfriend/:id/", to: "pages#nana_unfriend", as: :nana_unfriend
   get "intro", to: "pages#intro", as: :intro

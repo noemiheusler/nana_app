@@ -1,0 +1,76 @@
+<div class="profile">
+  <div class="profile-pic">
+
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, class:"avatar" %>
+        <% else %>
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" /, class="avatar">
+    <% end %>
+
+  </div>
+
+  <div class="profile-info">
+    <div class="profile-info-box">
+      <div class="label">Name</div>
+      <div class="profile-info-item"><%= @user.firstname %> <%=@user.lastname%></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Motto</div>
+      <div class="profile-info-item"><%= @user.motto %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Description</div>
+      <div class="profile-info-item"><%= @user.description %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Kids</div>
+      <% @user.kids.each do |kid|  %>
+        <div class="profile-info-item"><%= kid.birthday  %></div>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="profile-action">
+
+    <% is_a_friend = false %>
+    <% is_a_pending_friend = false %>
+    <% is_a_requested_friend = false %>
+
+    <% if current_user.friends_with?(@user) %>
+      <%# 2 ID %>
+      <%=link_to unfriend_path(@user.id), method: :patch do %>
+      <% is_a_friend = true %>
+        <%= "UNFRIEND"  %>
+      <% end %>
+    <% end %>
+
+    <% current_user.pending_friends.each do |pending_friend| %>
+      <% if pending_friend == @user %>
+        <%# 5 ID %>
+        <% is_a_pending_friend = true %>
+        <%= "YOUR FRIEND REQUEST IS STILL PENDING" %>
+      <% end %>
+    <% end %>
+
+    <% current_user.requested_friends.each do |requested_friend| %>
+      <% if requested_friend == @user %>
+        <% is_a_requested_friend = true %>
+        <%# 8 ID %>
+        <%=link_to accept_friend_profile_path(requested_friend.id), method: :patch do %>
+          <i class="fas fa-check-circle"></i>
+        <% end %>
+        <%=link_to reject_friend_profile_path(requested_friend.id), method: :patch do %>
+          <i class="fas fa-times-circle"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if is_a_friend == false && is_a_requested_friend == false && is_a_pending_friend == false %>
+      <%# 5 ID %>
+      <%=link_to request_friend_path(@user.id), method: :patch do %>
+        <%= "CONNECT" %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

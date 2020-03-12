@@ -4,6 +4,10 @@ class PagesController < ApplicationController
   def profile
   end
 
+  def your_profile
+    @user = User.find(params[:id])
+  end
+
   def mynanas
     @users = User.all
     @friends = current_user.friends
@@ -18,6 +22,26 @@ class PagesController < ApplicationController
   def reject_friend
     current_user.decline_request(User.find(params[:id]))
     redirect_to mynanas_path
+  end
+
+  def accept_friend_profile
+    current_user.accept_request(User.find(params[:id]))
+    redirect_to your_profile_path(User.find(params[:id]))
+  end
+
+  def reject_friend_profile
+    current_user.decline_request(User.find(params[:id]))
+    redirect_to your_profile_path(User.find(params[:id]))
+  end
+
+  def unfriend
+    current_user.remove_friend(User.find(params[:id]))
+    redirect_to your_profile_path(User.find(params[:id]))
+  end
+
+  def request_friend
+    current_user.friend_request(User.find(params[:id]))
+    redirect_to your_profile_path(User.find(params[:id]))
   end
 
   def nana_friend

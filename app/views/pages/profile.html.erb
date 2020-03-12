@@ -1,1 +1,49 @@
-<h1>here is my profile</h1>
+<div class="profile">
+  <div class="profile-pic">
+
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, class:"avatar" %>
+        <% else %>
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" /, class="avatar">
+    <% end %>
+
+  </div>
+
+  <div class="profile-info">
+    <div class="profile-info-box">
+      <div class="label">Name</div>
+      <div class="profile-info-item"><%= current_user.firstname %> <%=current_user.lastname%></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Motto</div>
+      <div class="profile-info-item"><%= current_user.motto %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Description</div>
+      <div class="profile-info-item"><%= current_user.description %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Kids</div>
+      <% current_user.kids.each do |kid|  %>
+        <div class="profile-info-item"><%= kid.birthday  %></div>
+    <% end %>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Email</div>
+      <div class="profile-info-item"><%= current_user.email %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Address</div>
+      <div class="profile-info-item"><%= current_user.address %></div>
+    </div>
+
+  </div>
+
+  <div class="profile-action">
+
+    <%= link_to "Edit your profile", edit_user_registration_path, class: "btn"%>
+
+  </div>
+</div>
+
+
