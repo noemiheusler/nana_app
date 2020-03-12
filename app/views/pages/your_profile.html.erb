@@ -36,13 +36,13 @@
     <%# 2 ID %>
     <%= "UNFRIEND"  %>
   <% elsif current_user.requested_friends.each do |requested_friend| %>
-      <% if requested_friend = @user %>
+      <% if requested_friend == @user %>
       <%# 5 ID %>
       <%= "OPEN FRIEND REQUEST" %>
       <% end %>
     <% end %>
   <% elsif current_user.pending_friends.each do |pending_friend| %>
-    <% pending_friend = @user %>
+    <% if pending_friend == @user %>
     <%# 8 ID %>
     <%=link_to accept_friend_path(pending_friend.id), method: :patch do %>
       <i class="fas fa-check-circle"></i>
