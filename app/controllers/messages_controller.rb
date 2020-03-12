@@ -8,9 +8,9 @@ class MessagesController < ApplicationController
 
     @messages = policy_scope(Message)
     
-    if @messages.length > 10
+    if @messages.length > 50
       @over_ten = true
-      @messages = @messages[-10..-1]
+      @messages = @messages[-50..-1]
     end
     
     if params[:m]
