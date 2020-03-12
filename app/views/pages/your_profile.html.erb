@@ -32,30 +32,45 @@
 
   <div class="profile-action">
 
-  <% if current_user.friends_with?(@user) %>
-    <%# 2 ID %>
-    <%= "UNFRIEND"  %>
-  <% elsif current_user.requested_friends.each do |requested_friend| %>
-      <% if requested_friend == @user %>
-      <%# 5 ID %>
-      <%= "OPEN FRIEND REQUEST" %>
+    <% is_a_friend = false %>
+    <% is_a_pending_friend = false %>
+    <% is_a_requested_friend = false %>
+
+    <% if current_user.friends_with?(@user) %>
+      <%# 2 ID %>
+      <%=link_to unfriend_path(@user.id), method: :patch do %>
+      <% is_a_friend = true %>
+        <%= "UNFRIEND"  %>
       <% end %>
     <% end %>
-  <% elsif current_user.pending_friends.each do |pending_friend| %>
-    <% if pending_friend == @user %>
-    <%# 8 ID %>
-    <%=link_to accept_friend_path(pending_friend.id), method: :patch do %>
-      <i class="fas fa-check-circle"></i>
-    <% end %>
-    <%=link_to reject_friend_path(pending_friend.id), method: :patch do %>
-      <i class="fas fa-times-circle"></i>
+
+    <% current_user.pending_friends.each do |pending_friend| %>
+      <% if pending_friend == @user %>
+        <%# 5 ID %>
+        <% is_a_pending_friend = true %>
+        <%= "YOUR FRIEND REQUEST IS STILL PENDING" %>
+      <% end %>
     <% end %>
 
+    <% current_user.requested_friends.each do |requested_friend| %>
+      <% if requested_friend == @user %>
+        <% is_a_requested_friend = true %>
+        <%# 8 ID %>
+        <%=link_to accept_friend_profile_path(requested_friend.id), method: :patch do %>
+          <i class="fas fa-check-circle"></i>
+        <% end %>
+        <%=link_to reject_friend_profile_path(requested_friend.id), method: :patch do %>
+          <i class="fas fa-times-circle"></i>
+        <% end %>
+      <% end %>
     <% end %>
-  <% else %>
-    <%# 5 ID %>
-    <%= "CONNECT" %>
-  <% end %>
+
+    <% if is_a_friend == false && is_a_requested_friend == false && is_a_pending_friend == false %>
+      <%# 5 ID %>
+      <%=link_to request_friend_path(@user.id), method: :patch do %>
+        <%= "CONNECT" %>
+      <% end %>
+    <% end %>
 
   </div>
 </div>
