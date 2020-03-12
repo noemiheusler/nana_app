@@ -2,6 +2,29 @@
   display: none;
 }
 
+.back-arrow {
+  font-size: 2rem;
+  color: #000;
+}
+
+.chat {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  height: 85vh;
+  z-index: 2;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
+}
+
 .pic {
   width: 4rem;
   height: 4rem;
@@ -50,23 +73,6 @@
   color: white;
 }
 
-.chat {
-  position: relative;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  width: 24rem;
-  height: 45rem;
-  z-index: 2;
-  box-sizing: border-box;
-  border-radius: 1rem;
-  background: white;
-  box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
-}
 .chat .contact.bar {
   flex-basis: 3.5rem;
   flex-shrink: 0;
@@ -80,7 +86,7 @@
   overflow-y: auto;
   box-shadow: inset 0 2rem 2rem -2rem rgba(0, 0, 0, 0.05), inset 0 -2rem 2rem -2rem rgba(0, 0, 0, 0.05);
 }
-.chat .messages .time {
+.chat-day {
   font-size: 0.8rem;
   background: #EEE;
   padding: 0.25rem 1rem;
@@ -91,6 +97,24 @@
   width: fit-content;
   margin: 0 auto;
 }
+
+.message-time-my {
+  font-size: 0.7rem;
+  padding: 0.25rem 1rem;
+  color: rgb(199, 199, 199);
+  margin: 0 auto;
+  text-align: right;
+}
+
+.message-time-other {
+  font-size: 0.7rem;
+  padding: 0.25rem 1rem;
+  color: rgb(199, 199, 199);
+  margin: 0 auto;
+  text-align: right;
+}
+
+
 .chat .messages .message {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
@@ -107,7 +131,7 @@
 .chat .messages .message.my {
   margin: 1rem 1rem 1rem auto;
   border-radius: 1.125rem 1.125rem 0 1.125rem;
-  background: #333;
+  background: $dark-purple;
   color: white;
 }
 .chat .messages .message .typing {
