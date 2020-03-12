@@ -1,40 +1,41 @@
 <% if users.empty? %>
   <h1>Sorry no user found</h1>
 <% else %>
-  <h3 class="panel-start-text text-center">Parents nearby...</h3>
+  <h3 class="requests-header">Parents nearby...</h3>
   <% users.each do |user| %>
-<div class="d-flex justify-content-between align-items-center mx-2">
-  <div class="card-product">
-    <%= image_tag "image.png" %> <!-- Here we need to enter the profile imgae once it is available -->
-    <div class="card-product-infos">
-      <h2><%= user.firstname %> <%= user.lastname %></h2>
-      <p><%= user.motto %></p>
-      <% if current_user.calculate_match(user) == 0 %>
-        <p>Sorry, no matching</p>
-      <% else %>
-        <div class="progress mt-2">
-          <% if current_user.calculate_match(user) < 50 %>
-            <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+    <div class="d-flex justify-content-between align-items-center mx-2">
+      <div class="card-product">
+        <% if  user.photo.attached? %>
+          <%= cl_image_tag user.photo.key class:"avatar-large" %>
+        <% else %>
+          <%= image_tag "default-avatar.png", class:"avatar-large" %>
+        <% end %>
+        <div class="card-product-infos">
+          <h6><%= user.firstname %> <%= user.lastname %></h6>
+          <p><%= user.motto %></p>
+          <% if current_user.calculate_match(user) == 0 %>
+            <p>Sorry, no matching</p>
           <% else %>
-            <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+            <div class="progress mt-2">
+              <% if current_user.calculate_match(user) < 50 %>
+                <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+              <% else %>
+                <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+              <% end %>
+            </div>
           <% end %>
         </div>
-      <% end %>
+      </div>
+      <div>
+        <%= link_to your_profile_path(user.id) do %><i class="fas fa-chevron-right"></i><% end %>
+      </div>
     </div>
-  </div>
-  <div>
-    <i class="fas fa-chevron-right"></i> <!-- Once the view for basic profile exists we have to link it here -->
-  </div>
-
-</div>
-  <hr class="m-0">
   <% end %>
 <% end %>
 
-  <div class="btn-sm-bottom"> <!-- Change to other button when available -->
-    <%= link_to show_nanas_nearby_path do%><i class='fas fa-sync'></i><% end %>
-    <%= link_to "Refresh search", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby" %>
-  </div>
+<div class="btn-sm-bottom">
+  <%= link_to show_nanas_nearby_path do%><i class='fas fa-sync'></i><% end %>
+  <%= link_to "Refresh search", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby" %>
 </div>
 
 
