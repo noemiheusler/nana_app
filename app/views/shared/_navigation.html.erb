@@ -8,14 +8,14 @@
  </div>
   <div class="icon-box">
     <%= link_to mynanas_path do %>
-      <div class="nav-button">
+      <div class="nav-button <%= "active" if controller_name == 'pages' && action_name == 'mynanas' %>">
         <i class="fas fa-users"></i>
         <span>Nanas</span>
       </div>
     <% end %>
 
     <%= link_to events_path do %>
-      <div class="nav-button">
+      <div class="nav-button <%= "active" if controller_name == 'events' && action_name == 'index' %>" >
         <i class="fas fa-dice"></i>
         <span>Activities</span>
       </div>
@@ -24,13 +24,13 @@
 
   <div class="icon-box">
     <%= link_to conversations_path do %>
-      <div class="nav-button">
+      <div class="nav-button <%= "active" if controller_name == 'conversations' && action_name == 'index' %>" >
         <i class="fas fa-envelope"></i>
         <span>Messages</span>
       </div>
     <% end %>
-    <%#= link_to , pages_profile_path do %>
-      <div class="nav-button">
+    <%= link_to , pages_profile_path do %>
+      <div class="nav-button <%= "active" if controller_name == 'pages' && action_name == 'profile' %>" >
         <i class="fas fa-user"></i>
         <span>Profile</span>
      </div>
