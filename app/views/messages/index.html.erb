@@ -65,6 +65,8 @@
             <%= message.body %>
             <div class="message-time-my"><%= message.created_at.strftime("%H.%M") %></div>
           <% end %>
+          <% message.read = true %>
+          <% message.save %>
         </div>     
         <% end %>
         <% end %>
