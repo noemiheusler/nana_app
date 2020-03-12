@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 2020_03_12_051503) do
     t.string "title"
     t.string "description"
     t.integer "max_participants"
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string "category"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -147,14 +147,14 @@ ActiveRecord::Schema.define(version: 2020_03_12_051503) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "firstname"
-    t.text "lastname"
-    t.text "address"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "address"
     t.float "longitude"
     t.float "latitude"
     t.text "motto"
     t.text "description"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

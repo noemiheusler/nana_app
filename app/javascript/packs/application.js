@@ -8,7 +8,10 @@ import "bootstrap";
     })
   })
 
-document.getElementById("event_category").addEventListener('change', (event) => {
+const eventCategory = document.getElementById("event_category")
+
+if (eventCategory) {
+  eventCategory.addEventListener('change', (event) => {
   if (event.currentTarget.value == 'Private') {
     const invitation = document.getElementById("form-js-input")
     invitation.style.display = "block";
@@ -17,5 +20,7 @@ document.getElementById("event_category").addEventListener('change', (event) => 
     const invitation = document.getElementById("form-js-input")
     invitation.style.display = "none";
   };
-})
+  })
+}
+
 
