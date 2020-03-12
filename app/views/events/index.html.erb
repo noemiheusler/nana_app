@@ -12,7 +12,7 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="myevents" role="tabpanel" aria-labelledby="myevents-tab">
     <ul class="list-group">
-    <% @events.sort_by { |event| envent.created_at }.each do |event| %>
+    <% @events.each do |event| %>
 
         <% if (event.user_id == current_user.id) %>
 

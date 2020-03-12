@@ -21,6 +21,11 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+    <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'UPLOAD PROFILE PICTURE' %>
+    <%= f.input :motto, label: false, placeholder: "MOTTO" %>
+    <%= f.input :description, label: false, placeholder: "DESCRIPTION" %>
+    <%= f.input :address, label: false, placeholder: "ADDRESS"%>
+
   </div>
 
   <div class="form-actions">
