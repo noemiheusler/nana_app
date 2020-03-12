@@ -1,6 +1,7 @@
 <% if users.empty? %>
   <h1>Sorry no user found</h1>
 <% else %>
+  <h3 class="panel-start-text text-center">Parents nearby...</h3>
   <% users.each do |user| %>
 <div class="d-flex justify-content-between align-items-center mx-2">
   <div class="card-product">
@@ -8,7 +9,17 @@
     <div class="card-product-infos">
       <h2><%= user.firstname %> <%= user.lastname %></h2>
       <p><%= user.motto %></p>
-      <p>Matching score: XX%</p> <!-- When we have the matching score it should be displayed here -->
+      <% if current_user.calculate_match(user) == 0 %>
+        <p>Sorry, no matching</p>
+      <% else %>
+        <div class="progress mt-2">
+          <% if current_user.calculate_match(user) < 50 %>
+            <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+          <% else %>
+            <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div>
