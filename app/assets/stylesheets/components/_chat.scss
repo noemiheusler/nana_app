@@ -18,24 +18,18 @@
   -webkit-box-pack: justify;
           justify-content: space-between;
   width: 100%;
-  height: 85vh;
+  height: 87vh;
   z-index: 2;
   box-sizing: border-box;
   border-radius: 1rem;
   background: white;
-  box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
+  //box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
 }
 
-.name-seen {
+.contact-name-seen {
   margin-left: 5px;
   display: flex;
   flex-direction: column;
-}
-
-.pic {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
 }
 
 .contact {
@@ -49,36 +43,19 @@
   align-items: center;
 }
 
-.name {
+.contact-name {
   direction: flex;
   flex-direction: column;
   font-weight: 500;
   margin-bottom: 0.125rem;
 }
 
-.seen {
+.contact-seen {
   font-size: 0.9rem;
   color: #999;
 }
 
-
-.contact .badge {
-  box-sizing: border-box;
-  position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  text-align: center;
-  font-size: 0.9rem;
-  padding-top: 0.125rem;
-  border-radius: 1rem;
-  top: 0;
-  left: 2.5rem;
-  background: #333;
-  color: white;
-}
-
-
-.chat .messages {
+.messages {
   padding: 1rem;
   background: #F7F7F7;
   flex-grow: 1;
@@ -86,6 +63,7 @@
   overflow-y: auto;
   box-shadow: inset 0 2rem 2rem -2rem rgba(0, 0, 0, 0.05), inset 0 -2rem 2rem -2rem rgba(0, 0, 0, 0.05);
 }
+
 .chat-day {
   font-size: 0.8rem;
   background: #EEE;
@@ -114,8 +92,7 @@
   text-align: right;
 }
 
-
-.chat .messages .message {
+.message {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   margin: 1rem;
@@ -128,62 +105,55 @@
   max-width: 66%;
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
 }
-.chat .messages .message.my {
+
+.my-message {
   margin: 1rem 1rem 1rem auto;
   border-radius: 1.125rem 1.125rem 0 1.125rem;
   background: $dark-purple;
   color: white;
 }
-.chat .messages .message .typing {
-  display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
-  margin-right: 0rem;
-  box-sizing: border-box;
-  background: #ccc;
-  border-radius: 50%;
+
+// chat input field
+
+.chat-input-area {
+  bottom: 30px;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background: #F7F7F7;
 }
 
-.chat .input {
-  box-sizing: border-box;
-  flex-basis: 4rem;
-  flex-shrink: 0;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  padding: 0 0.5rem 0 1.5rem;
-}
-.chat .input i {
-  font-size: 1.5rem;
-  margin-right: 1rem;
+.emoji-icon {
+  font-size: 30px;
   color: #666;
-  cursor: pointer;
-  -webkit-transition: color 200ms;
-  transition: color 200ms;
+  margin-right: 10px;
 }
-.chat .input i:hover {
+
+.emoji-icon:hover {
   color: #333;
 }
-.chat .input input {
-  border: none;
-  background-image: none;
+
+.chat-input-area input {
+  border: 1px solid;
+  border-color: #999;
   background-color: white;
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
-  border-radius: 1.125rem;
-  -webkit-box-flex: 2;
-          flex-grow: 2;
+  height: 35px;
+  width: 80vw;
+  border-radius: 12px;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.2);
-  font-family: Red hat Display, sans-serif;
+  font-family: $body-font;
   font-weight: 400;
   letter-spacing: 0.025em;
-}
-.chat .input input:placeholder {
-  color: #999;
+  padding-left: 10px;
 }
 
-// contacts
+.chat-input-area input:focus {
+  border-color: $dark-purple !important;
+}
+
+// conversations view
 
 .number-of-messages {
   position: relative;
@@ -213,6 +183,10 @@
   border: 1px solid rgb(235,235,235);
 }
 
+.conversation p {
+  color: black;
+}
+
 .conversation .conversation-content {
   flex-grow: 1;
   padding: 0 24px;
@@ -225,7 +199,6 @@
 
 .conversation small {
   color: #999999;
-  font-weight: bold;
 }
 .conversation .conversation-actions {
   opacity: 0;
@@ -246,31 +219,6 @@
 .conversation .conversation-actions a:hover {
   color: #555555;
 }
-
-.avatar {
-  width: 40px;
-  border-radius: 50%;
-}
-
-.avatar-large {
-  width: 56px;
-  border-radius: 50%;
-}
-
-.avatar-bordered {
-  width: 40px;
-  border-radius: 50%;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  border: white 1px solid;
-}
-
-.avatar-square {
-  width: 40px;
-  border-radius: 0px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  border: white 1px solid;
-}
-
 
 
 
