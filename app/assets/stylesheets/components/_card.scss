@@ -80,11 +80,43 @@
   padding: 16px;
 }
 
+.card-event-show {
+  display: flex;
+  flex-direction: column;
+}
 
 .card-event-show-info {
   display: flex;
   flex-direction: column;
 }
+
+.card-event-show-info-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  i {
+  color: $grey-light;
+  font-size: 16px;
+  margin: 15px;
+  }
+  p {
+    margin-bottom: -8px;
+  }
+  h2 {
+    margin-top: 15px;
+  }
+}
+
+.card-event-show-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  i {
+    margin: 10px;
+  }
+}
+
 
 
 

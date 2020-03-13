@@ -11,6 +11,8 @@ class ParticipationsController < ApplicationController
     @participation.user_id = current_user.id
     authorize @participation
 
+    @participation.save!
+
     invitation_record = Invitation.where(user_id: "#{current_user.id}", event_id: "#{params[:event_id]}")
 
     if invitation_record.present?
@@ -23,7 +25,6 @@ class ParticipationsController < ApplicationController
 
     end
 
-    @participation.save
     redirect_to events_path
   end
 

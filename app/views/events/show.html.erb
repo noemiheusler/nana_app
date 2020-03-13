@@ -1,52 +1,121 @@
-<h1><%=@event.title%></h1>
-<div>
-<%=@event.description  %>
+<div class="navbar navbar-back">
+  <div>
+    <%= link_to events_path do  %>
+      <i class="fas fa-chevron-left"></i>
+    <% end %>
+  </div>
 </div>
 
-<div class="card-event-show-info">
-  <i class="far fa-clock"></i> <%=@event.start_date.strftime("%a, %d. %B %H:%M")%> - <%=@event.end_date.strftime("%B %H:%M")%>
-  <i class="fas fa-map-marker-alt"></i> <%=@event.location %>
-  <i class="far fa-user"></i><% @event.user.firstname %> is your host
-  <i class="fas fa-users"></i>
-  <%#=@event.category  %>
-  <%@event.participations.each do |participation|  %>
-    <%= participation.user.firstname  %>
-  <% end %>
-  <%@event.invitations.each do |invitation|  %>
-    <%= invitation.user.firstname  %>
-  <% end %>
+<div class= "card-event-show">
+
+  <div class="profile-pic">
+    <% if @event.photo.attached? %>
+      <%= cl_image_tag @event.photo.key, class:"avatar-profile-page" %>
+    <% else %>
+      <img class="avatar-profile-page" style="height: 80px;width: 80px;" src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+    <% end %>
+  </div>
+
+  <h2><%=@event.title%></h2>
+
+  <div style="text-align:center; margin-top:15px; margin-bottom: 15px;">
+  <%=@event.description  %>
+  </div>
+
+  <div class="card-event-show-info">
+    <%#=@event.category  %>
+    <div class="card-event-show-info-item">
+      <i class="far fa-clock"></i>
+      <p><%=@event.start_date.strftime("%a, %d. %B %H:%M")%> - <%=@event.end_date.strftime("%B %H:%M")%></p>
+    </div>
+    <div class="card-event-show-info-item">
+      <i class="fas fa-map-marker-alt"></i>
+      <p><%=@event.location %></p>
+    </div>
+    <div class="card-event-show-info-item">
+      <i class="fas fa-user"></i>
+      <p><%= @event.user.firstname %> is your host</p>
+    </div>
+    <div class="card-event-show-info-item">
+      <i class="fas fa-users"></i>
+
+      <% friend_counter = 0 %>
+
+      <%@event.participations.each do |participation|  %>
+        <% current_user.friends.each do |friend| %>
+          <% if participation.user == friend%>
+            <% friend_counter += 1 %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if friend_counter == 0 %>
+        <p>Currently none of your friends are participating</p>
+      <% else %>
+        <p><%=friend_counter%> of your friends are participating</p>
+      <% end %>
+
+      <%@event.participations.each do |participation|  %>
+        <% current_user.friends.each do |friend| %>
+          <% if participation.user == friend%>
+
+            <div class="profile-pic">
+              <% if participation.user.photo.attached? %>
+                <%= cl_image_tag participation.user.photo.key, class:"avatar-small" %>
+              <% else %>
+                <%= image_tag "default-avatar.png", class:"avatar-small" %>
+              <% end %>
+            </div>
+
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="card-event-show-action">
+    <% user_organizes = false %>
+    <% user_participates = false %>
+
+    <% if (@event.user_id == current_user.id) %>
+      <% user_organizes = true %>
+      <%=link_to event_path(@event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <i class="fas fa-trash-alt"></i> Delete Event
+      <% end %>
+      <%=link_to edit_event_path(@event.id) do %>
+        <i class="fas fa-pen"></i> Edit Event
+      <% end %>
+    <% end %>
+
+    <% if @event.invitations.present?%>
+      <% @event.invitations.each do |invitation| %>
+        <% if (invitation.user_id == current_user.id) && (@event.user_id != current_user.id) %>
+          <%=link_to invitation_path(invitation.id), method: :delete do %>
+            <i class="fas fa-times-circle"></i> Reject Invite
+          <% end %>
+          <%=link_to event_participations_path(@event.id), method: :post do %>
+            <i class="fas fa-check-circle"></i> Accept Invite
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @event.participations.present? %>
+      <% @event.participations.each do |participation| %>
+        <% if participation.user_id == current_user.id && @event.user_id != current_user.id %>
+          <% user_participates = true %>
+          <%=link_to participation_path(participation.id), method: :delete do %>
+            <i class="fas fa-times-circle"></i> Cancel Participation
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if (user_organizes == false) && (user_participates == false) %>
+        <%=link_to event_participations_path(@event.id), method: :post do %>
+          <i class="fas fa-check-circle"></i> Participate
+        <% end %>
+    <% end %>
+  </div>
 </div>
-
-
-
-<% if (@event.user_id == current_user.id) %>
-  <%=link_to event_path(@event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-    <i class="fas fa-trash-alt"></i> Delete Event
-  <% end %>
-  <%=link_to edit_event_path(@event.id) do %>
-    <i class="fas fa-pen"></i> Edit Event
-  <% end %>
-<% end %>
-
-<% if @event.invitations.present?%>
-  <% @event.invitations.each do |invitation| %>
-    <% if (invitation.user_id == current_user.id) && (@event.user_id != current_user.id) %>
-      <%=link_to invitation_path(invitation.id), method: :delete do %>
-        <i class="fas fa-times-circle"></i> Reject Invite
-      <% end %>
-      <%=link_to event_participations_path(@event.id), method: :post do %>
-        <i class="fas fa-check-circle"></i> Accept Invite
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
-
-<% if @event.participations.present? %>
-  <% @event.participations.each do |participation| %>
-    <% if participation.user_id == current_user.id && @event.user_id != current_user.id %>
-      <%=link_to participation_path(participation.id), method: :delete do %>
-        <i class="fas fa-times-circle"></i> Cancel Participation
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
