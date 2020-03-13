@@ -1,31 +1,35 @@
-<%= render 'shared/navbar-nana' %>
-<div class="d-flex justify-content-center flex-column">
+<div class="profile">
   <div class="profile-pic">
-    <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, class:"avatar-profile-page" %>
-    <% else %>
-      <%= image_tag "default-avatar.png", class:"avatar-profile-page" %>
+
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, class:"avatar" %>
+        <% else %>
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" /, class="avatar">
     <% end %>
+
   </div>
-  <div class="profile-infos">
-    <h4><%= @user.firstname %> <%= @user.lastname%></h4>
-    <h6 style="opacity: 0.6; font-weight: lighter;"><%= @user.email %> </h6>
-    <p><%= @user.motto %> <br>
-    <%= @user.address %></p>
+
+  <div class="profile-info">
+    <div class="profile-info-box">
+      <div class="label">Name</div>
+      <div class="profile-info-item"><%= @user.firstname %> <%=@user.lastname%></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Motto</div>
+      <div class="profile-info-item"><%= @user.motto %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Description</div>
+      <div class="profile-info-item"><%= @user.description %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Kids</div>
+      <% @user.kids.each do |kid|  %>
+        <div class="profile-info-item"><%= kid.birthday  %></div>
+    <% end %>
+    </div>
   </div>
-  <div class="profile-info-box mx-auto my-4">
-    <div class="label-kids">Kids</div>
-    <% @user.kids.each do |kid|  %>
-      <div class="profile-info-item p-2">
-        <i class="fas fa-baby"></i>
-        <div><%= ((Date.today - kid.birthday).to_f / 365 * 12).round  %></div>
-      </div>
-  <% end %>
-  </div>
-  <div class="profile-info-box mx-auto my-2" style="height: 100px;">
-    <div class="label-description">Description</div>
-    <div class="profile-info-item p-3"><%= current_user.description %></div>
-  </div>
+
   <div class="profile-action">
 
     <% is_a_friend = false %>
@@ -67,8 +71,6 @@
         <%= "CONNECT" %>
       <% end %>
     <% end %>
+
   </div>
 </div>
-<%= render 'shared/navigation' %>
-
-

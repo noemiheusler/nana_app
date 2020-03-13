@@ -1,3 +1,12 @@
+<%# Set background color to gray %>
+
+<style>
+body { 
+  background: #F7F7F7;
+}
+</style>
+
+
 <%# set photo key of other user %>
 <% if @conversation.user2.id == current_user.id %>
   <% if  @conversation.user1.photo.attached? %>
@@ -19,21 +28,23 @@
   <div class="contact">
     <div><%= link_to conversations_path do %><i class="fas fa-arrow-left back-arrow"></i><% end %></div>
     <% if otheruser_cl_photo_key == "default-pic" %>
-      <%= image_tag "default-avatar.png", class:"pic otheruser" %>
+      <%= image_tag "default-avatar.png", class:"avatar-large" %>
     <% else %>
-      <%= cl_image_tag otheruser_cl_photo_key class:"pic otheruser" %>
+      <%= cl_image_tag otheruser_cl_photo_key class:"avatar-large" %>
     <% end %>
-    <div class="name-seen">
-      <div class="name">
+    <div class="contact-name-seen">
+      <div class="contact-name">
         <% if @conversation.user2.id == current_user.id %>
           <%= @conversation.user1.firstname %>
         <% else %>
           <%= @conversation.user2.firstname %>
         <% end %>
       </div>
-      <div class="seen">
+      <div class="contact-seen">
       <% if @messages.last.created_at != nil %>
         <%= @messages.last.created_at.strftime("%A, %d %b %Y %H:%M")%>
+      <% else %>
+        <%= DateTime.now.strftime("%A, %d %b %Y %H:%M")%>
       <% end %>
       </div>
     </div>
@@ -53,7 +64,7 @@
         <% end %>
         <% user = User.find(message.user_id) %>
         <% if user.id == current_user.id %>
-        <div class="message my">
+        <div class="message my-message">
           <% if message.body %>
             <%= message.body %>
             <div class="message-time-other"><%= message.created_at.strftime("%H.%M") %></div>
@@ -74,12 +85,12 @@
     <% end %>
     <span id="endofchat"></span>
   </div>
-  <div class="input">
-    <i class="far fa-laugh-beam" id="emojipicker"></i>
-    <%= form_for [@conversation, @message], html: {class: "ui reply form"}, remote: true do |f| %>
-      <%= f.text_field :body, class: "form-control", autofocus: true %>
+  <div class="chat-input-area">
+    <i class="far fa-laugh-beam emoji-icon" id="emojipicker"></i>
+    <%= form_for [@conversation, @message], remote: true do |f| %>
+      <%= f.text_field :body, class: "chat-input-field", autofocus: true %>
       <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-      <%= f.submit :submit, id: "send" %><!--i class="fas fa-paper-plane"></i-->
+      <%= f.submit :submit, id: "send" %>
     <% end %>
   </div>
 </div>

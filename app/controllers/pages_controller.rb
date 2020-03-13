@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:intro, :discover]
+  skip_before_action :authenticate_user!, only: [:intro]
 
   def profile
   end

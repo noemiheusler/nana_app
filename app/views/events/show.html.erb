@@ -1,14 +1,52 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
-<%=@event.title  %>
+<h1><%=@event.title%></h1>
+<div>
 <%=@event.description  %>
-<%=@event.location %>
-<%=@event.start_date  %>
-<%=@event.end_date  %>
-<%=@event.category  %>
-<%@event.participations.each do |participation|  %>
-  <%= participation.user.firstname  %>
+</div>
+
+<div class="card-event-show-info">
+  <i class="far fa-clock"></i> <%=@event.start_date.strftime("%a, %d. %B %H:%M")%> - <%=@event.end_date.strftime("%B %H:%M")%>
+  <i class="fas fa-map-marker-alt"></i> <%=@event.location %>
+  <i class="far fa-user"></i><% @event.user.firstname %> is your host
+  <i class="fas fa-users"></i>
+  <%#=@event.category  %>
+  <%@event.participations.each do |participation|  %>
+    <%= participation.user.firstname  %>
+  <% end %>
+  <%@event.invitations.each do |invitation|  %>
+    <%= invitation.user.firstname  %>
+  <% end %>
+</div>
+
+
+
+<% if (@event.user_id == current_user.id) %>
+  <%=link_to event_path(@event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+    <i class="fas fa-trash-alt"></i> Delete Event
+  <% end %>
+  <%=link_to edit_event_path(@event.id) do %>
+    <i class="fas fa-pen"></i> Edit Event
+  <% end %>
 <% end %>
-<%@event.invitations.each do |invitation|  %>
-  <%= invitation.user.firstname  %>
+
+<% if @event.invitations.present?%>
+  <% @event.invitations.each do |invitation| %>
+    <% if (invitation.user_id == current_user.id) && (@event.user_id != current_user.id) %>
+      <%=link_to invitation_path(invitation.id), method: :delete do %>
+        <i class="fas fa-times-circle"></i> Reject Invite
+      <% end %>
+      <%=link_to event_participations_path(@event.id), method: :post do %>
+        <i class="fas fa-check-circle"></i> Accept Invite
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @event.participations.present? %>
+  <% @event.participations.each do |participation| %>
+    <% if participation.user_id == current_user.id && @event.user_id != current_user.id %>
+      <%=link_to participation_path(participation.id), method: :delete do %>
+        <i class="fas fa-times-circle"></i> Cancel Participation
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
