@@ -1,0 +1,14 @@
+.notification-actions {
+  a {
+  color: $grey-light !important;
+  font-size: 8px;
+  }
+  display: flex;
+  flex-direction: column;
+  a:hover {
+    color: $dark-purple !important;
+  }
+  #event-date {
+    font-size: 10px;
+  }
+}

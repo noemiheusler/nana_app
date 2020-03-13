@@ -13,48 +13,79 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="myevents" role="tabpanel" aria-labelledby="myevents-tab">
     <ul class="list-group">
-    <% @events.each do |event| %>
+
+    <% @events.sort_by { |event| event.start_date }.each do |event| %>
 
         <% if (event.user_id == current_user.id) %>
 
-          <li class="list-group-item">I am organizer of <%= event.title %>
-            <%=link_to event_path(event.id) do %>
-              <p>Show Event</p>
-            <% end %>
-            <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-              <i class="fas fa-trash-alt"></i>
-            <% end %>
-            <%=link_to edit_event_path(event.id) do %>
-              <i class="fas fa-pen"></i>
-            <% end %>
-          </li>
+          <div class="card-product">
+            <img style="height:56px;width:56px;"src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+            <div class="card-product-infos">
+              <p id="event-date"><%= event.start_date %></p>
+              <h2><%= event.title %></h2>
+              <% counter = 0 %>
+              <% current_user.friends.each do |friend| %>
+                <% event.participations do |participation| %>
 
+                  <% if friend == participation.user %>
+                  <% counter += 1 %>
+                  <% end %>
+
+                <% end  %>
+              <% end %>
+              <% if counter > 0 %>
+                <p><%= counter %> Friends are going</p>
+              <% end %>
+            </div>
+            <div class="notification-actions">
+
+              <%=link_to event_path(event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+                <i class="fas fa-trash-alt"></i> Delete Event
+              <% end %>
+              <%=link_to edit_event_path(event.id) do %>
+                <i class="fas fa-pen"></i> Edit Event
+              <% end %>
+
+            </div>
+          </div>
         <% end %>
 
 
         <% if event.invitations.present?%>
 
-
           <% event.invitations.each do |invitation| %>
             <% if (invitation.user_id == current_user.id) && (event.user_id != current_user.id) %>
 
-              <%=link_to event_path(event.id) do %>
+              <div class="card-product">
+                <img style="height:56px;width:56px;"src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+                <div class="card-product-infos">
+                  <p id="event-date"><%= event.start_date %></p>
+                  <h2><%= event.title %></h2>
+                  <% counter = 0 %>
+                  <% current_user.friends.each do |friend| %>
+                    <% event.participations do |participation| %>
 
-              <li class="list-group-item">I am Invited to <%= event.title %>
+                      <% if friend == participation.user %>
+                      <% counter += 1 %>
+                      <% end %>
 
-                <%=link_to invitation_path(invitation.id), method: :delete do %>
+                    <% end  %>
+                  <% end %>
+                  <% if counter > 0 %>
+                    <p><%= counter %> Friends are going</p>
+                  <% end %>
+                </div>
+                  <div class="notification-actions">
 
-                  <p>Reject Invitation</p>
+                    <%=link_to invitation_path(invitation.id), method: :delete do %>
+                      <i class="fas fa-times-circle"></i> Reject Invite
+                    <% end %>
+                    <%=link_to event_participations_path(event.id), method: :post do %>
+                      <i class="fas fa-check-circle"></i> Accept Invite
+                    <% end %>
 
-                <% end %>
-                <%=link_to event_participations_path(event.id), method: :post do %>
-
-                  <p>Accept Invitation</p>
-
-                <% end %>
-              </li>
-
-              <% end %>
+                  </div>
+                </div>
 
             <% end %>
           <% end %>
@@ -65,19 +96,33 @@
           <% event.participations.each do |participation| %>
             <% if participation.user_id == current_user.id && event.user_id != current_user.id %>
 
-              <%=link_to event_path(event.id) do %>
+              <div class="card-product">
+                <img style="height:56px;width:56px;"src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+                <div class="card-product-infos">
+                  <p id="event-date"><%= event.start_date %></p>
+                  <h2><%= event.title %></h2>
+                  <% counter = 0 %>
+                  <% current_user.friends.each do |friend| %>
+                    <% event.participations do |participation| %>
 
-                <li class="list-group-item">I participate in <%= event.title %>
+                      <% if friend == participation.user %>
+                      <% counter += 1 %>
+                      <% end %>
+
+                    <% end  %>
+                  <% end %>
+                  <% if counter > 0 %>
+                    <p><%= counter %> Friends are going</p>
+                  <% end %>
+                </div>
+                <div class="notification-actions">
 
                   <%=link_to participation_path(participation.id), method: :delete do %>
-
-                    <p>Cancel Participation</p>
-
+                    <i class="fas fa-times-circle"></i> Cancel Participation
                   <% end %>
 
-                </li>
-
-              <% end %>
+                  </div>
+                </div>
 
             <% end %>
           <% end %>
@@ -95,22 +140,39 @@
       <% if event.category == "Public" && event.user_id != current_user.id %>
           <% event.participations.each do |participation| %>
 
-          <%=link_to event_path(event.id) do %>
-
-          <li class="list-group-item"><%= event.title %><%= event.start_date %><%= event.description[0..25]%>
-          <% if participation.user_id != current_user.id %>
-              <%=link_to event_participations_path(event.id), method: :post do %>
-                <p>Participate</p>
-              <% end %>
-          <% end %>
-          <% if participation.user_id == current_user.id %>
-                <%=link_to participation_path(participation.id), method: :delete do %>
-                  <p>Cancel Participation</p>
+            <div class="card-product">
+              <img style="height:56px;width:56px;"src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+              <div class="card-product-infos">
+                <p id="event-date"><%= event.start_date %></p>
+                <h2><%= event.title %></h2>
+                <% counter = 0 %>
+                <% current_user.friends.each do |friend| %>
+                  <% event.participations do |participation| %>
+                    <% if friend == participation.user %>
+                      <% counter += 1 %>
+                    <% end %>
+                  <% end  %>
                 <% end %>
-          <% end %>
-          </li>
 
-          <% end %>
+                <% if counter > 0 %>
+                  <p><%= counter %> Friends are going</p>
+                <% end %>
+              </div>
+
+            <div class="notification-actions">
+
+              <% if participation.user_id != current_user.id %>
+                  <%=link_to event_participations_path(event.id), method: :post do %>
+                    <i class="fas fa-check-circle"></i> Participate
+                  <% end %>
+              <% end %>
+              <% if participation.user_id == current_user.id %>
+                    <%=link_to participation_path(participation.id), method: :delete do %>
+                      <i class="fas fa-times-circle"></i> Cancel Participation
+                    <% end %>
+              <% end %>
+            </div>
+          </div>
 
         <% end %>
       <% end %>
@@ -119,6 +181,10 @@
   </div>
 </div>
 
-<%= link_to "+", new_event_path, class: "btn btn-plus btn-primary" %>
+<%= link_to new_event_path do%>
+  <div class="btn-round">
+    <p class="btn-round-content">+</p>
+  </div>
+<% end %>
 
 <%= render 'shared/navigation' %>
