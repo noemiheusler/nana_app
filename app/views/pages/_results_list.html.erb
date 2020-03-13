@@ -4,6 +4,7 @@
   <h3 class="requests-header">Parents nearby...</h3>
   <% users.each do |user| %>
     <div class="d-flex justify-content-between align-items-center mx-2">
+      <%= link_to your_profile_path(user.id) do %>
       <div class="card-product">
         <% if  user.photo.attached? %>
           <%= cl_image_tag user.photo.key class:"avatar-large" %>
@@ -25,19 +26,12 @@
             </div>
           <% end %>
         </div>
+        <div>
+          <i class="fas fa-chevron-right p-3"></i>
+        </div>
       </div>
-      <div>
-        <%= link_to your_profile_path(user.id) do %><i class="fas fa-chevron-right"></i><% end %>
-      </div>
+      <% end %>
     </div>
-
-  </div>
-  <div>
-    <i class="fas fa-chevron-right"></i> <!-- Once the view for basic profile exists we have to link it here -->
-  </div>
-
-</div>
-
   <% end %>
 <% end %>
 
