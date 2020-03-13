@@ -1,13 +1,13 @@
 <% if users.empty? %>
   <h1>Sorry no user found</h1>
 <% else %>
-  <h3 class="requests-header">Parents nearby...</h3>
+  <h3 class="requests-header">Nanas nearby...</h3>
   <% users.each do |user| %>
     <div class="d-flex justify-content-between align-items-center mx-2">
       <%= link_to your_profile_path(user.id) do %>
       <div class="card-product">
         <% if  user.photo.attached? %>
-          <%= cl_image_tag user.photo.key class:"avatar-large" %>
+          <%= cl_image_tag user.photo.key, class:"avatar-large" %>
         <% else %>
           <%= image_tag "default-avatar.png", class:"avatar-large" %>
         <% end %>
@@ -15,7 +15,7 @@
           <h6><%= user.firstname %> <%= user.lastname %></h6>
           <p><%= user.motto %></p>
           <% if current_user.calculate_match(user) == 0 %>
-            <p>Sorry, no matching</p>
+            <p>Sorry, there are no Nanas around</p>
           <% else %>
             <div class="progress mt-2">
               <% if current_user.calculate_match(user) < 50 %>
