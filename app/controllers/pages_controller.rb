@@ -76,7 +76,9 @@ class PagesController < ApplicationController
   end
 
   def show_nanas_nearby
-    @users_nearby = User.near(current_user.address, 10).sample(5)
+    friends_ids = current_user.friends.pluck(:id)
+    friends_ids.push(current_user.id)
+    @users_nearby = User.near(current_user.address, 10).where.not(id: friends_ids).sample(5)
     respond_to do |format|
         format.js  # <-- will render `app/views/reviews/create.js.erb`
     end
