@@ -1,46 +1,39 @@
-<%= render 'shared/navbar-back' %>
-<div class="profile">
+<%= render 'shared/navbar-nana' %>
+<div class="d-flex justify-content-center flex-column">
   <div class="profile-pic">
-
     <% if current_user.photo.attached? %>
-        <%= cl_image_tag current_user.photo.key class:"avatar-large" %>
-      <% else %>
-        <%= image_tag "default-avatar.png", class:"avatar-large" %>
-      <% end %>
-
-  </div>
-
-  <div class="profile-info">
-    <div class="profile-info-box">
-      <div class="label">Name</div>
-      <div class="profile-info-item"><%= current_user.firstname %> <%=current_user.lastname%></div>
-    </div>
-    <div class="profile-info-box">
-      <div class="label">Motto</div>
-      <div class="profile-info-item"><%= current_user.motto %></div>
-    </div>
-    <div class="profile-info-box">
-      <div class="label">Description</div>
-      <div class="profile-info-item"><%= current_user.description %></div>
-    </div>
-    <div class="profile-info-box">
-      <div class="label">Kids</div>
-      <% current_user.kids.each do |kid|  %>
-        <div class="profile-info-item"><%= ((Date.today - kid.birthday).to_f / 365 * 12).round  %></div>
-        <i class="fas fa-baby"></i>
+      <%= cl_image_tag current_user.photo.key, class:"avatar-profile-page" %>
+    <% else %>
+      <%= image_tag "default-avatar.png", class:"avatar-profile-page" %>
     <% end %>
-    </div>
-    <div class="profile-info-box">
-      <div class="label">Email</div>
-      <div class="profile-info-item"><%= current_user.email %></div>
-    </div>
-    <div class="profile-info-box">
-      <div class="label">Address</div>
-      <div class="profile-info-item"><%= current_user.address %></div>
-    </div>
   </div>
-  <%= link_to "Edit your profile", edit_user_registration_path %>
+  <div class="profile-infos">
+    <h4><%= current_user.firstname %> <%=current_user.lastname%></h4>
+    <h6 style="opacity: 0.6; font-weight: lighter;"><%= current_user.email %> </h6>
+    <p><%= current_user.motto %> <br>
+    <%= current_user.address %></p>
+  </div>
+  <div class="profile-info-box mx-auto my-4">
+    <div class="label-kids">Kids</div>
+    <% current_user.kids.each do |kid|  %>
+      <div class="profile-info-item p-2">
+        <i class="fas fa-baby"></i>
+        <div><%= ((Date.today - kid.birthday).to_f / 365 * 12).round  %></div>
+      </div>
+  <% end %>
+  </div>
+  <div class="profile-info-box mx-auto my-2" style="height: 100px;">
+    <div class="label-description">Description</div>
+    <div class="profile-info-item p-3"><%= current_user.description %></div>
+  </div>
+  <div class="btn-sm-bottom">
+    <%= link_to edit_user_registration_path do %>
+      <i class='fas fa-edit' style="opacity: 0.7"></i>
+    <% end %>
+    <%= link_to "Update profile", edit_user_registration_path, style: 'opacity: 0.7' %>
+  </div>
+  <div class="btn-sm-bottom">
+    <%= link_to "Log out", destroy_user_session_path, method: :delete,  style: 'opacity: 0.7' %>
+  </div>
 </div>
 <%= render 'shared/navigation' %>
-
-
