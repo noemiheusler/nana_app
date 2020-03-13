@@ -1,12 +1,29 @@
+<div class="navbar navbar-back">
+  <div>
+    <%= link_to events_path do  %>
+      <i class="fas fa-chevron-left"></i>
+    <% end %>
+  </div>
+</div>
+
 <div class= "card-event-show">
+
+  <div class="profile-pic">
+    <% if @event.photo.attached? %>
+      <%= cl_image_tag @event.photo.key, class:"avatar-profile-page" %>
+    <% else %>
+      <img class="avatar-profile-page" style="height: 80px;width: 80px;" src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+    <% end %>
+  </div>
 
   <h2><%=@event.title%></h2>
 
-  <div>
+  <div style="text-align:center; margin-top:15px; margin-bottom: 15px;">
   <%=@event.description  %>
   </div>
 
   <div class="card-event-show-info">
+    <%#=@event.category  %>
     <div class="card-event-show-info-item">
       <i class="far fa-clock"></i>
       <p><%=@event.start_date.strftime("%a, %d. %B %H:%M")%> - <%=@event.end_date.strftime("%B %H:%M")%></p>
@@ -17,22 +34,47 @@
     </div>
     <div class="card-event-show-info-item">
       <i class="fas fa-user"></i>
-      <p><% @event.user.firstname %> is your host</p>
+      <p><%= @event.user.firstname %> is your host</p>
     </div>
     <div class="card-event-show-info-item">
       <i class="fas fa-users"></i>
-      <%#=@event.category  %>
+
+      <% friend_counter = 0 %>
+
       <%@event.participations.each do |participation|  %>
-        <%= participation.user.firstname  %>
+        <% current_user.friends.each do |friend| %>
+          <% if participation.user == friend%>
+            <% friend_counter += 1 %>
+          <% end %>
+        <% end %>
       <% end %>
-      <%@event.invitations.each do |invitation|  %>
-        <%= invitation.user.firstname  %>
+
+      <% if friend_counter == 0 %>
+        <p>Currently none of your friends are participating</p>
+      <% else %>
+        <p><%=friend_counter%> of your friends are participating</p>
+      <% end %>
+
+      <%@event.participations.each do |participation|  %>
+        <% current_user.friends.each do |friend| %>
+          <% if participation.user == friend%>
+
+            <div class="profile-pic">
+              <% if participation.user.photo.attached? %>
+                <%= cl_image_tag participation.user.photo.key, class:"avatar-small" %>
+              <% else %>
+                <%= image_tag "default-avatar.png", class:"avatar-small" %>
+              <% end %>
+            </div>
+
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>
 
 
-  <div class="card-event-show-card">
+  <div class="card-event-show-action">
     <% user_organizes = false %>
     <% user_participates = false %>
 

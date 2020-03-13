@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :participations, dependent: :destroy
   has_many :invitations, dependent: :destroy
+  has_one_attached :photo
 
   validates :start_date, presence: true
   validates :end_date, presence: true
