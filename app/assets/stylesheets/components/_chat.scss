@@ -222,7 +222,7 @@
 }
 
 
-.notification {
+.conversation {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
@@ -231,37 +231,37 @@
   border: 1px solid rgb(235,235,235);
 }
 
-.notification .notification-content {
+.conversation .conversation-content {
   flex-grow: 1;
   padding: 0 24px;
 }
 
-.notification p {
+.conversation p {
   margin: 0;
   line-height: 1.4;
 }
 
-.notification small {
+.conversation small {
   color: #999999;
   font-weight: bold;
 }
-.notification .notification-actions {
+.conversation .conversation-actions {
   opacity: 0;
   display: flex;
   transition: ease .3s;
 }
 
-.notification:hover .notification-actions {
+.conversation:hover .conversation-actions {
   opacity: 1;
 }
 
-.notification .notification-actions a {
+.conversation .conversation-actions a {
   color: #999999;
   margin-left: 16px;
   font-size: 14px;
 }
 
-.notification .notification-actions a:hover {
+.conversation .conversation-actions a:hover {
   color: #555555;
 }
 
