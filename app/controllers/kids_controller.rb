@@ -1,5 +1,5 @@
 class KidsController < ApplicationController
-    authorize @kid
+    #authorize @kid
 
   def new
   end

@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
 
   def create
     @participation = Participation.new()
-    # stuff
+    authorize @participation
     @participation.save
   end
 
