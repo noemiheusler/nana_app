@@ -1,4 +1,4 @@
-<%= render 'shared/navbar' %>
+<%= render 'shared/navbar-nana' %>
 <% @conversations.each do |conversation| %>
   <% if conversation.user1_id == current_user.id || conversation.user2_id == current_user.id %>
     <% if conversation.user1_id == current_user.id %>
