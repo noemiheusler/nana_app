@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  authorize @answer
+  #authorize @answer
 
   def create
   end
