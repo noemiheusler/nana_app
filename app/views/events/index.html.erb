@@ -13,8 +13,7 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="myevents" role="tabpanel" aria-labelledby="myevents-tab">
     <ul class="list-group">
-
-    <% @events.sort_by { |event| event.start_date }.first(3).each do |event| %>
+    <% @events.first(3).sort_by { |event| event.start_date }.each do |event| %>
 
         <% if (event.user_id == current_user.id) %>
 
@@ -26,7 +25,7 @@
               <h2><%= event.title %></h2>
               <% counter = 0 %>
               <% current_user.friends.each do |friend| %>
-                <% event.participations do |participation| %>
+                <% event.participations.each do |participation| %>
 
                   <% if friend == participation.user %>
                   <% counter += 1 %>
@@ -42,7 +41,6 @@
           </div>
         <% end %>
 
-
         <% if event.invitations.present?%>
 
           <% event.invitations.each do |invitation| %>
@@ -56,7 +54,7 @@
                   <h2><%= event.title %></h2>
                   <% counter = 0 %>
                   <% current_user.friends.each do |friend| %>
-                    <% event.participations do |participation| %>
+                    <% event.participations.each do |participation| %>
 
                       <% if friend == participation.user %>
                       <% counter += 1 %>
@@ -87,7 +85,7 @@
                   <h2><%= event.title %></h2>
                   <% counter = 0 %>
                   <% current_user.friends.each do |friend| %>
-                    <% event.participations do |participation| %>
+                    <% event.participations.each do |participation| %>
 
                       <% if friend == participation.user %>
                       <% counter += 1 %>
@@ -112,31 +110,35 @@
 
     <ul class="list-group">
     <% @events.each do |event| %>
-      <% if event.category == "Public" && event.user_id != current_user.id %>
-          <% event.participations.each do |participation| %>
+      <% if (event.category == "Public") && (event.user_id != current_user.id) %>
 
-            <div class="card-product-event">
-              <img style="height:60px;width:60px;"src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
-              <div class="card-product-infos-event">
-                <p id="event-date"><%= event.start_date.strftime("%a, %d. %B %H:%M") %></p>
-                <h2><%= event.title %></h2>
-                <% counter = 0 %>
-                <% current_user.friends.each do |friend| %>
-                  <% event.participations do |participation| %>
-                    <% if friend == participation.user %>
-                      <% counter += 1 %>
+              <div class="card-product-event">
+                <img style="height:60px;width:60px;"src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+                <div class="card-product-infos-event">
+                  <% event.participations.each do |participation| %>
+                    <% if participation.user == current_user %>
+                      <p id="event-date">You participate in: </p>
                     <% end %>
-                  <% end  %>
-                <% end %>
+                  <% end %>
+                  <p id="event-date"><%= event.start_date.strftime("%a, %d. %B %H:%M") %></p>
+                  <h2><%= event.title %></h2>
+                  <% counter = 0 %>
+                  <% current_user.friends.each do |friend| %>
+                    <% event.participations.each do |participation| %>
 
-                <% if counter > 0 %>
-                  <p><%= counter %> Friends are going</p>
-                <% end %>
+                      <% if friend == participation.user %>
+                      <% counter += 1 %>
+                      <% end %>
+
+                    <% end  %>
+                  <% end %>
+                  <% if counter > 0 %>
+                    <p><%= counter %> Friends are going</p>
+                  <% end %>
+                </div>
+                  <%= link_to event_path(event.id) do %><i class="fas fa-chevron-right"></i><% end %>
               </div>
-            <%= link_to event_path(event.id) do %><i class="fas fa-chevron-right"></i><% end %>
-          </div>
 
-        <% end %>
       <% end %>
     <% end %>
     </ul>
