@@ -33,28 +33,52 @@
 .profile-info-box {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
     height: 58px;
-    width: 100%;
+    width: 80%;
     position: relative;
     background: white;
-    border: 1px solid;
-    border-color: $light-purple;
-    border-radius: 15px;
-}
+    border: 2px solid #6229CE;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+    border-radius: 25px;
+    justify-content: center;
+  }
 
-.label {
+.label-kids {
     position: absolute;
     top: -10px;
     left: 20px;
     height: 15px;
-    width: 60px;
+    width: 50px;
     background-color: white;
     text-align: center;
     font-size: 12px;
     font-weight: bold;
+    color: #353535;
+}
+
+.label-description {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    height: 15px;
+    width: 90px;
+    background-color: white;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #353535;
 }
 
 .profile-info-item {
-  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-baby {
+  padding: 5px;
+}
+
+.profile-infos {
+  text-align: center;
 }

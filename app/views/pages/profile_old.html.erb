@@ -1,0 +1,47 @@
+<%= render 'shared/navbar-back' %>
+<div class="profile">
+  <h3 class="requests-header">My profile</h3>
+  <div class="profile-pic">
+
+    <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key class:"avatar-profile-page" %>
+      <% else %>
+        <%= image_tag "default-avatar.png", class:"avatar-profile-page" %>
+      <% end %>
+
+  </div>
+
+  <div class="profile-info">
+    <div class="profile-info-box">
+      <div class="label">Name</div>
+      <div class="profile-info-item"><%= current_user.firstname %> <%=current_user.lastname%></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Motto</div>
+      <div class="profile-info-item"><%= current_user.motto %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Description</div>
+      <div class="profile-info-item"><%= current_user.description %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Kids</div>
+      <% current_user.kids.each do |kid|  %>
+        <div class="profile-info-item"><%= ((Date.today - kid.birthday).to_f / 365 * 12).round  %></div>
+        <i class="fas fa-baby"></i>
+    <% end %>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Email</div>
+      <div class="profile-info-item"><%= current_user.email %></div>
+    </div>
+    <div class="profile-info-box">
+      <div class="label">Address</div>
+      <div class="profile-info-item"><%= current_user.address %></div>
+    </div>
+  </div>
+  <%= link_to "Edit your profile", edit_user_registration_path %>
+</div>
+<%= render 'shared/navigation' %>
+
+
