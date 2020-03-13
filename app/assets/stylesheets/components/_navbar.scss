@@ -1,7 +1,22 @@
 
 .navbar-nana img {
     width: 45px;
-    margin-top: 10px;
     display: flex;
+}
 
+.navbar-nana {
+    justify-content: center;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.navbar-back {
+  justify-content: left;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+.fa-chevron-left {
+  color: #353535;
+  font-size: 25px;
 }
