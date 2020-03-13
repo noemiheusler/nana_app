@@ -30,12 +30,20 @@
         <%= link_to your_profile_path(user.id) do %><i class="fas fa-chevron-right"></i><% end %>
       </div>
     </div>
+
+  </div>
+  <div>
+    <i class="fas fa-chevron-right"></i> <!-- Once the view for basic profile exists we have to link it here -->
+  </div>
+
+</div>
+
   <% end %>
 <% end %>
 
 <div class="btn-sm-bottom">
-  <%= link_to show_nanas_nearby_path do%><i class='fas fa-sync'></i><% end %>
-  <%= link_to "Refresh search", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby" %>
+  <%= link_to show_nanas_nearby_path do%><i class='fas fa-sync' style="opacity: 0.7"></i><% end %>
+  <%= link_to "Refresh search", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby", style: 'opacity: 0.7' %>
 </div>
 
 

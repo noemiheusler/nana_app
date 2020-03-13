@@ -203,26 +203,8 @@
   padding: 0;
 }
 
-.new-message-button {
-  font-size: 30px;
-  color: white;
-}
 
-.new-chat {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  background-color: $dark-purple;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  bottom: 130px;
-  right: 20px;
-}
-
-
-.conversation {
+.notification {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
@@ -291,4 +273,4 @@
 
 
 
-  
+
