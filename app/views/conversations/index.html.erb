@@ -7,14 +7,14 @@
       <% user_other = User.find(conversation.user1_id) %>
     <% end %>
     <%= link_to conversation_messages_path(conversation) do %>
-    <div class="notification">
+    <div class="conversation">
       <% if user_other.photo.attached? %>
         <%= cl_image_tag user_other.photo.key class:"avatar-large" %>
       <% else %>
         <%= image_tag "default-avatar.png", class:"avatar-large" %>
       <% end %>
       <div class="number-of-messages"><%= conversation.messages.count %></div>
-      <div class="notification-content">
+      <div class="conversation-content">
         <% if conversation.messages.last.present? %>
           <p><small><%= conversation.messages.last.created_at.strftime("%A, %d %b %Y %H:%M") %> with <%= user_other.firstname %></small></p>
           <p><%= conversation.messages.last.user.firstname %>: <%= conversation.messages.last.body %></p>
@@ -28,8 +28,8 @@
   <% end %>
 <% end %>
 
-<div class="new-chat" data-toggle="modal" data-target="#friendsModal">
-  <i class="far fa-comments new-message-button"></i>
+<div class="btn-round" data-toggle="modal" data-target="#friendsModal">
+  <i class="far fa-comments btn-round-content"></i>
 </div>
 
 <!-- Modal -->
@@ -46,13 +46,13 @@
         <% current_user.friends.each do |friend| %>
           <%= link_to conversations_path(user1_id: current_user.id, user2_id: friend.id), method: 'post' do %>
             <% if friend.id != current_user.id %>
-              <div class="notification">
+              <div class="conversation">
                 <% if  friend.photo.attached? %>
                   <%= cl_image_tag friend.photo.key class:"avatar-large" %>
                 <% else %>
                   <%= image_tag "default-avatar.png", class:"avatar-large" %>
                 <% end %>
-                <div class="notification-content">
+                <div class="conversation-content">
                   <p><small>Member since <%= friend.created_at.strftime("%A, %d %b %Y %H:%M") %></small></p>
                   <p><strong><%= friend.firstname %></strong></p>
                 </div>
