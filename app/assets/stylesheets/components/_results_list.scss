@@ -28,6 +28,24 @@
 
 .card-product .card-product-infos {
   padding: 16px;
+  width: 250px;
+}
+
+.progress {
+  border-radius: 25px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+  border-radius: 25px;
+}
+
+#bar-under {
+  background: linear-gradient(180deg, rgba(255,122,70,1) 0%, rgba(255,89,70,1) 100%);
+}
+
+#bar-over {
+  background: linear-gradient(270deg, rgba(0,232,234,1) 0%, rgba(3,188,225,1) 100%);
 }
 
 .requests-header {

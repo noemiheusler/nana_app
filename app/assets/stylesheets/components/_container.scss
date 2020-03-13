@@ -3,3 +3,58 @@
   flex-direction: column;
   padding: 25px;
 }
+
+.profile {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-pic {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-action {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-info-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 58px;
+    width: 100%;
+    position: relative;
+    background: white;
+    border: 1px solid;
+    border-color: $light-purple;
+    border-radius: 15px;
+}
+
+.label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    height: 15px;
+    width: 60px;
+    background-color: white;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.profile-info-item {
+  margin-left: 20px;
+}

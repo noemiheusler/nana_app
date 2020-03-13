@@ -31,6 +31,18 @@ class User < ApplicationRecord
 #    }
 # end
 
+  def calculate_match(user)
+    score = 0
+    user_a_answers = self.answers.pluck(:answer)
+    user_b_answers = user.answers.pluck(:answer)
+    user_a_answers.each_with_index do |answer, index|
+      if answer == user_b_answers[index]
+        score += 1
+      end
+    end
+    (score / Question.all.size.to_f).round(2) * 100
+  end
+
   def is_favorited?(current_user)
      if Favorite.where(user: current_user, nana: self).first
       true

@@ -5,17 +5,9 @@
   <%= f.input :start_date%>
   <%= f.input :end_date%>
   <%= f.input :location%>
-  <%= f.select :category, options_for_select(%w[Public Private]), remote: true %>
-<div id=form-js-input>
+  <%= f.select :category, options_for_select(%w[Public Private]) %>
+<div id="form-js-input" style="display:none;">
+  <%= render 'form_private', f: f%>
 </div>
   <%= f.button :submit%>
 <% end %>
-
-<script>
-  console.log("Hello Form JS")
-
-  if (document.getElementById("event_category").value == 'Private') {
-    var invtation = document.getElementById("form-js-input")
-    invitation.innerHTML = "<%= j render 'form_private'%>"
-  };
-</script>
