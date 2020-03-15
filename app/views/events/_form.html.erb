@@ -6,8 +6,18 @@
   <%= f.input :end_date%>
   <%= f.input :location%>
   <%= f.select :category, options_for_select(%w[Public Private]) %>
-<div id="form-js-input" style="display:none;">
-  <%= render 'form_private', f: f%>
-</div>
+
+  <% user_collection = [] %>
+  <%  current_user.friends.each do |user| %>
+    <% if user.is_favorited?(current_user) %>
+      <%  user_collection.push(["#{user.firstname} IS A FAVORITE", user.id]) %>
+    <% else %>
+      <%  user_collection.push([user.firstname, user.id]) %>
+    <% end %>
+  <% end %>
+  <%= f.input :invitations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second %>
+
   <%= f.button :submit%>
 <% end %>
+
+

@@ -3,6 +3,43 @@ class EventsController < ApplicationController
 
   def index
     @events = policy_scope(Event).order(created_at: :desc)
+
+    #@events_organizer = Event.where(user_id: current_user.id)
+
+    #@events_non_organizer = Event.where.not(user_id: current_user.id)
+    #@events_participater = @events_non_organizer.joins(:participations).where("participations.user_id = #{current_user.id}")
+
+    #@events_organizer_orparticipating = @events_organizer.where(@events_participater)
+
+    #@events_invited = @events_non_organizer.joins(:invitations).where("invitations.user_id = #{current_user.id}")
+    #@events = @events_organizer_orparticipating.where(@events_invited)
+
+    #@events if params[:myevents].present?
+    if params[:all].present?
+      @events
+    end
+
+    if params[:organizing].present?
+    @events = Event.where(user_id: current_user.id)
+    end
+
+    if params[:participating].present?
+      @events_non_organizer = Event.where.not(user_id: current_user.id)
+      @events = @events_non_organizer.joins(:participations).where("participations.user_id = #{current_user.id}")
+    end
+
+    if params[:invited].present?
+      @events_non_organizer = Event.where.not(user_id: current_user.id)
+      @events = @events_non_organizer.joins(:invitations).where("invitations.user_id = #{current_user.id}")
+    end
+
+    if params[:public].present?
+      @events = Event.where(category: "Public")
+      #@events = @events_public.where.not(user_id: current_user.id)
+      #_public_notorga
+      #@events_public_notorga_notparticipating = @events_public_notorga.joins(:participations).where.not("participations.user_id = #{current_user.id}")
+      #@events = @events_public_notorga_notparticipating.joins(:invitations).where.not("invitations.user_id = #{current_user.id}")
+    end
   end
 
   def new
@@ -12,6 +49,11 @@ class EventsController < ApplicationController
 
   def show
     authorize @event
+    @markers =
+      [{
+        lat: @event.latitude,
+        lng: @event.longitude,
+      }]
   end
 
   def create
