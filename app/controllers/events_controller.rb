@@ -15,6 +15,9 @@ class EventsController < ApplicationController
     #@events = @events_organizer_orparticipating.where(@events_invited)
 
     #@events if params[:myevents].present?
+    if params[:all].present?
+      @events
+    end
 
     if params[:organizing].present?
     @events = Event.where(user_id: current_user.id)
@@ -30,14 +33,14 @@ class EventsController < ApplicationController
       @events = @events_non_organizer.joins(:invitations).where("invitations.user_id = #{current_user.id}")
     end
 
-    if params[:browse].present?
-      @events_public = Event.where(category: "Public")
-      @events_public_notorga = @events_public.where.not(user_id: current_user.id)
-      @events_public_notorga_notparticipating = @events_public_notorga.joins(:participations).where.not("participations.user_id = #{current_user.id}")
-      @events = @events_public_notorga_notparticipating.joins(:invitations).where.not("invitations.user_id = #{current_user.id}")
+    if params[:public].present?
+      @events = Event.where(category: "Public")
+      #@events = @events_public.where.not(user_id: current_user.id)
+      #_public_notorga
+      #@events_public_notorga_notparticipating = @events_public_notorga.joins(:participations).where.not("participations.user_id = #{current_user.id}")
+      #@events = @events_public_notorga_notparticipating.joins(:invitations).where.not("invitations.user_id = #{current_user.id}")
     end
   end
-
 
   def new
     @event = Event.new
@@ -50,7 +53,6 @@ class EventsController < ApplicationController
       [{
         lat: @event.latitude,
         lng: @event.longitude,
-        # infoWindow: render_to_string(partial: "info_window", locals: { pram: pram })
       }]
   end
 

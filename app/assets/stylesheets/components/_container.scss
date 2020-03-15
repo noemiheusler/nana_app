@@ -1,4 +1,4 @@
-.container-sign-up {
+event-filter-tabs.container-sign-up {
   display: flex;
   flex-direction: column;
   padding: 25px;
@@ -87,8 +87,11 @@
   display: flex;
   flex-directon: row;
   flex-wrap: wrap;
+  #tagged {
+    background-color: $dark-purple;
+  }
   .event-selection-tag {
-    background-color: #6229CE;
+    background-color: $light-purple;
     border-radius: 25px;
     margin-left: 10px;
     font-size: 12px;

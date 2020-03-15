@@ -77,6 +77,7 @@
   <div class="card-event-show-action">
     <% user_organizes = false %>
     <% user_participates = false %>
+    <% user_invited = false %>
 
     <% if (@event.user_id == current_user.id) %>
       <% user_organizes = true %>
@@ -85,19 +86,6 @@
       <% end %>
       <%=link_to edit_event_path(@event.id) do %>
         <i class="fas fa-pen"></i> Edit Event
-      <% end %>
-    <% end %>
-
-    <% if @event.invitations.present?%>
-      <% @event.invitations.each do |invitation| %>
-        <% if (invitation.user_id == current_user.id) && (@event.user_id != current_user.id) %>
-          <%=link_to invitation_path(invitation.id), method: :delete do %>
-            <i class="fas fa-times-circle"></i> Reject Invite
-          <% end %>
-          <%=link_to event_participations_path(@event.id), method: :post do %>
-            <i class="fas fa-check-circle"></i> Accept Invite
-          <% end %>
-        <% end %>
       <% end %>
     <% end %>
 
@@ -112,7 +100,22 @@
       <% end %>
     <% end %>
 
-    <% if (user_organizes == false) && (user_participates == false) %>
+
+    <% if @event.invitations.present?%>
+      <% @event.invitations.each do |invitation| %>
+        <% if (invitation.user_id == current_user.id) && (@event.user_id != current_user.id) %>
+          <% user_invited = true %>
+          <%=link_to invitation_path(invitation.id), method: :delete do %>
+            <i class="fas fa-times-circle"></i> Reject Invite
+          <% end %>
+          <%=link_to event_participations_path(@event.id), method: :post do %>
+            <i class="fas fa-check-circle"></i> Accept Invite
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if (user_organizes == false) && (user_participates == false) && (user_invited == false) %>
         <%=link_to event_participations_path(@event.id), method: :post do %>
           <i class="fas fa-check-circle"></i> Participate
         <% end %>
