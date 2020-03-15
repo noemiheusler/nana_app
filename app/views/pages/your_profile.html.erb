@@ -12,6 +12,7 @@
     <h6 style="opacity: 0.6; font-weight: lighter;"><%= @user.email %> </h6>
     <p><%= @user.motto %> <br>
     <%= @user.address %></p>
+    <%= @distance  %> km away from you
   </div>
   <div class="profile-info-box mx-auto my-4">
     <div class="label-kids">Kids</div>
@@ -69,6 +70,7 @@
     <% end %>
   </div>
 </div>
+
 <%= render 'shared/navigation' %>
 
 
