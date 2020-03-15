@@ -82,3 +82,25 @@
 .profile-infos {
   text-align: center;
 }
+
+.event-filter-tabs {
+  display: flex;
+  flex-directon: row;
+  flex-wrap: wrap;
+  .event-selection-tag {
+    background-color: #6229CE;
+    border-radius: 25px;
+    margin-left: 10px;
+    font-size: 12px;
+    color: white;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  h4 {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  }
+}

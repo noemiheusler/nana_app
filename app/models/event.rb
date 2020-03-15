@@ -13,6 +13,9 @@ class Event < ApplicationRecord
   # accept nested attributes
   validate :date_validation
 
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
+
   private
 
   def date_validation
