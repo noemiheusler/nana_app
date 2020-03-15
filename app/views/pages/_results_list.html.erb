@@ -13,6 +13,10 @@
         <% end %>
         <div class="card-product-infos">
           <h6><%= user.firstname %> <%= user.lastname %></h6>
+          <% my_coordinates = current_user.address %>
+          <% nana_coordinates = @user.address %>
+          <% distance = Geocoder::Calculations.distance_between(my_coordinates, nana_coordinates).round(0) %>
+          <p><%= distance %></p>
           <p><%= user.motto %></p>
           <% if current_user.calculate_match(user) == 0 %>
             <p>Sorry, there are no Nanas around</p>

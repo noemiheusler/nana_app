@@ -6,6 +6,12 @@ class PagesController < ApplicationController
 
   def your_profile
     @user = User.find(params[:id])
+
+    my_coordinates = current_user.address
+    nana_coordinates = @user.address
+
+    @distance = Geocoder::Calculations.distance_between(my_coordinates, nana_coordinates).round(0)
+
   end
 
   def mynanas
@@ -83,6 +89,5 @@ class PagesController < ApplicationController
         format.js  # <-- will render `app/views/reviews/create.js.erb`
     end
   end
-
 
 end
