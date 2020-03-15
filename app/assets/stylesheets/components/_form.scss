@@ -40,6 +40,16 @@
   box-shadow: 0 0 0 0.2rem rgba(98, 41, 206, 0.25);
 }
 
+// checkbox to toggles
+
+/* .custom-control-label:before{
+  background-color:red;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+  background-color:black;
+}
+ */
+
 // simple form buttons
 
 .form-actions {
