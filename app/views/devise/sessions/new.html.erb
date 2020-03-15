@@ -1,7 +1,7 @@
 <div class="container-sign-up">
   <%= image_tag "logo.svg", class: "logo"%>
   <div class="my-3">
-    <h2 class="header">Welcome, are you a Nana already?</h2>
+    <h2 class="header">Welcome back</h2>
   </div>
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -17,17 +17,10 @@
                   placeholder: "Password",
                   required: false,
                   input_html: { autocomplete: "current-password" } %>
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      <%= f.input :remember_me, wrapper_html: { class: 'custom-control custom-switch' }, input_html: { class: 'custom-control-input' }, label_html: {class: 'custom-control-label' }, as: :boolean if devise_mapping.rememberable? %>
     </div>
-    <div class="form-actions mx-auto">
-      <%= f.button :submit, "Log in" %>
-    </div>
+    <%= f.button :submit, "Log in", class: "btn-quiz" %>
   <% end %>
-  <div class="btn-sm-bottom">
-    <%= link_to "Sign up", intro_path, style: 'opacity: 0.7' %>
-  </div>
-  <div class="btn-sm-bottom">
-    <%= link_to "Forgot your password?", new_password_path(resource_name), style: 'opacity: 0.7' %><br />
-  </div>
-
+    <%= link_to "Sign up", intro_path, class: "btn-quiz" %>
+    <%= link_to "Forgot your password?", new_password_path(resource_name), class: "btn" %>
 </div>
