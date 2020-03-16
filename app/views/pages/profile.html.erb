@@ -13,17 +13,27 @@
     <p><%= current_user.motto %> <br>
     <%= current_user.address %></p>
   </div>
-  <div class="profile-info-box mx-auto my-4">
-    <div class="label-kids">Kids</div>
+  <div class="my-2 row" style="width: 100vw; margin: 0 auto">
     <% current_user.kids.each do |kid|  %>
-      <div class="profile-info-item p-2">
-        <i class="fas fa-baby"></i>
-        <div><%= ((Date.today - kid.birthday).to_f / 365 * 12).round  %></div>
+    <div class="col-6">
+    <div class="kid-container d-flex align-items-center justify-content-start my-3 px-3 col-12">
+        <% kid_age_in_month = ((Date.today - kid.birthday).to_f / 365 * 12).round %>
+        <% if kid_age_in_month < 2 %>
+          <div class="kid"><%= image_tag "baby.svg" %></div>
+          <% kid_age = "#{kid_age_in_month} month" %>
+        <% elsif kid_age_in_month < 23 %>
+          <div class="kid"><%= image_tag "baby.svg" %></div>
+          <% kid_age = "#{kid_age_in_month} months" %>
+        <% else %>
+        <div class="kid"><%= image_tag "kid.svg" %></div>
+          <% kid_age = "#{(kid_age_in_month / 12).round(0)} years" %>
+        <% end %>
+        <div><%= kid_age %></div>
+      </div>
       </div>
   <% end %>
   </div>
-  <div class="profile-info-box mx-auto my-2" style="height: 100px;">
-    <div class="label-description">Description</div>
+  <div class="description-container mx-auto my-2" style="height: 100px;">
     <div class="profile-info-item p-3"><%= current_user.description %></div>
   </div>
   <div class="btn-sm-bottom">
