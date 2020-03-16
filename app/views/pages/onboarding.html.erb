@@ -15,10 +15,11 @@
     <div class="carousel-item">
       <div class="carousel-item-wrapper form-wrapper">
         <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'UPLOAD PROFILE PICTURE' %>
-        <%= f.input :motto, label: false, placeholder: "MOTTO" %>
+        <%= f.input :motto, label: false, placeholder: "STATUS" %>
         <%= f.input :description, label: false, placeholder: "DESCRIPTION" %>
-        <%= f.input :address, label: false, placeholder: "ADDRESS"%>
-        <button type="button" class="next btn-next">
+        <%= f.input :address, label: false, placeholder: "ADDRESS" %>
+        <button type="button" class="btn-next next btn-blocked" id="update-form">
+          <!-- removed the next class on button to force user into inserting address -->
           NEXT
         </button>
       </div>
@@ -44,7 +45,7 @@
         <h3 class="panel-start-text"></h3>
         <div class="mt-5">
           <%= image_tag "letsgo.png"%>
-          <%= f.button :submit, "Let's go!", class: "next btn-next" %>
+          <%= f.button :submit, "Let's find parents!", class: "next btn-next" %>
         </div>
       </div>
     </div>
@@ -54,7 +55,28 @@
 </div>
 
 <script>
+  const nextBtn = document.querySelector("#update-form");
+  const addressInput = document.querySelector("#user_address")
+  const errorMessage = `<span id="error-message" class="">Sorry, we need your address</span>`
+  let errorSpan = null
+
+  addressInput.addEventListener("change", (event) => {
+    console.log("hi")
+    if (addressInput.value != "") {
+      nextBtn.classList.remove("btn-blocked")
+    }
+  })
+
+  nextBtn.addEventListener("click", (event) => {
+    if (addressInput.value == "" && errorSpan == null) {
+      if (errorSpan != null) errorSpan.remove();
+      addressInput.style.border = "1px solid red";
+      addressInput.insertAdjacentHTML("beforebegin", errorMessage)
+      errorSpan = document.querySelector("#error-message");
+    }
+  })
 </script>
+
 
 
 
