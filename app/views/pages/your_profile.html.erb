@@ -13,6 +13,20 @@
     <p><%= @user.motto %> <br>
     <%= @user.address %></p>
     <%= @distance  %> km away from you
+    <p style="margin-bottom: -10px; margin-top: 10px;">Match Score:</p>
+    <div style="width: 200px;">
+      <% if current_user.calculate_match(@user) == 0 %>
+        <p>Sorry, no match data</p>
+      <% else %>
+        <div class="progress mt-2">
+          <% if current_user.calculate_match(@user) < 50 %>
+              <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+          <% else %>
+              <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="profile-info-box mx-auto my-4">
     <div class="label-kids">Kids</div>
@@ -45,7 +59,7 @@
       <% if pending_friend == @user %>
         <%# 5 ID %>
         <% is_a_pending_friend = true %>
-        <%= "YOUR FRIEND REQUEST IS STILL PENDING" %>
+        <%= "Your friend request is still pending" %>
       <% end %>
     <% end %>
 
@@ -65,7 +79,7 @@
     <% if is_a_friend == false && is_a_requested_friend == false && is_a_pending_friend == false %>
       <%# 5 ID %>
       <%=link_to request_friend_path(@user.id), method: :patch do %>
-        <%= "CONNECT" %>
+        <p class="btn-next">Connect</p>
       <% end %>
     <% end %>
   </div>

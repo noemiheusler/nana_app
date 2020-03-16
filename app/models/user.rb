@@ -40,7 +40,7 @@ class User < ApplicationRecord
         score += 1
       end
     end
-    (score / Question.all.size.to_f).round(2) * 100
+    (score / Question.total.to_f).round(0) * 100
   end
 
   def is_favorited?(current_user)

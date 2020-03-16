@@ -1,5 +1,12 @@
 <%= render 'shared/navbar-nana' %>
-<div>
+<div class="requests-header">
+  <% if @friend_requested.present? == false && @friends.present? == false %>
+    <h3>Let's get started</h3>
+
+    <%= link_to root_path do %>
+      <p class="btn-next">Discover</p>
+    <% end %>
+  <% end %>
   <% if @friends_requested.present? %>
     <h3 class="requests-header">Friend requests</h3>
       <% @friends_requested.each do |friend_requested| %>
@@ -60,13 +67,13 @@
           <% if friend.is_favorited?(current_user) %>
             <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
               <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
-                <i class="fas fa-heart blue-heart"></i>
+                <i class="fas fa-star"></i>
               <% end %>
             </div>
           <% else  %>
             <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
               <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
-              <i class="fas fa-heart"></i>
+                <i class="far fa-star"></i>
               <% end %>
             </div>
           <% end %>
