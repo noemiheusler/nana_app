@@ -8,7 +8,7 @@
     <% end %>
   <% end %>
   <% if @friends_requested.present? %>
-    <h3 class="requests-header">Friend requests</h3>
+    <h3 class="requests-header mt-5">Friend requests</h3>
       <% @friends_requested.each do |friend_requested| %>
       <div class="d-flex justify-content-between align-items-center ml-2 mr-3">
         <%= link_to your_profile_path(friend_requested.id) do %>
@@ -52,32 +52,35 @@
     <h3 class="requests-header mt-5">My Nanas</h3>
     <% @friends.each do |friend|%>
       <div class="d-flex justify-content-between align-items-center ml-2 mr-3">
-        <div class="card-product">
-          <% if friend.photo.attached? %>
-            <%= cl_image_tag friend.photo.key, class:"avatar" %>
-          <% else %>
-            <%= image_tag "default-avatar.png" %>
-          <% end %>
-          <div class="card-product-infos">
-            <h6><%= friend.firstname %></h6>
-            <p><%= friend.motto  %></p>
+        <%= link_to your_profile_path(friend.id) do %>
+
+          <div class="card-product">
+            <% if friend.photo.attached? %>
+              <%= cl_image_tag friend.photo.key, class:"avatar" %>
+            <% else %>
+              <%= image_tag "default-avatar.png" %>
+            <% end %>
+            <div class="card-product-infos">
+              <h6><%= friend.firstname %></h6>
+              <p><%= friend.motto  %></p>
+            </div>
           </div>
-        </div>
-        <div class="">
-          <% if friend.is_favorited?(current_user) %>
-            <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
-              <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
-                <i class="fas fa-star"></i>
-              <% end %>
-            </div>
-          <% else  %>
-            <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
-              <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
-                <i class="far fa-star"></i>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+          <div class="">
+            <% if friend.is_favorited?(current_user) %>
+              <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
+                <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              </div>
+            <% else  %>
+              <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
+                <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   <% end %>
