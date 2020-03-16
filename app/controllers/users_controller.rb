@@ -43,7 +43,7 @@ class UsersController < ApplicationController
 
       @answer_3.save
 
-    redirect_to root_path
+    redirect_to profile_path
 
     end
   end
