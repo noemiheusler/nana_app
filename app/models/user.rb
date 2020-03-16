@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   validates  :firstname, presence: true, length: { maximum: 25 }
   validates  :lastname, presence: true, length: { maximum: 25 }
-  validates  :address, length: { maximum: 200 }
+  validates  :address, presence: true, length: { maximum: 200 }, on: :update
   # validates  :motto, presence: true, length: { maximum: 200 }
   # validates  :description, presence: true, length: {maximum: 200}
 
