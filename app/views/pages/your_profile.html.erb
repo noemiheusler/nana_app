@@ -33,7 +33,15 @@
     <% @user.kids.each do |kid|  %>
       <div class="profile-info-item p-2">
         <i class="fas fa-baby"></i>
-        <div><%= ((Date.today - kid.birthday).to_f / 365 * 12).round  %></div>
+        <% kid_age_in_month = ((Date.today - kid.birthday).to_f / 365 * 12).round %>
+        <% if kid_age_in_month < 2 %>
+          <% kid_age = "#{kid_age_in_month} month" %>
+        <% elsif kid_age_in_month < 23 %>
+          <% kid_age = "#{kid_age_in_month} months" %>
+        <% else %>
+          <% kid_age = "#{(kid_age_in_month / 12).round(0)} years" %>
+        <% end %>
+        <div><%= kid_age %></div>
       </div>
   <% end %>
   </div>

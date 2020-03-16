@@ -18,13 +18,13 @@
         <%= f.input :motto, label: false, placeholder: "STATUS" %>
         <%= f.input :description, label: false, placeholder: "DESCRIPTION" %>
         <%= f.input :address, label: false, placeholder: "ADDRESS" %>
+        <%#= f.input :kid, label: false, placeholder: "Age of your child"%>
         <button type="button" class="btn-next next btn-blocked" id="update-form">
           <!-- removed the next class on button to force user into inserting address -->
           NEXT
         </button>
       </div>
     </div>
-
 
     <% Question.all.each do |question| %>
     <div class="carousel-item">
