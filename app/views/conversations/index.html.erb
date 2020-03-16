@@ -16,7 +16,7 @@
       <div class="number-of-messages"><%= conversation.messages.count %></div>
       <div class="conversation-content">
         <% if conversation.messages.last.present? %>
-          <p><small><%= conversation.messages.last.created_at.strftime("%A, %d %b %Y %H:%M") %> with <%= user_other.firstname %></small></p>
+          <p><small><%= conversation.messages.last.created_at.strftime(" %e.%m.%y %k.%M") %> with <%= user_other.firstname %></small></p>
           <p><%= conversation.messages.last.user.firstname %>: <%= conversation.messages.last.body %></p>
         <% else %>
           <p><small>No messages yet with <%= user_other.firstname %></small></p>
