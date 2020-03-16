@@ -1,13 +1,24 @@
 class UsersController < ApplicationController
   def update
     # update user
-
+    @all_kids = []
     @user = User.find(params[:id])
     authorize @user
     @user.motto = params[:user][:motto]
     @user.description = params[:user][:description]
     @user.address = params[:user][:address]
     @user.photo = params[:user][:photo]
+
+    number_of_kids = params[:kids].count
+
+    if number_of_kids > 0
+      counter = number_of_kids
+      params[:kids].each do |kid|
+        counter -= 1
+        @kid = Kid.new(user_id: @user.id, birthday: params[:kids][counter][:kid_birthday])
+        @kid.save!
+      end
+    end
 
     # create answers
 

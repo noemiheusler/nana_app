@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :favorites
   has_one_attached :photo
 
+  #accepts_nested_attributes_for :kids
+
   validates  :firstname, presence: true, length: { maximum: 25 }
   validates  :lastname, presence: true, length: { maximum: 25 }
   validates  :address, presence: true, length: { maximum: 200 }, on: :update

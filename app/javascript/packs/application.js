@@ -3,7 +3,7 @@ import "bootstrap";
   const nextBtn = document.querySelectorAll(".next")
   nextBtn.forEach((btn) => {
     btn.addEventListener('click', ()=>{
-      if (btn.classList.contains("btn-blocked")) {
+      if (btn.classList.contains("btn-blocked") || btn.classList.contains("last-btn") ) {
         return "";
       } else {
         console.log("clocked")
@@ -32,3 +32,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'; // <-- you need to uncomment the styleshe
 import { initMapbox } from '../plugins/init_mapbox';
 
 initMapbox();
+
+import { initAddkids } from '../plugins/init_addkids';
+
+initAddkids();
