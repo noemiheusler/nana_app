@@ -42,9 +42,9 @@ body {
       </div>
       <div class="contact-seen">
       <% if @messages.last.created_at != nil %>
-        <%= @messages.last.created_at.strftime("%A, %d %b %Y %H:%M")%>
+        <%= @messages.last.created_at.strftime(" %e.%m.%y %k.%M")%>
       <% else %>
-        <%= DateTime.now.strftime("%A, %d %b %Y %H:%M")%>
+        <%= DateTime.now.strftime(" %e.%m.%y %k.%M")%>
       <% end %>
       </div>
     </div>
@@ -126,15 +126,21 @@ document.addEventListener("keyup", function(event) {
 // emoji picker, see https://github.com/joeattardi/emoji-button?ref=mdbootstrap.com
 
 const button = document.getElementById("emojipicker");
-const picker = new EmojiButton();
+const picker = new EmojiButton({
+  position: "bottom-start"
+});
 
 picker.on('emoji', emoji => {
   input.value += emoji;
-  input.focus();
+  console.log("close")
+  setTimeout(() => {
+     input.focus(); 
+  }, 100);
 });
 
 button.addEventListener('click', () => {
   picker.togglePicker(button);
+  document.querySelector(".emoji-picker__search-icon").remove()
 });
 
 </script>
