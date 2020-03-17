@@ -1,3 +1,8 @@
-<h1>Create an Event</h1>
-<%= render 'events/form', event: @event%>
+<%= render 'shared/navbar-nana' %>
+    <div class="container">
+        <div class="row flex-column justify-content-center align-items-center">
+        <%= render 'events/form', event: @event%>
+        </div>
+    </div>
+<%= render 'shared/navigation' %>
 

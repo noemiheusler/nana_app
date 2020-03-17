@@ -1,4 +1,7 @@
+import {initFlatpickr} from  "../plugins/flatpickr";
 import "bootstrap";
+
+initFlatpickr()
 
   const nextBtn = document.querySelectorAll(".next")
   nextBtn.forEach((btn) => {
