@@ -1,5 +1,5 @@
 <%= render 'shared/navbar-nana' %>
-<div class="d-flex justify-content-center flex-column">
+<div class="background d-flex justify-content-center flex-column">
   <div class="profile-pic">
     <% if current_user.photo.attached? %>
       <%= cl_image_tag current_user.photo.key, class:"avatar-profile-page" %>
