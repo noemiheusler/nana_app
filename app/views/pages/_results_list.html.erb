@@ -66,14 +66,14 @@
                     <%= @distance  %> km away from you
                     <p style="margin-bottom: -10px; margin-top: 10px;">Match Score:</p>
                     <div style="width: 200px;">
-                      <% if current_user.calculate_match(@user) == 0 %>
+                      <% if current_user.calculate_match(@user, answers) == 0 %>
                         <p>Sorry, no match data</p>
                       <% else %>
                         <div class="progress mt-2">
-                          <% if current_user.calculate_match(@user) < 50 %>
-                              <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+                          <% if current_user.calculate_match(@user, answers) < 50 %>
+                              <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user, answers)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user, answers) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user, answers) %>%</div>
                           <% else %>
-                              <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+                              <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user, answers)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user, answers) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user, answers) %>%</div>
                           <% end %>
                         </div>
                       <% end %>
