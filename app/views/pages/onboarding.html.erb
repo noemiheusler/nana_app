@@ -1,3 +1,6 @@
+<div class="onboarding-header">
+<%= image_tag "logo.svg", class: "logo"%>
+</div>
 <div id="caroselOnboarding" class="onboarding-carousel carousel slide" data-interval="false">
   <%= simple_form_for current_user do |f| %>
   <div class="carousel-inner">
@@ -14,11 +17,11 @@
     </div>
     <div class="carousel-item">
       <div class="carousel-item-wrapper form-wrapper">
-        <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'UPLOAD PROFILE PICTURE' %>
+        <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'Upload Profile Picture' %>
         <%= f.input :motto, label: false, placeholder: "Status" %>
         <%= f.input :description, label: false, placeholder: "Description" %>
-        <%= f.input :address, label: false, placeholder: "Address" %>
-        <button class="btn btn-primary"id="add">x</button>
+        <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit" %>
+        <button class="upload-photo"id="add">Add a childs birthday</button>
         <div class="kids-input-container">
           <!-- <input type="date" html5="true" name="kids[][kid_birthday]"/> -->
         </div>
