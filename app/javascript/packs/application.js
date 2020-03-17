@@ -36,3 +36,8 @@ initMapbox();
 import { initAddkids } from '../plugins/init_addkids';
 
 initAddkids();
+
+import { initAutocomplete } from '../plugins/init_autocomplete';
+
+initAutocomplete();
+
