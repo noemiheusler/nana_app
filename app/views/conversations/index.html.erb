@@ -1,4 +1,5 @@
 <%= render 'shared/navbar-nana' %>
+<div class="background">
 <% @conversations.each do |conversation| %>
   <% if conversation.user1_id == current_user.id || conversation.user2_id == current_user.id %>
     <% if conversation.user1_id == current_user.id %>
@@ -7,7 +8,7 @@
       <% user_other = User.find(conversation.user1_id) %>
     <% end %>
     <%= link_to conversation_messages_path(conversation) do %>
-    <div class="conversation">
+    <div class="conversation mx-auto">
       <% if user_other.photo.attached? %>
         <%= cl_image_tag user_other.photo.key class:"avatar-large" %>
       <% else %>
@@ -46,7 +47,7 @@
         <% current_user.friends.each do |friend| %>
           <%= link_to conversations_path(user1_id: current_user.id, user2_id: friend.id), method: 'post' do %>
             <% if friend.id != current_user.id %>
-              <div class="conversation">
+              <div class="conversation mx-auto">
                 <% if  friend.photo.attached? %>
                   <%= cl_image_tag friend.photo.key class:"avatar-large" %>
                 <% else %>
@@ -63,6 +64,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <%= render 'shared/navigation' %>

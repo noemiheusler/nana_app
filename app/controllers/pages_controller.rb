@@ -94,6 +94,7 @@ class PagesController < ApplicationController
     friends_ids = current_user.friends.pluck(:id)
     friends_ids.push(current_user.id)
     @users_nearby = User.near(current_user.address, 20).where.not(id: friends_ids).sample(5)
+    @users_nearby.each { |user| user.distance_from_you = Geocoder::Calculations.distance_between([current_user.latitude, current_user.longitude], [user.latitude, user.longitude]).round(0)}
     respond_to do |format|
         format.js  # <-- will render `app/views/reviews/create.js.erb`
     end

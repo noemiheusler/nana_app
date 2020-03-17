@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  attr_accessor :distance_from_you
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 # include PgSearch::Model
@@ -33,16 +35,16 @@ class User < ApplicationRecord
 #    }
 # end
 
-  def calculate_match(user)
+  def calculate_match(user, self_answers)
     score = 0
-    user_a_answers = self.answers.pluck(:answer)
+    user_a_answers = self_answers
     user_b_answers = user.answers.pluck(:answer)
     user_a_answers.each_with_index do |answer, index|
       if answer == user_b_answers[index]
         score += 1
       end
     end
-    (score / Question.total.to_f).round(0) * 100
+    (score / Question.total.to_f).round(2) * 100
   end
 
   def is_favorited?(current_user)
