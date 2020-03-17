@@ -13,10 +13,10 @@
     <p><%= current_user.motto %> <br>
     <%= current_user.address %></p>
   </div>
-  <div class="my-2 row" style="width: 100vw; margin: 0 auto">
+  <div class="my-2 row px-3 my-3" style="width: 100vw; margin: 0 auto">
     <% current_user.kids.each do |kid|  %>
-    <div class="col-6">
-    <div class="kid-container d-flex align-items-center justify-content-start my-3 px-3 col-12">
+    <div class="col-6 p-0 mx-auto">
+    <div class="kid-container d-flex align-items-center justify-content-start my-2 px-3 col-12">
         <% kid_age_in_month = ((Date.today - kid.birthday).to_f / 365 * 12).round %>
         <% if kid_age_in_month < 2 %>
           <div class="kid"><%= image_tag "baby.svg" %></div>
@@ -42,7 +42,7 @@
     <% end %>
     <%= link_to "Update your profile", edit_user_registration_path, style: 'opacity: 0.7' %>
   </div>
-  <div class="btn-sm-bottom">
+  <div class="btn-sm-bottom mt-1">
     <%= link_to "Log out", destroy_user_session_path, method: :delete,  style: 'opacity: 0.7' %>
   </div>
 </div>

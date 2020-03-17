@@ -19,7 +19,7 @@ event-filter-tabs.container-sign-up {
 }
 
 .profile-pic {
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -31,17 +31,17 @@ event-filter-tabs.container-sign-up {
 }
 
 .profile-info-box {
-    display: flex;
-    align-items: center;
-    height: 58px;
-    width: 80%;
-    position: relative;
-    background: white;
-    border: 2px solid #6229CE;
-    box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
-    border-radius: 25px;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  height: 58px;
+  width: 80%;
+  position: relative;
+  background: white;
+  border: 2px solid #6229CE;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+  border-radius: 25px;
+  justify-content: center;
+}
 
 .profile-info-item {
   display: flex;
@@ -73,9 +73,9 @@ event-filter-tabs.container-sign-up {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-  h4 {
-    margin-left: 3px;
-    margin-right: 3px;
+    h4 {
+      margin-left: 3px;
+      margin-right: 3px;
     }
   }
 }
@@ -102,19 +102,23 @@ event-filter-tabs.container-sign-up {
 }
 
 .kid-container {
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
+  -webkit-box-pack: center;
   justify-content: center;
-  width: 152px;
+  width: 90%;
   padding: 5px;
+  background-color: white;
+  margin: 0 auto;
 }
 
 .description-container {
   box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
   border-radius: 25px;
   justify-content: center;
-  width: 80%;
+  width: 90%;
   padding: 5px;
+  background-color: white;
 }
 
 .kid img {

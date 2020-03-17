@@ -50,6 +50,15 @@ class PagesController < ApplicationController
     redirect_to your_profile_path(User.find(params[:id]))
   end
 
+  def cancel_friend_request
+    potential_friend = User.find(params[:id])
+    friend_request = potential_friend.friendships.find_by(friend_id: current_user.id)
+    friend_request.destroy
+    friend_request = current_user.friendships.find_by(friend_id: potential_friend.id)
+    friend_request.destroy
+    redirect_to your_profile_path(potential_friend)
+  end
+
   def nana_friend
     @favorite = Favorite.new
     @favorite.user = current_user
