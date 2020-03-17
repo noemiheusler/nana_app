@@ -1,3 +1,6 @@
+<div class="onboarding-header">
+<%= image_tag "logo.svg", class: "logo"%>
+</div>
 <div id="caroselOnboarding" class="onboarding-carousel carousel slide" data-interval="false">
   <%= simple_form_for current_user do |f| %>
   <div class="carousel-inner">
@@ -14,10 +17,15 @@
     </div>
     <div class="carousel-item">
       <div class="carousel-item-wrapper form-wrapper">
-        <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'UPLOAD PROFILE PICTURE' %>
-        <%= f.input :motto, label: false, placeholder: "STATUS" %>
-        <%= f.input :description, label: false, placeholder: "DESCRIPTION" %>
-        <%= f.input :address, label: false, placeholder: "ADDRESS" %>
+        <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'Upload Profile Picture' %>
+        <%= f.input :motto, label: false, placeholder: "Status" %>
+        <%= f.input :description, label: false, placeholder: "Description" %>
+        <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit" %>
+        <button class="upload-photo"id="add">Add a childs birthday</button>
+        <div class="kids-input-container">
+          <!-- <input type="date" html5="true" name="kids[][kid_birthday]"/> -->
+        </div>
+
         <%#= f.input :kid, label: false, placeholder: "Age of your child"%>
         <button type="button" class="btn-next next btn-blocked" id="update-form">
           <!-- removed the next class on button to force user into inserting address -->
@@ -45,7 +53,7 @@
         <h3 class="panel-start-text"></h3>
         <div class="mt-5">
           <%= image_tag "letsgo.png"%>
-          <%= f.button :submit, "Let's find parents!", class: "next btn-next" %>
+          <%= f.button :submit, "Let's find parents!", class: "next btn-next last-btn" %>
         </div>
       </div>
     </div>

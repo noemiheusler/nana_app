@@ -22,9 +22,9 @@
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
     <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'UPLOAD PROFILE PICTURE' %>
-    <%= f.input :motto, label: false, placeholder: "STATUS" %>
-    <%= f.input :description, label: false, placeholder: "DESCRIPTION" %>
-    <%= f.input :address, label: false, placeholder: "ADDRESS"%>
+    <%= f.input :motto, label: false, placeholder: "Status" %>
+    <%= f.input :description, label: false, placeholder: "Description" %>
+    <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit"%>
 
   </div>
 

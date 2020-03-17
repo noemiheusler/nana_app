@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
     def index
         @users = User.all
         @conversations = policy_scope(Conversation)
-        @conversations = Conversation.all
+        @conversations = Conversation.all.sort_by { |c| c.messages.last.created_at }.reverse
     end
 
     def create
