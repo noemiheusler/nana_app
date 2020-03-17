@@ -43,41 +43,13 @@ event-filter-tabs.container-sign-up {
     justify-content: center;
   }
 
-.label-kids {
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    height: 15px;
-    width: 50px;
-    background-color: white;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    color: #353535;
-}
-
-.label-description {
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    height: 15px;
-    width: 90px;
-    background-color: white;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    color: #353535;
-}
-
 .profile-info-item {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.fa-baby {
-  padding: 5px;
-}
+
 
 .profile-infos {
   text-align: center;
@@ -127,6 +99,27 @@ event-filter-tabs.container-sign-up {
 .card-event-show-friends-participating-profiles {
   display: felx;
   flex-direction: row;
+}
+
+.kid-container {
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+  border-radius: 25px;
+  justify-content: center;
+  width: 152px;
+  padding: 5px;
+}
+
+.description-container {
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+  border-radius: 25px;
+  justify-content: center;
+  width: 80%;
+  padding: 5px;
+}
+
+.kid img {
+  width: 40px;
+  margin-right: 5px;
 }
 
 .onboarding-header {

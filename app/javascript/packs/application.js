@@ -1,4 +1,7 @@
+import {initFlatpickr} from  "../plugins/flatpickr";
 import "bootstrap";
+
+initFlatpickr()
 
   const nextBtn = document.querySelectorAll(".next")
   nextBtn.forEach((btn) => {
@@ -36,3 +39,8 @@ initMapbox();
 import { initAddkids } from '../plugins/init_addkids';
 
 initAddkids();
+
+import { initAutocomplete } from '../plugins/init_autocomplete';
+
+initAutocomplete();
+

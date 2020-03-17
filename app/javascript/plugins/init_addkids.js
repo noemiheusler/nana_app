@@ -5,7 +5,7 @@ const initAddkids = () => {
   if (btn){
     btn.addEventListener("click", (e) => {
       e.preventDefault()
-      container.insertAdjacentHTML("beforeend", "<input type='date' html5='true' name='kids[][kid_birthday]'/>")
+      container.insertAdjacentHTML("beforeend", "<input type='date' html5='true' name='kids[][kid_birthday]' class='datepicker' />")
     })
   }
 }
