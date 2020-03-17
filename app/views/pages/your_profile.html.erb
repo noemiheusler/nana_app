@@ -19,16 +19,19 @@
     <%= @distance  %> km away from you</p>
 
     <div style="width: 200px;">
-
+    <% match_score = current_user.calculate_match(@user, current_user.answers.pluck(:answer)) %>
     Match Score:
-      <% if current_user.calculate_match(@user) == 0 %>
+      <% if match_score == 0 %>
         <p>Sorry, no match data</p>
       <% else %>
-        <% if current_user.calculate_match(@user) < 50 %>
-          <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+      <div class="progress">
+        <% if match_score < 50 %>
+          <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{match_score}%" %>" aria-valuenow="<%= match_score %>" aria-valuemin="0" aria-valuemax="100"><%= match_score %>%</div>
+
         <% else %>
-          <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+          <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{match_score}%" %>" aria-valuenow="<%= match_score %>" aria-valuemin="0" aria-valuemax="100"><%= match_score %>%</div>
         <% end %>
+      </div>
       <% end %>
     </div>
 
@@ -77,17 +80,20 @@
     <p><%= @user.motto %> <br>
     <%= @distance  %> km away from you</p>
 
-    <div style="width: 200px;">
+    <div class="" style="width: 200px;">
 
     Match Score:
-      <% if current_user.calculate_match(@user) == 0 %>
+    <% match_score = current_user.calculate_match(@user, current_user.answers.pluck(:answer))  %>
+      <% if match_score == 0 %>
         <p>Sorry, no match data</p>
       <% else %>
-        <% if current_user.calculate_match(@user) < 50 %>
-          <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+        <% if match_score < 50 %>
+        <div class="progress">
+          <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{match_score}%" %>" aria-valuenow="<%= match_score %>" aria-valuemin="0" aria-valuemax="100"><%= match_score %>%</div>
         <% else %>
-          <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+          <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{match_score}%" %>" aria-valuenow="<%= match_score %>" aria-valuemin="0" aria-valuemax="100"><%= match_score %>%</div>
         <% end %>
+        </div>
       <% end %>
     </div>
 

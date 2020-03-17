@@ -1,6 +1,7 @@
 <% if users.empty? %>
   <h2>Sorry no user found</h2>
 <% else %>
+  <% answers = current_user.answers.pluck(:answer) %>
   <h3 class="requests-header">Nanas nearby...</h3>
   <% users.each do |user| %>
     <div class="d-flex justify-content-between align-items-center mx-2">
@@ -14,17 +15,17 @@
         <div class="card-product-infos">
           <h6><%= user.firstname %> <%= user.lastname %></h6>
           <% nana_coordinates = user.address %>
-          <% distance = Geocoder::Calculations.distance_between(current_user.address, nana_coordinates).round(0) %>
-          <p><%= distance %> km away from you</p>
+          <p><%= user.distance_from_you %> km away from you</p>
           <p><%= user.motto %></p>
-          <% if current_user.calculate_match(user) == 0 %>
+          <% match_value = current_user.calculate_match(user, answers) %>
+          <% if match_value == 0 %>
             <p>Sorry, no match data</p>
           <% else %>
             <div class="progress mt-2">
-              <% if current_user.calculate_match(user) < 50 %>
-                <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+              <% if match_value < 50 %>
+                <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{match_value}%" %>" aria-valuenow="<%= match_value %>" aria-valuemin="0" aria-valuemax="100"><%= match_value %>%</div>
               <% else %>
-                <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(user)}%" %>" aria-valuenow="<%= current_user.calculate_match(user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(user) %>%</div>
+                <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{match_value}%" %>" aria-valuenow="<%= match_value %>" aria-valuemin="0" aria-valuemax="100"><%= match_value %>%</div>
               <% end %>
             </div>
           <% end %>

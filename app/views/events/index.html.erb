@@ -1,5 +1,5 @@
 <%= render 'shared/navbar-nana' %>
-
+     <div class="background">
       <div class="event-filter-tabs">
 
         <%= link_to events_path(:all => '1') do  %>
@@ -42,6 +42,7 @@
           <% end %>
         <% end %>
       </div>
+
 
     <% @events.sort_by { |event| event.start_date }.each do |event| %>
       <% is_organizer = false %>
@@ -107,6 +108,9 @@
         <%# end %>
       </ul>
     <% end %>
+  </div>
+
+
 
 <%= link_to new_event_path do%>
   <div class="btn-round">

@@ -1,10 +1,10 @@
 class ConversationsController < ApplicationController
     #before_action :authenticate_user
-    
+
     def index
         @users = User.all
-        @conversations = policy_scope(Conversation)
-        @conversations = Conversation.all.sort_by { |c| c.messages.last.created_at }.reverse
+        @conversations = policy_scope(Conversation).with_messages
+        @conversations = @conversations.all.sort_by { |c| c.messages.last.created_at }.reverse
     end
 
     def create
