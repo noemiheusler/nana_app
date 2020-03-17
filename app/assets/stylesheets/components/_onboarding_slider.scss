@@ -91,3 +91,12 @@ body { overflow-x: hidden}
 
 .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
     color: #03BCE1; }
+
+#disclaimer-address {
+  margin-top: -15px;
+  margin-bottom: 1rem;
+  font-size: small;
+  opacity: 0.7;
+  text-align: left;
+  margin-left: 15px;
+}
