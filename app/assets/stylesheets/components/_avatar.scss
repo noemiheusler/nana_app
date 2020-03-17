@@ -40,16 +40,17 @@
 }
 
 .upload-photo {
-  padding: 20px;
   cursor: pointer;
   font-weight: bold;
-  background: none;
-  border: 2px solid $light-purple;
-  border-radius: 25px;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
-  margin: 20px auto;
   text-align: center;
   color: $light-purple;
   padding: 10px 20px;
   width: 300px;
 }
+
+.upload-photo::before {
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 900;
+  content: "\f030";
+}
+

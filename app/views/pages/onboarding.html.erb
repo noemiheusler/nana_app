@@ -17,11 +17,12 @@
     </div>
     <div class="carousel-item">
       <div class="carousel-item-wrapper form-wrapper">
-        <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'Upload Profile Picture' %>
+        <%= f.input :photo, as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo fa-camera'}, label: 'Upload Profile Picture' %>
         <%= f.input :motto, label: false, placeholder: "Status" %>
         <%= f.input :description, label: false, placeholder: "Description" %>
-        <%= f.input :address, label: false, placeholder: "Address" %>
-        <button class="upload-photo"id="add">Add a childs birthday</button>
+        <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit" %>
+        <p id= "disclaimer-address">Address will not be displayed to other users</p>
+        <button class="btn-sm-bottom" id="add" style="opacity: 0.7"><i class="fas fa-plus"></i> Add a childs birthday</button>
         <div class="kids-input-container">
           <!-- <input type="date" html5="true" name="kids[][kid_birthday]"/> -->
         </div>
