@@ -20,13 +20,11 @@
         <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'Upload Profile Picture' %>
         <%= f.input :motto, label: false, placeholder: "Status" %>
         <%= f.input :description, label: false, placeholder: "Description" %>
-        <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit" %>
+        <%= f.input :address, label: false, placeholder: "Address" %>
         <button class="upload-photo"id="add">Add a childs birthday</button>
         <div class="kids-input-container">
           <!-- <input type="date" html5="true" name="kids[][kid_birthday]"/> -->
         </div>
-
-        <%#= f.input :kid, label: false, placeholder: "Age of your child"%>
         <button type="button" class="btn-next next btn-blocked" id="update-form">
           <!-- removed the next class on button to force user into inserting address -->
           NEXT
