@@ -1,5 +1,6 @@
 <%= render 'shared/navbar-nana' %>
-<div class="d-flex justify-content-center flex-column">
+<div class="background d-flex justify-content-center flex-column">
+<% if current_user.friends_with?(@user) %>
   <div class="profile-pic">
     <% if @user.photo.attached? %>
       <%= cl_image_tag @user.photo.key, class:"avatar-profile-page" %>
@@ -7,50 +8,121 @@
       <%= image_tag "default-avatar.png", class:"avatar-profile-page" %>
     <% end %>
   </div>
+
   <div class="profile-infos">
+
     <h4><%= @user.firstname %> <%= @user.lastname%></h4>
+
     <h6 style="opacity: 0.6; font-weight: lighter;"><%= @user.email %> </h6>
+
     <p><%= @user.motto %> <br>
-    <%= @user.address %></p>
-    <%= @distance  %> km away from you
-    <p style="margin-bottom: -10px; margin-top: 10px;">Match Score:</p>
+    <%= @distance  %> km away from you</p>
+
     <div style="width: 200px;">
+
+    Match Score:
       <% if current_user.calculate_match(@user) == 0 %>
         <p>Sorry, no match data</p>
       <% else %>
-        <div class="progress mt-2">
-          <% if current_user.calculate_match(@user) < 50 %>
-              <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
-          <% else %>
-              <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
-          <% end %>
-        </div>
+        <% if current_user.calculate_match(@user) < 50 %>
+          <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+        <% else %>
+          <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+        <% end %>
       <% end %>
     </div>
+
   </div>
-  <div class="profile-info-box mx-auto my-4">
-    <div class="label-kids">Kids</div>
+
+
+  <div class="my-2 row px-3 my-3" style="width: 100vw; margin: 0 auto">
     <% @user.kids.each do |kid|  %>
-      <div class="profile-info-item p-2">
-        <i class="fas fa-baby"></i>
+    <div class="col-6 mx-auto p-0">
+    <div class="kid-container d-flex align-items-center justify-content-start my-2 px-3 col-12">
         <% kid_age_in_month = ((Date.today - kid.birthday).to_f / 365 * 12).round %>
         <% if kid_age_in_month < 2 %>
+          <div class="kid"><%= image_tag "baby.svg" %></div>
           <% kid_age = "#{kid_age_in_month} month" %>
         <% elsif kid_age_in_month < 23 %>
+          <div class="kid"><%= image_tag "baby.svg" %></div>
           <% kid_age = "#{kid_age_in_month} months" %>
         <% else %>
+        <div class="kid"><%= image_tag "kid.svg" %></div>
           <% kid_age = "#{(kid_age_in_month / 12).round(0)} years" %>
         <% end %>
         <div><%= kid_age %></div>
       </div>
+      </div>
   <% end %>
   </div>
-  <div class="profile-info-box mx-auto my-2" style="height: 100px;">
-    <div class="label-description">Description</div>
+
+
+  <div class="description-container mx-auto my-2" style="height: 100px;">
     <div class="profile-info-item p-3"><%= current_user.description %></div>
   </div>
-  <div class="profile-action">
+<% else %>
 
+<div class="profile-pic">
+    <% if @user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, class:"avatar-profile-page" %>
+    <% else %>
+      <%= image_tag "default-avatar.png", class:"avatar-profile-page" %>
+    <% end %>
+  </div>
+
+  <div class="profile-infos">
+
+    <h4><%= @user.firstname %></h4>
+
+    <p><%= @user.motto %> <br>
+    <%= @distance  %> km away from you</p>
+
+    <div style="width: 200px;">
+
+    Match Score:
+      <% if current_user.calculate_match(@user) == 0 %>
+        <p>Sorry, no match data</p>
+      <% else %>
+        <% if current_user.calculate_match(@user) < 50 %>
+          <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+        <% else %>
+          <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user) %>%</div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+
+
+  <div class="my-2 row px-3 my-3" style="width: 100vw; margin: 0 auto">
+    <% @user.kids.each do |kid|  %>
+    <div class="col-6 mx-auto p-0">
+    <div class="kid-container d-flex align-items-center justify-content-start my-2 px-3 col-12">
+        <% kid_age_in_month = ((Date.today - kid.birthday).to_f / 365 * 12).round %>
+        <% if kid_age_in_month < 2 %>
+          <div class="kid"><%= image_tag "baby.svg" %></div>
+          <% kid_age = "#{kid_age_in_month} month" %>
+        <% elsif kid_age_in_month < 23 %>
+          <div class="kid"><%= image_tag "baby.svg" %></div>
+          <% kid_age = "#{kid_age_in_month} months" %>
+        <% else %>
+        <div class="kid"><%= image_tag "kid.svg" %></div>
+          <% kid_age = "#{(kid_age_in_month / 12).round(0)} years" %>
+        <% end %>
+        <div><%= kid_age %></div>
+      </div>
+      </div>
+  <% end %>
+  </div>
+
+
+  <div class="description-container mx-auto my-2" style="height: 100px;">
+    <div class="profile-info-item p-3"><%= current_user.description %></div>
+  </div>
+<% end %>
+
+
+  <div class="">
     <% is_a_friend = false %>
     <% is_a_pending_friend = false %>
     <% is_a_requested_friend = false %>
@@ -59,15 +131,24 @@
       <%# 2 ID %>
       <%=link_to unfriend_path(@user.id), method: :patch do %>
       <% is_a_friend = true %>
-        <%= "UNFRIEND"  %>
+      <div class="btn-sm-bottom", style="opacity: 0.7">
+        <i class="fas fa-user-times"></i>
+        <%= "Unfriend"  %>
+      </div>
       <% end %>
     <% end %>
 
     <% current_user.pending_friends.each do |pending_friend| %>
       <% if pending_friend == @user %>
-        <%# 5 ID %>
         <% is_a_pending_friend = true %>
-        <%= "Your friend request is still pending" %>
+        <div class="btn-sm-bottom", style="opacity: 0.7">
+          <i class="fas fa-user-clock"></i>
+          <%= "Your friend request is still pending" %>
+        </div>
+        <div class="btn-sm-bottom mt-1", style="opacity: 0.7">
+          <i class="fas fa-times"></i>
+          <%= link_to "Cancel your request", cancel_friend_request_path(pending_friend), method: :patch %>
+        </div>
       <% end %>
     <% end %>
 
@@ -76,10 +157,16 @@
         <% is_a_requested_friend = true %>
         <%# 8 ID %>
         <%=link_to accept_friend_profile_path(requested_friend.id), method: :patch do %>
-          <i class="fas fa-check-circle"></i>
+          <div class="btn-sm-bottom", style="opacity: 0.7">
+            <i class="fas fa-check"></i>
+            <%= "Accept pending friend request" %>
+          </div>
         <% end %>
         <%=link_to reject_friend_profile_path(requested_friend.id), method: :patch do %>
-          <i class="fas fa-times-circle"></i>
+        <div class="btn-sm-bottom", style="opacity: 0.7">
+          <i class="fas fa-times"></i>
+          <%= "Decline this request" %>
+        </div>
         <% end %>
       <% end %>
     <% end %>
@@ -87,10 +174,14 @@
     <% if is_a_friend == false && is_a_requested_friend == false && is_a_pending_friend == false %>
       <%# 5 ID %>
       <%=link_to request_friend_path(@user.id), method: :patch do %>
-        <p class="btn-next">Connect</p>
+        <div class="btn-sm-bottom", style="opacity: 0.7">
+          <i class="fas fa-user-plus"></i>
+          <%= "Connect" %>
+        </div>
       <% end %>
     <% end %>
   </div>
+
 </div>
 
 <%= render 'shared/navigation' %>
