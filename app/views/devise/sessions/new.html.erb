@@ -20,8 +20,12 @@
         </div>
         <%= f.button :submit, "Log in", class: "btn-next" %>
       <% end %>
-      <%= link_to "Sign up", intro_path, class: "btn-next" %>
-      <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+      <div class="btn-sm-bottom">
+        <%= link_to "Sign up", intro_path, style: 'opacity: 0.7' %>
+      </div>
+      <div class="btn-sm-bottom mt-0">
+        <%= link_to "Forgot your password?", new_password_path(resource_name), style: 'opacity: 0.7' %>
+      </div>
     <%# </div> %>
   </div>
 </div>
