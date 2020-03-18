@@ -37,7 +37,7 @@
 
   </div>
 
-
+<div class="background d-flex justify-content-center flex-column">
   <div class="my-2 row px-3 my-3" style="width: 100vw; margin: 0 auto">
     <% @user.kids.each do |kid|  %>
     <div class="col-6 mx-auto p-0">
@@ -60,8 +60,10 @@
   </div>
 
 
+
   <div class="description-container mx-auto my-2" style="height: 100px;">
     <div class="profile-info-item p-3"><%= current_user.description %></div>
+  </div>
   </div>
 <% else %>
 
@@ -87,8 +89,8 @@
       <% if match_score == 0 %>
         <p>Sorry, no match data</p>
       <% else %>
-        <% if match_score < 50 %>
         <div class="progress">
+        <% if match_score < 50 %>
           <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{match_score}%" %>" aria-valuenow="<%= match_score %>" aria-valuemin="0" aria-valuemax="100"><%= match_score %>%</div>
         <% else %>
           <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{match_score}%" %>" aria-valuenow="<%= match_score %>" aria-valuemin="0" aria-valuemax="100"><%= match_score %>%</div>
