@@ -13,9 +13,8 @@
           <%= image_tag "default-avatar.png", class:"avatar-large" %>
         <% end %>
         <div class="card-product-infos">
-          <h6><%= user.firstname %> <%= user.lastname %></h6>
           <% nana_coordinates = user.address %>
-          <p><%= user.distance_from_you %> km away from you</p>
+          <h6><%= user.firstname %> <%= user.lastname %> - <%= user.distance_from_you style: "font-weight:light"%> km</h6>
           <p><%= user.motto %></p>
           <% match_value = current_user.calculate_match(user, answers) %>
           <% if match_value == 0 %>
