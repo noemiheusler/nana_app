@@ -18,7 +18,7 @@
   <% end %>
   <%= f.input :invitations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second %>
 
-  <%= f.button :submit%>
+  <%= f.button :submit, class: 'btn-next'%>
 <% end %>
 
 
