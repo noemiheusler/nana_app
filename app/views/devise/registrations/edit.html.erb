@@ -1,40 +1,38 @@
-<h2>Update your profile</h2>
+<%= render 'shared/navbar-back' %>
+<div class="container background">
+  <div class="row flex-column justify-content-center align-items-center">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, style: 'width: 85%' }) do |f| %>
+        <%= f.error_notification %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+          <%= f.input :password,
+                      hint: "leave it blank if you don't want to change it",
+                      required: false,
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: false,
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :current_password,
+                      hint: "we need your current password to confirm your changes",
+                      required: true,
+                      input_html: { autocomplete: "current-password" } %>
+          <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo fa-camera'}, label: 'UPLOAD PROFILE PICTURE' %>
+          <%= f.input :motto, label: false, placeholder: "Status" %>
+          <%= f.input :description, label: false, placeholder: "Description" %>
+          <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit"%>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :photo,  as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: 'UPLOAD PROFILE PICTURE' %>
-    <%= f.input :motto, label: false, placeholder: "Status" %>
-    <%= f.input :description, label: false, placeholder: "Description" %>
-    <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit"%>
-
+          <%= f.button :submit, "Update", class: "btn-next", style: "width: 100%" %>
+        </div>
+      <% end %>
+        <div class="btn-sm-bottom mt-0">
+          <%= link_to "Delete", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, style: 'opacity: 0.7' %></p>
+        </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p><%= link_to "Delete", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
+<%= render 'shared/navigation' %>

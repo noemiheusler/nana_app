@@ -3,10 +3,12 @@
       <div class="event-filter-tabs">
 
         <%= link_to events_path(:all => '1') do  %>
-          <% if params[:organizing].present? %>
-            <h4><span class="badge badge-secondary event-selection-tag">All</span></h4>
-          <% else %>
+          <% if params[:all].nil? && params[:organizing].nil? && params[:participating].nil? && params[:invited].nil? && params[:public].nil? %>
             <h4><span class="badge badge-secondary event-selection-tag" id="tagged">All</span></h4>
+          <% elsif params[:all].present? %>
+            <h4><span class="badge badge-secondary event-selection-tag" id="tagged">All</span></h4>
+          <% else %>
+            <h4><span class="badge badge-secondary event-selection-tag">All</span></h4>
           <% end %>
         <% end %>
 
