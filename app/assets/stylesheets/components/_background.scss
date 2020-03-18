@@ -1,6 +1,14 @@
 .background {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url("Connection.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), asset-url("Connection.png");
   background-size: cover;
   height: 80vh;
   overflow: overlay;
+}
+
+.results-list{
+  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), asset-url("Connection.png");
+  background-size: cover;
+  height: 80vh;
+  overflow: overlay;
+
 }
