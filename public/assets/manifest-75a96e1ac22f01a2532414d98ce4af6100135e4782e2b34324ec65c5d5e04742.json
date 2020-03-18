@@ -1,0 +1,17 @@
+{
+  "background_color": "white",
+  "description": "Nana - Find like-minded parents around you and create your support system ",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/assets/icons/android-icon-192x192-88fcdfc4e2fe52fa7370be9c4f22a0c22eba85345948085c1e0a91de2be49fa9.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {},
+    {}
+  ],
+  "name": "Nana App",
+  "short_name": "Nana",
+  "start_url": "/"
+}
