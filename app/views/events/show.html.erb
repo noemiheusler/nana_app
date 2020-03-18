@@ -78,10 +78,16 @@
       <% user_organizes = true %>
       <div class="two-btn-div">
         <%=link_to event_path(@event.id), method: :delete, data: { confirm: "Are you sure?" } do %>
-          <p class="btn-next"><i class="fas fa-trash-alt"></i> Delete Event</p>
+          <div class="btn-sm-bottom", style="opacity: 0.7">
+          <i class="fas fa-trash-alt"></i>
+          <%= "Delete Event" %>
+        </div>
         <% end %>
         <%=link_to edit_event_path(@event.id) do %>
-          <p class="btn-next"><i class="fas fa-pen"></i> Edit Event</p>
+          <div class="btn-sm-bottom", style="opacity: 0.7">
+          <i class="fas fa-pen"></i>
+          <%= "Edit Event" %>
+        </div>
         <% end %>
       </div>
     <% end %>
@@ -91,7 +97,10 @@
         <% if participation.user_id == current_user.id && @event.user_id != current_user.id %>
           <% user_participates = true %>
           <%=link_to participation_path(participation.id), method: :delete do %>
-            <p class="btn-next"><i class="fas fa-times-circle"></i> Cancel Participation</p>
+            <div class="btn-sm-bottom", style="opacity: 0.7">
+              <i class="fas fa-times"></i>
+            <%= "Cancel Participation" %>
+        </div>
           <% end %>
         <% end %>
       <% end %>
@@ -101,11 +110,17 @@
       <% @event.invitations.each do |invitation| %>
         <% if (invitation.user_id == current_user.id) && (@event.user_id != current_user.id) %>
           <% user_invited = true %>
-          <%=link_to invitation_path(invitation.id), method: :delete do %>
-            <p class="btn-next"><i class="fas fa-times-circle"></i> Reject Invite</p>
-          <% end %>
           <%=link_to event_participations_path(@event.id), method: :post do %>
-            <p class="btn-next"><i class="fas fa-check-circle"></i> Accept Invite</p>
+            <div class="btn-sm-bottom", style="opacity: 0.7">
+              <i class="fas fa-check"></i>
+            <%= "Accept Invite" %>
+            </div>
+          <% end %>
+          <%=link_to invitation_path(invitation.id), method: :delete do %>
+            <div class="btn-sm-bottom", style="opacity: 0.7">
+              <i class="fas fa-times"></i>
+            <%= "Reject Invite" %>
+            </div>
           <% end %>
         <% end %>
       <% end %>
@@ -113,7 +128,10 @@
 
     <% if (user_organizes == false) && (user_participates == false) && (user_invited == false) %>
         <%=link_to event_participations_path(@event.id), method: :post do %>
-          <p class="btn-next"><i class="fas fa-check-circle"></i> Participate</p>
+          <div class="btn-sm-bottom", style="opacity: 0.7">
+          <i class="fas fa-check"></i>
+          <%= "Participate" %>
+        </div>
         <% end %>
     <% end %>
   </div>
