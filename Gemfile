@@ -20,6 +20,7 @@ gem 'has_friendship'
 gem 'cloudinary', '~> 1.12.0'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
 gem 'geocoder'
+gem 'serviceworker-rails'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
