@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: be482005f7abaad473eb9047cab0122ed4081265
+  revision: 7966190d46fd8165b58f3be1bffe41d37ccaea7c
   specs:
     faker (2.10.2)
       i18n (>= 1.6, < 2)
@@ -82,7 +82,7 @@ GEM
     ffi (1.12.2)
     font-awesome-sass (5.12.0)
       sassc (>= 1.11)
-    geocoder (1.6.1)
+    geocoder (1.6.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     has_friendship (1.1.8)
