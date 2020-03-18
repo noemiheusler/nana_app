@@ -4,8 +4,8 @@
   <% answers = current_user.answers.pluck(:answer) %>
   <h3 class="requests-header">Nanas nearby...</h3>
   <% users.each do |user| %>
-    <div class="d-flex justify-content-between align-items-center mx-2">
-      <%#= link_to your_profile_path(user.id) do %>
+    <div class="requests-header mt-0 d-flex justify-content-between align-items-center">
+      <%= link_to your_profile_path(user.id) do %>
       <div class="card-product">
         <% if  user.photo.attached? %>
           <%= cl_image_tag user.photo.key, class:"avatar-large" %>
@@ -14,7 +14,7 @@
         <% end %>
         <div class="card-product-infos">
           <% nana_coordinates = user.address %>
-          <h6><%= user.firstname %> <%= user.lastname %> - <%= user.distance_from_you style: "font-weight:light"%> km</h6>
+          <h6><%= user.firstname %> <%= user.lastname %> - <span id="km-away"><%= user.distance_from_you %> km</span></h6>
           <p><%= user.motto %></p>
           <% match_value = current_user.calculate_match(user, answers) %>
           <% if match_value == 0 %>
@@ -29,136 +29,13 @@
             </div>
           <% end %>
         </div>
-
         <div data-toggle="modal" data-target="#exampleModal">
           <i class="fas fa-chevron-right p-5"></i>
         </div>
-
-        <% @user = user %>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><%=@user.firstname%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="d-flex justify-content-center flex-column">
-
-                  <!-- When profile is done: make sure to store it in parcial and call it here -->
-
-                  <div class="profile-pic">
-                    <% if @user.photo.attached? %>
-                      <%= cl_image_tag @user.photo.key, class:"avatar-profile-page" %>
-                    <% else %>
-                      <%= image_tag "default-avatar.png", class:"avatar-profile-page" %>
-                    <% end %>
-                  </div>
-                  <div class="profile-infos">
-                    <h4><%= @user.firstname %> <%= @user.lastname%></h4>
-                    <h6 style="opacity: 0.6; font-weight: lighter;"><%= @user.email %> </h6>
-                    <p><%= @user.motto %> <br>
-                    <%= @user.address %></p>
-                    <%= @distance  %> km away from you
-                    <p style="margin-bottom: -10px; margin-top: 10px;">Match Score:</p>
-                    <div style="width: 200px;">
-                      <% if current_user.calculate_match(@user, answers) == 0 %>
-                        <p>Sorry, no match data</p>
-                      <% else %>
-                        <div class="progress mt-2">
-                          <% if current_user.calculate_match(@user, answers) < 50 %>
-                              <div class="progress-bar" id="bar-under" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user, answers)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user, answers) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user, answers) %>%</div>
-                          <% else %>
-                              <div class="progress-bar" id="bar-over" role="progressbar" style= "width: <%= "#{current_user.calculate_match(@user, answers)}%" %>" aria-valuenow="<%= current_user.calculate_match(@user, answers) %>" aria-valuemin="0" aria-valuemax="100"><%= current_user.calculate_match(@user, answers) %>%</div>
-                          <% end %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                  <div class="profile-info-box mx-auto my-4">
-                    <div class="label-kids">Kids</div>
-                    <% @user.kids.each do |kid|  %>
-                      <div class="profile-info-item p-2">
-                        <i class="fas fa-baby"></i>
-                        <% kid_age_in_month = ((Date.today - kid.birthday).to_f / 365 * 12).round %>
-                        <% if kid_age_in_month < 2 %>
-                          <% kid_age = "#{kid_age_in_month} month" %>
-                        <% elsif kid_age_in_month < 23 %>
-                          <% kid_age = "#{kid_age_in_month} months" %>
-                        <% else %>
-                          <% kid_age = "#{(kid_age_in_month / 12).round(0)} years" %>
-                        <% end %>
-                        <div><%= kid_age %></div>
-                      </div>
-                  <% end %>
-                  </div>
-                  <div class="profile-info-box mx-auto my-2" style="height: 100px;">
-                    <div class="label-description">Description</div>
-                    <div class="profile-info-item p-3"><%= current_user.description %></div>
-                  </div>
-                  <div class="profile-action">
-
-                    <% is_a_friend = false %>
-                    <% is_a_pending_friend = false %>
-                    <% is_a_requested_friend = false %>
-
-                    <% if current_user.friends_with?(@user) %>
-                      <%# 2 ID %>
-                      <%=link_to unfriend_path(@user.id), method: :patch do %>
-                      <% is_a_friend = true %>
-                        <%= "UNFRIEND"  %>
-                      <% end %>
-                    <% end %>
-
-                    <% current_user.pending_friends.each do |pending_friend| %>
-                      <% if pending_friend == @user %>
-                        <%# 5 ID %>
-                        <% is_a_pending_friend = true %>
-                        <%= "Your friend request is still pending" %>
-                      <% end %>
-                    <% end %>
-
-                    <% current_user.requested_friends.each do |requested_friend| %>
-                      <% if requested_friend == @user %>
-                        <% is_a_requested_friend = true %>
-                        <%# 8 ID %>
-                        <%=link_to accept_friend_profile_path(requested_friend.id), method: :patch do %>
-                          <i class="fas fa-check-circle"></i>
-                        <% end %>
-                        <%=link_to reject_friend_profile_path(requested_friend.id), method: :patch do %>
-                          <i class="fas fa-times-circle"></i>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-
-                    <% if is_a_friend == false && is_a_requested_friend == false && is_a_pending_friend == false %>
-                      <%# 5 ID %>
-                      <%=link_to request_friend_path(@user.id), method: :patch do %>
-                        <p class="btn-next">Connect</p>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
-      <%# end %>
+      <% end %>
     </div>
   <% end %>
 <% end %>
 
-<div class="btn-sm-bottom">
-  <%= link_to show_nanas_nearby_path do%><i class='fas fa-sync' style="opacity: 0.7"></i><% end %>
-  <%= link_to "Refresh search", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby", style: 'opacity: 0.7' %>
-</div>
+
