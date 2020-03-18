@@ -1,46 +1,40 @@
-<div class="container-sign-up mx-auto">
-  <div class="mx-auto">
-    <%= image_tag "logo.svg", class: "logo"%>
-  </div>
-<div class="my-3">
-  <h2 class="header">Let's get started</h2>
-</div>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :firstname,
-                label: false,
-                placeholder: "Given name:",
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "firstname" }%>
-    <%= f.input :lastname,
-                label: false,
-                placeholder: "Family name:",
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "lastname" }%>
-    <%= f.input :email,
-                label: false,
-                placeholder: "user@email.com",
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                label: false,
-                required: true,
-                placeholder: "Password",
-                input_html: { autocomplete: "new-password" } %>
+<div class="container my-5">
+  <div class="row flex-column justify-content-center align-items-center">
+    <%= image_tag "logo.svg", style: "width: 200px; height: 200px"%>
+      <h2 class="header">Let's get started</h2>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <%= f.input :firstname,
+                        label: false,
+                        placeholder: "Given name:",
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "firstname" }%>
+            <%= f.input :lastname,
+                        label: false,
+                        placeholder: "Family name:",
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "lastname" }%>
+            <%= f.input :email,
+                        label: false,
+                        placeholder: "user@email.com",
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" }%>
+            <%= f.input :password,
+                        label: false,
+                        required: true,
+                        placeholder: "Password",
+                        input_html: { autocomplete: "new-password" } %>
 
-  </div>
-
-  <div class="form-actions mx-auto">
-    <%= f.button :submit, "SIGN UP"  %>
-  </div>
-<% end %>
-  <div class="btn-sm-bottom">
-    <%= link_to "Log in", new_session_path(resource_name), style: 'opacity: 0.7' %>
-  </div>
-</div>
+          </div>
+          <%= f.button :submit, "SIGN UP", class: "btn-next"   %>
+      <% end %>
+        <div class="btn-sm-bottom mt-0">
+          <%= link_to "Log in", new_session_path(resource_name), style: 'opacity: 0.7' %>
+        </div>
+      </div>
 
 
