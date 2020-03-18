@@ -5,13 +5,13 @@
 
 
 <div id="discover-link-box">
-<%= link_to "", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby"  %>
+  <%= link_to "", show_nanas_nearby_path, remote: true, id: "show_nanas_nearby"  %>
 
-<script>
-  setTimeout(()=>{
-    const btn = document.querySelector("#show_nanas_nearby")
-    Rails.fire(btn, "click")
-  }, 700);
-</script>
+  <script>
+    setTimeout(()=>{
+      const btn = document.querySelector("#show_nanas_nearby")
+      Rails.fire(btn, "click")
+    }, 700);
+  </script>
 </div>
 
