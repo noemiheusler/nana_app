@@ -19,7 +19,7 @@
               <% else %>
                 <%= image_tag "default-avatar.png", class: "avatar" %>
               <% end %>
-            <div class="card-product-infos">
+            <div class="card-product-infos-mynanas">
               <h6><%= friend_requested.firstname  %></h6>
               <% match_score = current_user.calculate_match(friend_requested, current_user.answers.pluck(:answer)) %>
               <% if match_score == 0 %>
@@ -62,7 +62,7 @@
               <% else %>
                 <%= image_tag "default-avatar.png", class: "avatar" %>
               <% end %>
-              <div class="card-product-infos">
+              <div class="card-product-infos-mynanas">
                 <h6><%= friend.firstname %></h6>
                 <p><%= friend.motto  %></p>
               </div>

@@ -28,7 +28,12 @@
 
 .card-product .card-product-infos {
   padding: 16px;
-  width: 200px;
+  min-width: 63vw;
+}
+
+.card-product .card-product-infos-mynanas {
+  padding: 16px;
+  min-width: 50vw;
 }
 
 .progress {
