@@ -11,7 +11,7 @@
     <div class="conversation mx-auto">
       <div class="avatar-box">
         <% if user_other.photo.attached? %>
-          <%= cl_image_tag user_other.photo.key class:"avatar-large" %>
+          <%= cl_image_tag user_other.photo.key, class:"avatar-large" %>
         <% else %>
           <%= image_tag "default-avatar.png", class:"avatar-large" %>
         <% end %>
