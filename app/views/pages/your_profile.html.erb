@@ -60,7 +60,7 @@
   </div>
 
 
-<% if current_user.description.present? %>
+<% if @user.description.present? %>
   <div class="description-container mx-auto my-2" style="height: 100px;">
     <div class="profile-info-item p-3"><%= @user.description %></div>
   </div>
@@ -124,9 +124,9 @@
   <% end %>
   </div>
 
-<% if current_user.description.present? %>
+<% if @user.description.present? %>
   <div class="description-container mx-auto my-2" style="height: 100px;">
-    <div class="profile-info-item p-3"><%= current_user.description %></div>
+    <div class="profile-info-item p-3"><%= @user.description %></div>
   </div>
   <% end %>
 <% end %>
