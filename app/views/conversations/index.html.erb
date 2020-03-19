@@ -58,7 +58,7 @@
             <% if friend.id != current_user.id %>
               <div class="conversation mx-auto">
                 <% if  friend.photo.attached? %>
-                  <%= cl_image_tag friend.photo.key class:"avatar-large" %>
+                  <%= cl_image_tag friend.photo.key, class:"avatar-large" %>
                 <% else %>
                   <%= image_tag "default-avatar.png", class:"avatar-large" %>
                 <% end %>
