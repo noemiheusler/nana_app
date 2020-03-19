@@ -20,11 +20,11 @@ const eventCategory = document.getElementById("event_category")
 if (eventCategory) {
   eventCategory.addEventListener('change', (event) => {
   if (event.currentTarget.value == 'Private') {
-    const invitation = document.getElementById("form-js-input")
+    const invitation = document.querySelector(".event_invitations_box")
     invitation.style.display = "block";
   };
   if (event.currentTarget.value == 'Public') {
-    const invitation = document.getElementById("form-js-input")
+    const invitation = document.querySelector(".event_invitations_box")
     invitation.style.display = "none";
   };
   })
