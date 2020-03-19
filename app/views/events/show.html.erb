@@ -2,14 +2,14 @@
 <div class="background">
 <div class= "card-event-show">
 
-  <div class="profile-pic">
-    <% if @event.photo.attached? %>
-      <%= cl_image_tag @event.photo.key, class:"avatar-profile-page" %>
-    <% else %>
-      <img class="avatar-profile-page" style="height: 80px;width: 80px;" src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
-    <% end %>
+  <!-- <div class="profile-pic">
+    <%# if @event.photo.attached? %>
+      <%#= cl_image_tag @event.photo.key, class: "avatar-profile-page" %>
+    <%# else %>
+      <img class="avatar-profile-page" src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/>
+    <%# end %>
   </div>
-
+ -->
   <h2><%=@event.title%></h2>
 
   <div style="text-align:center; margin-top:15px; margin-bottom: 15px;">
