@@ -10,13 +10,13 @@ body {
 <%# set photo key of other user %>
 <% if @conversation.user2.id == current_user.id %>
   <% if  @conversation.user1.photo.attached? %>
-    <% otheruser_cl_photo_key = conversation.user1.photo.key %>
+    <% otheruser_cl_photo_key = @conversation.user1.photo.key %>
   <% else %>
     <% otheruser_cl_photo_key = "default-pic"%>
   <% end %>
 <% else %>
   <% if  @conversation.user2.photo.attached? %>
-    <% otheruser_cl_photo_key = conversation.user2.photo.key %>
+    <% otheruser_cl_photo_key = @conversation.user2.photo.key %>
   <% else %>
     <% otheruser_cl_photo_key = "default-pic"%>
   <% end %>
