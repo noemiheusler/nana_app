@@ -30,6 +30,7 @@
       <i class="fas fa-user"></i>
       <p><%= @event.user.firstname %> is your host</p>
     </div>
+
     <div class="card-event-show-info-item card-event-show-friends-participating">
       <i class="fas fa-users"></i>
 
@@ -51,22 +52,28 @@
         </div>
       <% end %>
 
+    </div>
       <%@event.participations.each do |participation|  %>
         <% current_user.friends.each do |friend| %>
           <% if participation.user == friend%>
 
-            <div class="profile-pic">
+            <div class="profile-pic-event">
               <% if participation.user.photo.attached? %>
-                <%= cl_image_tag participation.user.photo.key, class:"avatar-small" %>
+                <%= cl_image_tag participation.user.photo.key, class:"avatar-small-event-participent" %>
               <% else %>
-                <%= image_tag "default-avatar.png", class:"avatar-small" %>
+                <%= image_tag "default-avatar.png", class:"avatar-small-event-participent" %>
               <% end %>
             </div>
 
           <% end %>
         <% end %>
       <% end %>
-    </div>
+
+
+
+
+
+
   </div>
 
   <div class="card-event-show-action">
