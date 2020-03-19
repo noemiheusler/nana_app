@@ -5,8 +5,8 @@
   <%= f.input :max_participants%>
   <%= f.input :start_date, as: :string, input_html: {class: "datepicker"} %>
   <%= f.input :end_date, as: :string, input_html: {class: "datepicker"} %>
-  <%= f.input :location%>
-  <%= f.select :category, options_for_select(%w[Public Private]) %>
+  <%= f.input :location, as: :string%>
+  <%= f.input :category, collection: (%w[Public Private]), label: "Choose event type", prompt: 'Select Type' %>
 
   <% user_collection = [] %>
   <%  current_user.friends.each do |user| %>
@@ -16,7 +16,9 @@
       <%  user_collection.push([user.firstname, user.id]) %>
     <% end %>
   <% end %>
-  <%= f.input :invitations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second %>
+  <div class="event_invitations_box" style="display: none">
+    <%= f.input :invitations, as: :check_boxes, collection: user_collection, input_html: { multiple: true }, label_method: :first, value_method: :second, label:"Choose Friends" %>
+  </div>
 
   <%= f.button :submit, class: 'btn-next'%>
 <% end %>

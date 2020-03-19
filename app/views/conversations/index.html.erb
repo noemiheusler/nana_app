@@ -9,16 +9,25 @@
     <% end %>
     <%= link_to conversation_messages_path(conversation) do %>
     <div class="conversation mx-auto">
+      <div class="avatar-box">
+
       <% if user_other.photo.attached? %>
         <%= cl_image_tag user_other.photo.key class:"avatar-large" %>
       <% else %>
         <%= image_tag "default-avatar.png", class:"avatar-large" %>
       <% end %>
       <div class="number-of-messages"><%= conversation.messages.count %></div>
+      </div>
       <div class="conversation-content">
         <% if conversation.messages.last.present? %>
           <p><small><%= conversation.messages.last.created_at.strftime(" %e.%m.%y %k.%M") %> with <%= user_other.firstname %></small></p>
-          <p><%= conversation.messages.last.user.firstname %>: <%= conversation.messages.last.body %></p>
+          <p>
+            <% if conversation.messages.last.user == current_user %>
+             Me:
+            <% else %>
+             <%= conversation.messages.last.user.firstname %>:
+            <% end %>
+            <%= conversation.messages.last.body.truncate(25) %></p>
         <% else %>
           <p><small>No messages yet with <%= user_other.firstname %></small></p>
           <p><%= user_other.firstname %></p>

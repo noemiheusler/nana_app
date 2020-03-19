@@ -160,9 +160,9 @@
 // conversations view
 
 .number-of-messages {
-  position: relative;
-  bottom: 10px;
-  right: 10px;
+  position: absolute;
+  top: 0px;
+  right: -6px;
   border-radius: 50%;
   background: linear-gradient(180deg, rgba(147,77,230,1) 0%, rgba(98,41,206,1) 100%);
   width: 20px;
@@ -177,6 +177,9 @@
   padding: 0;
 }
 
+.avatar-box {
+  position: relative;
+}
 
 .conversation {
   display: flex;
@@ -197,6 +200,7 @@
 .conversation .conversation-content {
   flex-grow: 1;
   padding: 0 24px;
+  padding-right: 16px;
 }
 
 .conversation p {

@@ -1,4 +1,7 @@
-<h1>Events#edit</h1>
-<p>Find me in app/views/events/edit.html.erb</p>
-
-<%= render 'events/form', event: @event%>
+<%= render 'shared/navbar-nana' %>
+    <div class="container background">
+        <div class="row flex-column justify-content-center align-items-center">
+        <%= render 'events/form', event: @event%>
+        </div>
+    </div>
+<%= render 'shared/navigation' %>
