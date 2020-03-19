@@ -33,9 +33,13 @@
       </div>
   <% end %>
   </div>
-  <div class="description-container mx-auto my-2" style="height: 100px;">
-    <div class="profile-info-item p-3"><%= current_user.description %></div>
-  </div>
+
+    <% if current_user.description.present? %>
+      <div class="description-container mx-auto my-2" style="height: 100px;">
+        <div class="profile-info-item p-3"><%= current_user.description %></div>
+      </div>
+    <% end %>
+
   <div class="btn-sm-bottom">
     <%= link_to edit_user_registration_path do %>
       <i class='fas fa-edit' style="opacity: 0.7"></i>
