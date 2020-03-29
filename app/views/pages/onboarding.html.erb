@@ -15,9 +15,11 @@
     </div>
     <div class="carousel-item">
       <div class="carousel-item-wrapper form-wrapper">
+        <h3 class="panel-start-text">Let's complete your profile</h3>
+
         <%= f.input :photo, as: :file, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo fa-camera'}, label: 'Upload Profile Picture' %>
         <%= f.input :motto, label: false, placeholder: "Status" %>
-        <%= f.input :description, label: false, placeholder: "Description" %>
+        <%= f.input :description, label: false, placeholder: "Tell the other parents something about you" %>
         <%= f.input :address, label: false, placeholder: "Address", id: "address-input-edit" %>
         <p id= "disclaimer-address">Address will not be displayed to other users</p>
         <button class="btn-sm-bottom" id="add" style="opacity: 0.7"><i class="fas fa-plus"></i> Add a childs birthday</button>
@@ -34,8 +36,10 @@
     <% Question.all.each do |question| %>
     <div class="carousel-item">
             <div class="carousel-item-wrapper">
-
-      <h3 class="panel-text"><%= question.question %></h3>
+      <div class="carousel-item-question">
+        <h3 class="panel-text"><%= question.question %></h3>
+        <p style="font-size: 18px; color: #6229CE; width: 250px;">This will help us matching you with like-minded parents.</p>
+      </div>
       <input hidden type="radio" id="question-<%= question.id %>-option-a" name="question-<%= question.id %>" value="1">
       <label class="btn-quiz next btn-next" for="question-<%= question.id %>-option-a"> <%= question.option_a %></label>
       <input hidden type="radio" id="question-<%= question.id %>-option-b" name="question-<%= question.id %>" value="2">
