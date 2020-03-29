@@ -14,9 +14,9 @@ Invitation.destroy_all
 Question.destroy_all
 User.destroy_all
 
-Question.create(question: "what do you like more?", option_a: "SECOND HAND", option_b: "NEW")
-Question.create(question: "what do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
-Question.create(question: "what do you like more?", option_a: "WOODEN TOYS", option_b: "PLASTIC TOYS")
+Question.create(question: "What do you like more?", option_a: "SECOND HAND", option_b: "NEW")
+Question.create(question: "What do you like more?", option_a: "RELAXING", option_b: "BEING ACTIVE")
+Question.create(question: "What do you like more?", option_a: "WOODEN TOYS", option_b: "PLASTIC TOYS")
 
 user_1 = User.create!(email: "anna.hill@gmail.com", password: "password", firstname: "Anna", lastname: "Hill", address: "Heinrichstrasse 269 8005 Zürich", motto: "Work hard, play hard!", description: "I love my kids, going for a walk and playing with my dog Sammy.")
 user_2 = User.create!(email: "t.gardner@gmail.com", password: "password", firstname: "Tomas", lastname: "Gardner", address: "Kronenstrasse 42 8006 Zürich", motto: "Carpe diem <3", description: "I am a single dad and looking for other parents to support each other.")
@@ -85,6 +85,5 @@ participation_2 = Participation.create!(user_id: (user_1.id) , event_id: (Event.
 participation_4 = Participation.create!(user_id: (User.all.last.id - 8) , event_id: (Event.all.last.id - 3))
 participation_5 = Participation.create!(user_id: (User.all.last.id - 7) , event_id: (Event.all.last.id - 4))
 
-# puts "End of seed!"
 puts "End of seed!"
 
