@@ -2,10 +2,10 @@
 <div class="background">
   <div class="requests-header">
     <% if @friend_requested.present? == false && @friends.present? == false %>
-      <h3 style="text-align: center; ">Let's get started</h3>
+      <h3 style="text-align: center; ">You haven't connected with other parents yet.</h3>
 
       <%= link_to root_path do %>
-        <p class="btn-next">Discover</p>
+        <p class="btn-next">Find parents nearby</p>
       <% end %>
     <% end %>
     <% if @friends_requested.present? %>
@@ -67,21 +67,23 @@
                 <p><%= friend.motto  %></p>
               </div>
             </div>
+            <!--
             <div class="">
-              <% if friend.is_favorited?(current_user) %>
-                <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
-                  <%= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
+              <%# if friend.is_favorited?(current_user) %>
+                <div id="<%= friend.id%>-box">
+                  <%#= link_to nana_unfriend_path(friend.id), method: :delete, remote: true  do %>
                     <i class="fas fa-star" style="opacity: 0.7"></i>
-                  <% end %>
+                  <%# end %>
                 </div>
-              <% else  %>
-                <div id="<%= friend.id%>-box"> <!--This DIV is important for Ajax -->
-                  <%= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
+              <%# else  %>
+                <div id="<%= friend.id%>-box">
+                  <%#= link_to nana_friend_path(friend.id), method: :post, remote: true do %>
                     <i class="far fa-star" style="opacity: 0.7"></i>
-                  <% end %>
+                  <%# end %>
                 </div>
-              <% end %>
-            </div>
+              <%# end %>
+            </div> -->
+
           <% end %>
         </div>
       <% end %>

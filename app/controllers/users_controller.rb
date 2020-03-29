@@ -9,15 +9,15 @@ class UsersController < ApplicationController
     @user.address = params[:user][:address]
     @user.photo = params[:user][:photo]
 
-    number_of_kids = params[:kids].count
+    if params[:kids]
 
-    if number_of_kids > 0
-      counter = number_of_kids
+    counter = params[:kids].count
       params[:kids].each do |kid|
         counter -= 1
         @kid = Kid.new(user_id: @user.id, birthday: params[:kids][counter][:kid_birthday])
         @kid.save!
       end
+
     end
 
     # create answers
